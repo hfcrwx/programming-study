@@ -8,10 +8,10 @@ all:$(BIN)
 .c.o:
 	$(CC) $(CFLAGS) -c $< -o $@
 01test:01test.o
-	$(CC) $(CFLAGS) $^ -o $@
+	$(CC) $^ -o $@
 02test:02test.o
-	$(CC) $(CFLAGS) $^ -o $@
+	$(CC) $^ -o $@
 03test:03test.o pub.o
-	$(CC) $(CFLAGS) $^ -o $@
+	$(CC) $^ -o $@
 clean:
 	rm -f *.o $(BIN)
