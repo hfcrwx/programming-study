@@ -2,6 +2,6 @@
 
 int main(void)
 {
-	printf("Two plus two is %d", 4);
+	printf("Two plus two is %f", 4);
 	return 0;
 }
