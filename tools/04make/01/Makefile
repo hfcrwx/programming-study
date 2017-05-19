@@ -8,7 +8,7 @@ SUBSRC  = $(shell find $(SUBDIR) -name '*.c')
 SUBOBJ  = $(SUBSRC:%.c=%.o)
 
 $(BIN):$(ROOTOBJ) $(SUBOBJ)
-	$(CC) $(CFLAGS) -o $(BIN) $(ROOTOBJ) $(SUBOBJ)
+	$(CC) -o $(BIN) $(ROOTOBJ) $(SUBOBJ)
 %o:%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 

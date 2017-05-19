@@ -1,6 +1,7 @@
 CC      = gcc
 BIN     = test1
 OBJS    = test1.o
+CFLAGS  = -Wall -g
 .PHONY: all clean print
 all:print $(BIN)
 print:

@@ -1,7 +1,7 @@
 CXX       = g++
 BIN       = test2
 OBJS      = test2.o
-CPPFLAGS  = -Wall -g
+CXXFLAGS  = -Wall -g
 .PHONY: all clean print
 all:print $(BIN)
 print:
