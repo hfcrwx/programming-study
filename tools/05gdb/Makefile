@@ -6,6 +6,6 @@ all:$(BIN)
 %.o:%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 main:main.o search.o
-	$(CC) $(CFLAGS) $^ -o $@
+	$(CC) $^ -o $@
 clean:
 	rm -f *.o $(BIN)
