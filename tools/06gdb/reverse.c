@@ -8,7 +8,7 @@ int main(void)
 
 	printf("%s\n", str);
 	for (i=0; i<5; i++)
-		reverse_str[4-i] = str[i];
+		reverse_str[5-i] = str[i];
 	printf("%s\n", reverse_str);
 	return 0;
 }
