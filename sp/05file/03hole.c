@@ -5,9 +5,8 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <errno.h>
-#include <string.h>
-
+// #include <errno.h>
+// #include <string.h>
 
 #define ERR_EXIT(m) \
 	do \
@@ -25,7 +24,7 @@ int main(void)
 
 	write(fd, "ABCDE", 5);
 
-	int ret = lseek(fd, 1024*1024*1024, SEEK_CUR);
+	int ret = lseek(fd, 1024*1024*1024, SEEK_CUR); // 32
 	if (ret == -1)
 		ERR_EXIT("lseek error");
 
