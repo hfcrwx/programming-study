@@ -1,11 +1,11 @@
-#include <unistd.h>
+// #include <unistd.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <errno.h>
+// #include <errno.h>
 #include <string.h>
 
 
@@ -18,7 +18,7 @@
 
 int main(void)
 {
-	umask(0);
+	umask(0); // 在进程中指定，不再从shell中继承
 	int fd;
 	fd = open("test.txt", O_WRONLY | O_CREAT, 0666);
 	if (fd == -1)

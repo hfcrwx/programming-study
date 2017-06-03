@@ -5,7 +5,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <errno.h>
+// #include <errno.h>
 #include <string.h>
 
 
@@ -14,7 +14,7 @@
 	{ \
 		perror(m); \
 		exit(EXIT_FAILURE); \
-	} while(0)
+	} while (0)
 
 int main(void)
 {

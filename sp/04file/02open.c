@@ -1,7 +1,7 @@
-#include <unistd.h>
+// #include <unistd.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <fcntl.h>
+#include <fcntl.h> 
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -9,7 +9,7 @@
 #include <string.h>
 
 /*
-#define ERR_EXIT(m) (perror(m), exit(EXIT_FAILURE))
+#define ERR_EXIT(m) (perror(m), exit(EXIT_FAILURE)) // 因为宏不能用两条语句，所以用逗号表达式
 */
 
 #define ERR_EXIT(m) \
@@ -17,7 +17,7 @@
 	{ \
 		perror(m); \
 		exit(EXIT_FAILURE); \
-	} while(0)
+	} while(1) // do-while是一条语句
 
 int main(void)
 {
