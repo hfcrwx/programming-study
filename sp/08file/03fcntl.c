@@ -1,14 +1,11 @@
 #include <unistd.h>
-#include <sys/stat.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <errno.h>
 #include <string.h>
-
 
 #define ERR_EXIT(m) \
 	do \
@@ -26,13 +23,13 @@ int main(int argc, char *argv[])
 
 	struct flock lock;
 	memset(&lock, 0, sizeof(lock));
-	lock.l_type = F_WRLCK;
+	lock.l_type = F_WRLCK; // 写锁，排他锁
 	lock.l_whence = SEEK_SET;
 	lock.l_start = 0;
-	lock.l_len = 0;
+	lock.l_len = 0; // 锁定整个文件
 
 	/*if (fcntl(fd, F_SETLK, &lock) == 0)*/
-	if (fcntl(fd, F_SETLKW, &lock) == 0)
+	if (fcntl(fd, F_SETLKW, &lock) == 0) // 不能获取锁就阻塞等待
 	{
 		printf("lock success\n");
 		printf("press any key to unlock\n");
@@ -45,9 +42,6 @@ int main(int argc, char *argv[])
 	}
 	else
 		ERR_EXIT("lock fail");
-
-
-
 
 	return 0;
 }

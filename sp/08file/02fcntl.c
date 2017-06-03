@@ -1,14 +1,11 @@
 #include <unistd.h>
-#include <sys/stat.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <errno.h>
 #include <string.h>
-
 
 #define ERR_EXIT(m) \
 	do \
@@ -50,7 +47,7 @@ void set_flag(int fd, int flags)
 	val = fcntl(fd, F_GETFL, 0);
 	if (val == -1)
                 ERR_EXIT("fcntl get flag error");
-	val |= flags;
+	val |= flags; // 不改变已有的状态
 	if (fcntl(fd, F_SETFL, val) < 0)
 		ERR_EXIT("fcntl set flag error");
 }
