@@ -1,12 +1,10 @@
 #include <unistd.h>
-#include <sys/stat.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <errno.h>
 #include <string.h>
 
 
@@ -17,8 +15,8 @@
 		exit(EXIT_FAILURE); \
 	} while(0)
 
-#define MAJOR(a) (int)((unsigned short)a >> 8)
-#define MINOR(a) (int)((unsigned short)a & 0xFF)
+#define MAJOR(a) (int)((unsigned short)a >> 8) //高八位
+#define MINOR(a) (int)((unsigned short)a & 0xFF) //低八位
 
 int filetype(struct stat *buf);
 void fileperm(struct stat *buf, char *perm);
@@ -46,10 +44,8 @@ int main(int argc, char *argv[])
 	fileperm(&sbuf, perm);
 	printf("File permission bits=%o %s\n", sbuf.st_mode & 07777, perm);
 	
-
 	return 0;
 }
-
 
 int filetype(struct stat *buf)
 {
