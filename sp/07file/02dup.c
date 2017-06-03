@@ -1,14 +1,11 @@
 #include <unistd.h>
-#include <sys/stat.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <errno.h>
 #include <string.h>
-
 
 #define ERR_EXIT(m) \
 	do \
@@ -26,7 +23,7 @@ int main(int argc, char *argv[])
 
 /*
 	close(1);
-	dup(fd);
+	dup(fd); // 关闭了1, 返回文件描述符1(fd+1)
 */
 	dup2(fd, 1);
 	printf("hello\n");
