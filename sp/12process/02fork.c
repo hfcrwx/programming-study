@@ -1,22 +1,17 @@
 #include <unistd.h>
-#include <sys/stat.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <errno.h>
-#include <string.h>
 #include <signal.h>
 
-
 #define ERR_EXIT(m) \
-	do \
-	{ \
+	do { \
 		perror(m); \
 		exit(EXIT_FAILURE); \
-	} while(0)
+	} while (0)
 
 int gval = 100;
 
@@ -30,16 +25,15 @@ int main(int argc, char *argv[])
 	if (pid == -1)
 		ERR_EXIT("fork error");
 
-	if (pid > 0)
-	{
+	if (pid > 0) {
 		sleep(1);
 		printf("this is parent pid=%d childpid=%d gval=%d\n", getpid(), pid, gval);
 		sleep(3);
 	}
-	else if (pid == 0)
-	{
+	else if (pid == 0) {
 		gval++;
 		printf("this is child pid=%d parentpid=%d gval=%d\n", getpid(), getppid(), gval);
 	}
+	
 	return 0;
 }

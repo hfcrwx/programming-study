@@ -1,23 +1,7 @@
 #include <unistd.h>
-#include <sys/stat.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <errno.h>
-#include <string.h>
-#include <signal.h>
-
-
-#define ERR_EXIT(m) \
-	do \
-	{ \
-		perror(m); \
-		exit(EXIT_FAILURE); \
-	} while(0)
-
 
 void my_exit1(void)
 {
@@ -33,5 +17,7 @@ int main(int argc, char *argv[])
 {
 	atexit(my_exit1);
 	atexit(my_exit2);
-	_exit(0);
+	_exit(0); // 不会调用终止处理程序
+	// exit(0);
+	// return 0;
 }

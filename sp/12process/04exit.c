@@ -1,28 +1,13 @@
 #include <unistd.h>
-#include <sys/stat.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
 
-#include <stdlib.h>
 #include <stdio.h>
-#include <errno.h>
-#include <string.h>
-#include <signal.h>
-
-
-#define ERR_EXIT(m) \
-	do \
-	{ \
-		perror(m); \
-		exit(EXIT_FAILURE); \
-	} while(0)
-
+#include <stdlib.h>
 
 int main(int argc, char *argv[])
 {
-	printf("hello world");
-	//fflush(stdout);
-	//_exit(0);
-	exit(0);
+	printf("hello world"); // 没有\n，printf不会自动清除缓冲区的
+	// fflush(stdout); // 及时清空缓冲区
+	//  _exit(0); // 不清除缓冲区
+	exit(0); // 程序结束时清除缓冲区
+	// return 0; // 程序结束时清除缓冲区
 }
