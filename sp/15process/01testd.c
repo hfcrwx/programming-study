@@ -1,29 +1,23 @@
 #include <unistd.h>
-#include <sys/stat.h>
-#include <sys/wait.h>
 #include <sys/types.h>
+#include <sys/stat.h>
 #include <fcntl.h>
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <errno.h>
-#include <string.h>
-#include <signal.h>
-
 
 #define ERR_EXIT(m) \
-	do \
-	{ \
+	do { \
 		perror(m); \
 		exit(EXIT_FAILURE); \
-	} while(0)
+	} while (0)
 
 int setup_daemon(int nochdir, int noclose);
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
-	setup_daemon(1, 1);
-	//daemon(1, 1);
+	setup_daemon(0, 0);
+	// daemon(1, 1);
 	printf("test ...\n");
 	for (;;) ;
 	return 0;
@@ -42,15 +36,14 @@ int setup_daemon(int nochdir, int noclose)
 	setsid();
 	if (nochdir == 0)
 		chdir("/");
-	if (noclose == 0)
-	{
+	if (noclose == 0) {
 		int i;
-		for (i=0; i<3; ++i)
+		for (i = 0; i < 3; ++i)
 			close(i);
-		open("/dev/null", O_RDWR);
-		dup(0);
-		dup(0);
+		open("/dev/null", O_RDWR); // 0
+		dup(0); // 1
+		dup(0); // 2
 	}
+
 	return 0;
-	
 }
