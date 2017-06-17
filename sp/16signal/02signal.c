@@ -1,25 +1,17 @@
-#include <unistd.h>
-#include <sys/stat.h>
-#include <sys/wait.h>
-#include <sys/types.h>
-#include <fcntl.h>
-
-#include <stdlib.h>
-#include <stdio.h>
-#include <errno.h>
-#include <string.h>
 #include <signal.h>
 
+#include <stdio.h>
+#include <stdlib.h>
 
 #define ERR_EXIT(m) \
-	do \
-	{ \
+	do { \
 		perror(m); \
 		exit(EXIT_FAILURE); \
-	} while(0)
+	} while (0)
 
 void handler(int sig);
-int main(int argc, char *argv[])
+
+int main(int argc, char* argv[])
 {
 	__sighandler_t oldhandler;
 	oldhandler = signal(SIGINT, handler);
@@ -33,7 +25,9 @@ int main(int argc, char *argv[])
 	*/
 	if (signal(SIGINT, SIG_DFL) == SIG_ERR)
 		ERR_EXIT("signal error");
-	for (;;) ;
+	for (;;)
+        ;
+
 	return 0;
 }
 
