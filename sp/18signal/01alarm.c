@@ -1,25 +1,18 @@
-#include <unistd.h>
-#include <sys/stat.h>
-#include <sys/wait.h>
-#include <sys/types.h>
-#include <fcntl.h>
-
-#include <stdlib.h>
-#include <stdio.h>
-#include <errno.h>
-#include <string.h>
 #include <signal.h>
+#include <unistd.h>
 
+#include <stdio.h>
+#include <stdlib.h>
 
 #define ERR_EXIT(m) \
-	do \
-	{ \
+	do { \
 		perror(m); \
 		exit(EXIT_FAILURE); \
-	} while(0)
+	} while (0)
 
 void handler(int sig);
-int main(int argc, char *argv[])
+
+int main(int argc, char* argv[])
 {
 	if (signal(SIGALRM, handler) == SIG_ERR)
 		ERR_EXIT("signal error");
@@ -27,11 +20,12 @@ int main(int argc, char *argv[])
 	alarm(1);
 	for (;;)
 		pause();
+
 	return 0;
 }
 
 void handler(int sig)
 {
 	printf("recv a sig=%d\n", sig);
-	alarm(1);
+	alarm(1); // 间接递归
 }
