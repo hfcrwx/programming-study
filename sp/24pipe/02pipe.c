@@ -1,26 +1,15 @@
 #include <unistd.h>
-#include <sys/stat.h>
-#include <sys/wait.h>
-#include <sys/types.h>
-#include <fcntl.h>
 
-#include <stdlib.h>
 #include <stdio.h>
-#include <errno.h>
-#include <string.h>
-#include <signal.h>
-#include <sys/time.h>
-
+#include <stdlib.h>
 
 #define ERR_EXIT(m) \
-	do \
-	{ \
+	do { \
 		perror(m); \
 		exit(EXIT_FAILURE); \
-	} while(0)
+	} while (0)
 
-
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
 	int pipefd[2];
 	if (pipe(pipefd) == -1)
@@ -31,8 +20,7 @@ int main(int argc, char *argv[])
 	if (pid == -1)
 		ERR_EXIT("fork error");
 
-	if (pid == 0)
-	{
+	if (pid == 0) {
 		close(pipefd[1]);
 		exit(EXIT_SUCCESS);
 	}
@@ -44,5 +32,4 @@ int main(int argc, char *argv[])
 	printf("ret = %d\n", ret);
 	
 	return 0;
-
 }
