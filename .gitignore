@@ -1,3 +1,6 @@
+# Kdevelop
+*.kdev4
+
 # Prerequisites
 *.d
 
