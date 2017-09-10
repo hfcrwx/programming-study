@@ -2,26 +2,26 @@
 
 typedef struct stu
 {
-	char name[32];
-	int age;
+    char name[32];
+    int age;
 } STU;
 int main(void)
 {
-	shmfifo_t *fifo = shmfifo_init(1234, sizeof(STU), 3);
+    shmfifo_t* fifo = shmfifo_init(1234, sizeof(STU), 3);
 
-	STU s;
-	memset(&s, 0, sizeof(STU));
-	s.name[0]='A';
-	int i;
-	
-	for (i=0; i<5; i++)
-	{
-		s.age = 20 +i;
-		shmfifo_put(fifo, &s);
-		s.name[0] = s.name[0] + 1;
+    STU s;
+    memset(&s, 0, sizeof(STU));
+    s.name[0] = 'A';
+    s.age = 20;
+    int i;
 
-		printf("send ok\n");
-	}
-	
-	return 0;
+    for (i = 0; i < 5; i++) {
+        shmfifo_put(fifo, &s);
+        s.name[0] += 1;
+        s.age += 1;
+
+        printf("send ok\n");
+    }
+
+    return 0;
 }

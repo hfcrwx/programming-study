@@ -16,4 +16,3 @@ shmfifo_free:$(OBJS3)
 	$(CC) $(CFLAGS) $^ -o $@
 clean:
 	rm -f *.o $(BIN)
-

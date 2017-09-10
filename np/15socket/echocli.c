@@ -191,7 +191,7 @@ void echo_cli(int sock)
 		{
 			if (fgets(sendbuf, sizeof(sendbuf), stdin) == NULL)
 			{
-				stdineof = 1;
+				stdineof = 1; // 下次不再关心stdin是否有数据到来
 				/*
 				close(sock);
 				sleep(5);

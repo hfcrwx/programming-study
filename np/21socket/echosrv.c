@@ -48,6 +48,7 @@ int main(void)
 	if ((listenfd = socket(PF_UNIX, SOCK_STREAM, 0)) < 0)
 		ERR_EXIT("socket");
 
+    // 不设置地址重复利用
 	unlink("/tmp/test_socket");
 	struct sockaddr_un servaddr;
 	memset(&servaddr, 0, sizeof(servaddr));
@@ -55,7 +56,7 @@ int main(void)
 	strcpy(servaddr.sun_path, "/tmp/test_socket");
 	
 	if (bind(listenfd, (struct sockaddr*)&servaddr, sizeof(servaddr)) < 0)
-		ERR_EXIT("bind");
+		ERR_EXIT("bind"); // 产生套接字文件
 
 	if (listen(listenfd, SOMAXCONN) < 0)
 		ERR_EXIT("listen");

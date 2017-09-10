@@ -15,4 +15,3 @@ all:$(BIN)
 	$(CC) $(CFLAGS) $^ -o $@ -lrt
 clean:
 	rm -f *.o $(BIN)
-

@@ -7,4 +7,3 @@ all:$(BIN)
 	$(CC) $(CFLAGS) -c $< -o $@
 clean:
 	rm -f *.o $(BIN)
-

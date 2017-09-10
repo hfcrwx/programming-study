@@ -7,4 +7,3 @@ all:$(BIN)
 	$(CC) $(CPPFLAGS) -c $< -o $@
 clean:
 	rm -f *.o $(BIN)
-

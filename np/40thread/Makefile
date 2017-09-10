@@ -9,4 +9,3 @@ pctest:pctest.o
 	$(CC) $(CFLAGS) $^ -o $@ -lpthread
 clean:
 	rm -f *.o $(BIN)
-

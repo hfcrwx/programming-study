@@ -9,4 +9,3 @@ cli:cli.o sysutil.o
 	$(CC) $(CFLAGS) $^ -o $@
 clean:
 	rm -f *.o $(BIN)
-

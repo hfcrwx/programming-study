@@ -23,7 +23,7 @@ void echo_cli(int sock)
         servaddr.sin_port = htons(5188);
         servaddr.sin_addr.s_addr = inet_addr("127.0.0.1");
 
-	connect(sock, (struct sockaddr*)&servaddr, sizeof(servaddr));
+	connect(sock, (struct sockaddr*)&servaddr, sizeof(servaddr)); // 只是绑定了socket的远程地址，这个socket不能发送给其他地址了
 
 	int ret;
 	char sendbuf[1024] = {0};
@@ -31,7 +31,7 @@ void echo_cli(int sock)
 	while (fgets(sendbuf, sizeof(sendbuf), stdin) != NULL)
 	{		
 		/*sendto(sock, sendbuf, strlen(sendbuf), 0, (struct sockaddr*)&servaddr, sizeof(servaddr));*/
-		/*sendto(sock, sendbuf, strlen(sendbuf), 0, NULL, 0);*/
+		/*sendto(sock, sendbuf, strlen(sendbuf), 0, NULL, 0);*/ // 使用connet之后，sendto不用再指定发送地址了
 		
 		send(sock, sendbuf, strlen(sendbuf), 0);
 		ret = recvfrom(sock, recvbuf, sizeof(recvbuf), 0, NULL, NULL);

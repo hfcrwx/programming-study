@@ -21,12 +21,12 @@
 int main(void)
 {
 int count = 0;
+int sock;
 while(1)
 {
-	int sock;
 	if ((sock = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP)) < 0)
 	{
-		sleep(4);
+		sleep(4); // 推迟close，server可以建立的连接1020
 		ERR_EXIT("socket");
 	}
 
@@ -45,7 +45,7 @@ while(1)
 		ERR_EXIT("getsockname");
 
 	printf("ip=%s port=%d\n", inet_ntoa(localaddr.sin_addr), ntohs(localaddr.sin_port));
-	printf("count = %d\n", ++count);
+	printf("count = %d\n", ++count); // 最大1021
 
 }
 

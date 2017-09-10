@@ -12,4 +12,3 @@ epollsrv:epollsrv.o
 	g++ $(CFLAGS) $^ -o $@
 clean:
 	rm -f *.o $(BIN)
-

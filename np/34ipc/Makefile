@@ -1,8 +1,7 @@
 .PHONY:clean all
 CC=gcc
 CFLAGS=-Wall -g
-BIN=01mq_open 02mq_unlink 03mq_getattr 04mq_send 05mq_recv \
-06mq_notify
+BIN=01mq_open 02mq_unlink 03mq_getattr 04mq_send 05mq_recv 06mq_notify
 all:$(BIN)
 %.o:%.c
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -20,4 +19,3 @@ all:$(BIN)
 	$(CC) $(CFLAGS) $^ -o $@ -lrt
 clean:
 	rm -f *.o $(BIN)
-

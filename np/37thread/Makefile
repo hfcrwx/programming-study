@@ -11,4 +11,3 @@ echosrv:echosrv.o
 	$(CC) $(CFLAGS) $^ -o $@ -lpthread
 clean:
 	rm -f *.o $(BIN)
-
