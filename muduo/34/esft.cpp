@@ -1,6 +1,7 @@
 #include <boost/enable_shared_from_this.hpp>
 #include <boost/shared_ptr.hpp>
 #include <cassert>
+#include <iostream>
 
 class Y: public boost::enable_shared_from_this<Y>
 {

@@ -15,7 +15,7 @@ namespace muduo
 namespace detail
 {
 template<typename T>
-class AtomicIntegerT : boost::noncopyable
+class AtomicIntegerT : boost::noncopyable // 复制构造函数、赋值运算符做成私有的
 {
  public:
   AtomicIntegerT()

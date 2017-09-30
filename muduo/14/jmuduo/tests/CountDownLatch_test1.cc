@@ -27,7 +27,7 @@ class Test
 
   void run()
   {
-    latch_.countDown();
+    latch_.countDown(); // 1->0 通知了所有子线程
   }
 
   void joinAll()

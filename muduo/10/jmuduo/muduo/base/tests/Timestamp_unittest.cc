@@ -14,15 +14,15 @@ void passByValue(Timestamp x)
   printf("%s\n", x.toString().c_str());
 }
 
-void benchmark()
+void benchmark() // 基准函数 参照函数
 {
   const int kNumber = 1000*1000;
 
   std::vector<Timestamp> stamps;
-  stamps.reserve(kNumber);
+  stamps.reserve(kNumber); // 预留好空间
   for (int i = 0; i < kNumber; ++i)
   {
-    stamps.push_back(Timestamp::now());
+    stamps.push_back(Timestamp::now()); // gettimeofday是主要时间消耗
   }
   printf("%s\n", stamps.front().toString().c_str());
   printf("%s\n", stamps.back().toString().c_str());
@@ -57,7 +57,7 @@ void benchmark()
 
 int main()
 {
-  Timestamp now(Timestamp::now());
+  Timestamp now(Timestamp::now()); // Timestamp now = Timestamp::now();
   printf("%s\n", now.toString().c_str());
   passByValue(now);
   passByConstReference(now);

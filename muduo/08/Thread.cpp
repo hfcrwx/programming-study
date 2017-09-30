@@ -25,7 +25,7 @@ void Thread::Join()
 
 void* Thread::ThreadRoutine(void* arg)
 {
-	Thread* thread = static_cast<Thread*>(arg);
+	Thread* thread = static_cast<Thread*>(arg); // 基类指针指向派生类对象
 	thread->Run();
 	if (thread->autoDelete_)
 		delete thread;

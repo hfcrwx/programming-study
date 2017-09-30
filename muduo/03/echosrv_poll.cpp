@@ -34,6 +34,8 @@ int main(void)
 	int listenfd;
 
 	//if ((listenfd = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP)) < 0)
+    //SOCK_NONBLOCK 可以用fcntl F_SETFL O_NONBLOCK
+    //SOCK_CLOEXEC 可以用fcntl F_SETFD FD_CLOEXEC
 	if ((listenfd = socket(PF_INET, SOCK_STREAM | SOCK_NONBLOCK | SOCK_CLOEXEC, IPPROTO_TCP)) < 0)
 		ERR_EXIT("socket");
 
@@ -80,7 +82,7 @@ int main(void)
 		
 		if (pollfds[0].revents & POLLIN)
 		{
-			peerlen = sizeof(peeraddr);
+			peerlen = sizeof(peeraddr); // 放在循环外？
 			connfd = accept4(listenfd, (struct sockaddr*)&peeraddr,
 						&peerlen, SOCK_NONBLOCK | SOCK_CLOEXEC);
 

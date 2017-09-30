@@ -44,7 +44,7 @@ void afterFork()
 {
   muduo::CurrentThread::t_cachedTid = 0;
   muduo::CurrentThread::t_threadName = "main";
-  CurrentThread::tid();
+  CurrentThread::tid(); // 缓存一下
   // no need to call pthread_atfork(NULL, NULL, &afterFork);
 }
 
@@ -55,11 +55,11 @@ class ThreadNameInitializer
   {
     muduo::CurrentThread::t_threadName = "main";
     CurrentThread::tid();
-    pthread_atfork(NULL, NULL, &afterFork);
+    pthread_atfork(NULL, NULL, &afterFork); // 如果fork，子进程会调用afterFork
   }
 };
 
-ThreadNameInitializer init;
+ThreadNameInitializer init; // 构造先于main()
 }
 }
 
@@ -71,7 +71,7 @@ void CurrentThread::cacheTid()
   {
     t_cachedTid = detail::gettid();
     int n = snprintf(t_tidString, sizeof t_tidString, "%5d ", t_cachedTid);
-    assert(n == 6); (void) n;
+    assert(n == 6); (void) n; // 为了使用n，防止在release版本中有警告，编译不通过
   }
 }
 
