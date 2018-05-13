@@ -45,7 +45,7 @@ void BankSession::Send(const char* buf, size_t len)
 
 void BankSession::Parse()
 {
-	requestPack_= (RequestPack*)(buffer_);
+	requestPack_= reinterpret_cast<RequestPack*>(buffer_);
 	uint16 cmd = muduo::net::sockets::networkToHost16(requestPack_->head.cmd);
 	uint16 len = muduo::net::sockets::networkToHost16(requestPack_->head.len);
 	
