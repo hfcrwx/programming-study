@@ -28,14 +28,14 @@ typedef std::vector<struct pollfd> PollFdList;
 int main(void)
 {
 	signal(SIGPIPE, SIG_IGN);
-	signal(SIGCHLD, SIG_IGN);
+	signal(SIGCHLD, SIG_IGN);//避免僵尸进程
 
 	//int idlefd = open("/dev/null", O_RDONLY | O_CLOEXEC);
 	int listenfd;
 
 	//if ((listenfd = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP)) < 0)
     //SOCK_NONBLOCK 可以用fcntl F_SETFL O_NONBLOCK
-    //SOCK_CLOEXEC 可以用fcntl F_SETFD FD_CLOEXEC
+    //SOCK_CLOEXEC 可以用fcntl F_SETFD FD_CLOEXEC fork一个进程，再替换掉，替换的时候这个文件描述符是处于关闭的状态
 	if ((listenfd = socket(PF_INET, SOCK_STREAM | SOCK_NONBLOCK | SOCK_CLOEXEC, IPPROTO_TCP)) < 0)
 		ERR_EXIT("socket");
 

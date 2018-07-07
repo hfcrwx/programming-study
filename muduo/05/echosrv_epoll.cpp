@@ -55,6 +55,7 @@ int main(void)
 
 	std::vector<int> clients;
 	int epollfd;
+    //epoll_create + fcntl F_SETFD FD_CLOEXEC
 	epollfd = epoll_create1(EPOLL_CLOEXEC);
 
 	struct epoll_event event;

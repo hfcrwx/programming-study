@@ -31,7 +31,7 @@ void Thread::SetAutoDelete(bool autoDelete)
 	autoDelete_ = autoDelete;
 }
 
-void Thread::Run()
+void Thread::Run() // 回调
 {
 	func_();
 }

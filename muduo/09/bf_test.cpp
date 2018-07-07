@@ -15,9 +15,13 @@ public:
 int main()
 {
 	Foo foo;
-	boost::function<void (int, int)> fp = boost::bind(&Foo::memberFunc, &foo, 0.5, _1, _2);
-	fp(100, 200);
+    boost::function<void (int)> fp = boost::bind(&Foo::memberFunc, &foo, 0.5, -1, 10);
+    // (&foo)->memberFunc(0.5, 100, 10);
+    fp(100);
+	boost::function<void (int, int)> fp1 = boost::bind(&Foo::memberFunc, &foo, 0.5, _1, _2);
+	fp1(100, 200);
 	boost::function<void (int, int)> fp2 = boost::bind(&Foo::memberFunc, boost::ref(foo), 0.5, _1, _2);
+    // foo.memberFunc(0.5, 55, 66);
 	fp2(55, 66);
 	return 0;
 }

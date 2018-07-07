@@ -1,5 +1,6 @@
 #!/bin/sh
 
+#跟踪所有命令
 set -x
 
 SOURCE_DIR=`pwd`
@@ -10,3 +11,5 @@ mkdir -p $BUILD_DIR \
   && cmake $SOURCE_DIR \
   && make $*
 
+#可以传参数
+#./build.sh clean

@@ -34,7 +34,7 @@ int main(void)
 	/*
 	TestThread t(5);
 	t.Start();
-
+    // t.Run() // 是错的，这是在主线程中运行，不应该直接调用，做成private
 	t.Join();
 	*/
 
