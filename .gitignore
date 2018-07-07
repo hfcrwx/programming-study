@@ -1,6 +1,9 @@
-buid
+# Custom.gitignore
+
+[Bb]uild/
 
 # Kdevelop
+.kdev4/
 *.kdev4
 
 # Prerequisites
