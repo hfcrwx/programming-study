@@ -14,7 +14,8 @@ void passByValue(Timestamp x)
   printf("%s\n", x.toString().c_str());
 }
 
-void benchmark() // 基准函数 参照函数
+//测试插入的1000×1000个时间之间的距离
+void benchmark() // 基准函数 参照函数 度量程序
 {
   const int kNumber = 1000*1000;
 
@@ -49,6 +50,7 @@ void benchmark() // 基准函数 参照函数
     }
   }
 
+  //打印时间差<100的时间差个数
   for (int i = 0; i < 100; ++i)
   {
     printf("%2d: %d\n", i, increments[i]);

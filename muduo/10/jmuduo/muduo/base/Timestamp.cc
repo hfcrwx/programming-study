@@ -44,7 +44,7 @@ string Timestamp::toFormattedString() const
 Timestamp Timestamp::now()
 {
   struct timeval tv;
-  gettimeofday(&tv, NULL);
+  gettimeofday(&tv, NULL); //不需要返回时区
   int64_t seconds = tv.tv_sec;
   return Timestamp(seconds * kMicroSecondsPerSecond + tv.tv_usec);
 }
