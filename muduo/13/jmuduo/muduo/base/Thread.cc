@@ -43,7 +43,7 @@ pid_t gettid()
 void afterFork()
 {
   muduo::CurrentThread::t_cachedTid = 0;
-  muduo::CurrentThread::t_threadName = "main";
+  muduo::CurrentThread::t_threadName = "main"; // 如果是某个进程的子线程进行了fork，有必要这样
   CurrentThread::tid(); // 缓存一下
   // no need to call pthread_atfork(NULL, NULL, &afterFork);
 }
