@@ -32,6 +32,6 @@ int main()
   muduo::CountDownLatch latch(1);
   pool.run(boost::bind(&muduo::CountDownLatch::countDown, &latch));
   latch.wait();
-  pool.stop();
+  pool.stop(); // pool析构的时候不会再次stop()
 }
 
