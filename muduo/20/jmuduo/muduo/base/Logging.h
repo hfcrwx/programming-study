@@ -106,8 +106,8 @@ inline Logger::LogLevel Logger::logLevel()
 #define LOG_WARN muduo::Logger(__FILE__, __LINE__, muduo::Logger::WARN).stream()
 #define LOG_ERROR muduo::Logger(__FILE__, __LINE__, muduo::Logger::ERROR).stream()
 #define LOG_FATAL muduo::Logger(__FILE__, __LINE__, muduo::Logger::FATAL).stream()
-#define LOG_SYSERR muduo::Logger(__FILE__, __LINE__, false).stream() // false 不退出程序
-#define LOG_SYSFATAL muduo::Logger(__FILE__, __LINE__, true).stream()
+#define LOG_SYSERR muduo::Logger(__FILE__, __LINE__, false).stream() // ERROR 不退出程序
+#define LOG_SYSFATAL muduo::Logger(__FILE__, __LINE__, true).stream() // FATAL 退出程序
 
 const char* strerror_tl(int savedErrno);
 
