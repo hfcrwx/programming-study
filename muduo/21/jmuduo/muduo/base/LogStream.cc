@@ -37,6 +37,7 @@ size_t convert(char buf[], T value)
 
   do // 123 -123
   {
+    // last digit
     int lsd = static_cast<int>(i % 10); // last digit
     i /= 10;
     *p++ = zero[lsd];

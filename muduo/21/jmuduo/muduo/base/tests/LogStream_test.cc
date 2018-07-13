@@ -232,4 +232,8 @@ BOOST_AUTO_TEST_CASE(testLogStreamLong)
   os << "abcdefghi";
   BOOST_CHECK_EQUAL(buf.length(), 3999);
   BOOST_CHECK_EQUAL(buf.avail(), 1);
+  
+//   os << "E";
+//   BOOST_CHECK_EQUAL(buf.length(), 4000);
+//   BOOST_CHECK_EQUAL(buf.avail(), 0);
 }
