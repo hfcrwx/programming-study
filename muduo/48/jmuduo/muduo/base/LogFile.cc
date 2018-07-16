@@ -61,12 +61,13 @@ class LogFile::File : boost::noncopyable
 
   size_t write(const char* logline, size_t len)
   {
+	// 没有必要用线程安全的fwrite，线程安全由LogFile::mutex_保证
 #undef fwrite_unlocked
     return ::fwrite_unlocked(logline, 1, len, fp_);
   }
 
   FILE* fp_;
-  char buffer_[64*1024];
+  char buffer_[64*1024]; // 超过了缓冲区大小会自动flush到文件
   size_t writtenBytes_;
 };
 
@@ -132,7 +133,7 @@ void LogFile::append_unlocked(const char* logline, int len)
       count_ = 0;
       time_t now = ::time(NULL);
       time_t thisPeriod_ = now / kRollPerSeconds_ * kRollPerSeconds_;
-      if (thisPeriod_ != startOfPeriod_)
+      if (thisPeriod_ != startOfPeriod_) // 超过一天，不一定是第二天
       {
         rollFile();
       }

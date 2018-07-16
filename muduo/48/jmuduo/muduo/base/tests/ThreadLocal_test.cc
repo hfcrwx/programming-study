@@ -58,5 +58,5 @@ int main()
   testObj2.value().setName("main two");
   print();
 
-  pthread_exit(0);
+  pthread_exit(0); // 退出当前线程，主线程
 }

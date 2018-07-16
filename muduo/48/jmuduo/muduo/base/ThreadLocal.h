@@ -23,7 +23,7 @@ class ThreadLocal : boost::noncopyable
 
   ~ThreadLocal()
   {
-    pthread_key_delete(pkey_);
+    pthread_key_delete(pkey_); // 只是销毁key，不是销毁实际的数据
   }
 
   T& value()
@@ -39,7 +39,7 @@ class ThreadLocal : boost::noncopyable
 
  private:
 
-  static void destructor(void *x)
+  static void destructor(void *x) // 销毁实际的数据
   {
     T* obj = static_cast<T*>(x);
     typedef char T_must_be_complete_type[sizeof(T) == 0 ? -1 : 1];

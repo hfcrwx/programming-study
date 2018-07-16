@@ -27,6 +27,7 @@ class Test : boost::noncopyable
   std::string name_;
 };
 
+// muduo::Singleton<muduo::ThreadLocal<Test> >::instance() 是单例对象，STL是线程特定对象
 #define STL muduo::Singleton<muduo::ThreadLocal<Test> >::instance().value()
 
 void print()

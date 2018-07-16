@@ -19,6 +19,7 @@ class Singleton : boost::noncopyable
  public:
   static T& instance()
   {
+	// ponce_保证init只调用一次，而且是线程安全的
     pthread_once(&ponce_, &Singleton::init);
     return *value_;
   }

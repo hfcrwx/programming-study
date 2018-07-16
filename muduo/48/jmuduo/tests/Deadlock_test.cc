@@ -42,6 +42,8 @@ int main(void)
 	if (fork() == 0)
 	{
 		doit(NULL);
+		//ps aux | grep deadlock_test
+        //killall deadlock_test
 	}
 	pthread_join(tid, NULL);
 	printf("pid = %d Exiting main ...\n",static_cast<int>(getpid()));

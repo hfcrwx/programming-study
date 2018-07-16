@@ -14,15 +14,16 @@ void passByValue(Timestamp x)
   printf("%s\n", x.toString().c_str());
 }
 
-void benchmark()
+//测试插入的1000×1000个时间之间的距离
+void benchmark() // 基准测试
 {
   const int kNumber = 1000*1000;
 
   std::vector<Timestamp> stamps;
-  stamps.reserve(kNumber);
+  stamps.reserve(kNumber); // 预留好空间
   for (int i = 0; i < kNumber; ++i)
   {
-    stamps.push_back(Timestamp::now());
+    stamps.push_back(Timestamp::now()); // gettimeofday是主要时间消耗
   }
   printf("%s\n", stamps.front().toString().c_str());
   printf("%s\n", stamps.back().toString().c_str());
@@ -49,6 +50,7 @@ void benchmark()
     }
   }
 
+  //打印时间差<100的时间差个数
   for (int i = 0; i < 100; ++i)
   {
     printf("%2d: %d\n", i, increments[i]);
@@ -57,7 +59,7 @@ void benchmark()
 
 int main()
 {
-  Timestamp now(Timestamp::now());
+  Timestamp now(Timestamp::now()); // Timestamp now = Timestamp::now();
   printf("%s\n", now.toString().c_str());
   passByValue(now);
   passByConstReference(now);

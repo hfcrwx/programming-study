@@ -35,19 +35,19 @@ size_t convert(char buf[], T value)
   T i = value;
   char* p = buf;
 
-  do
+  do // 123 -123
   {
-    int lsd = static_cast<int>(i % 10);
+    int lsd = static_cast<int>(i % 10); // last digit
     i /= 10;
     *p++ = zero[lsd];
-  } while (i != 0);
+  } while (i != 0); // 321
 
   if (value < 0)
   {
     *p++ = '-';
-  }
+  } // 321-
   *p = '\0';
-  std::reverse(buf, p);
+  std::reverse(buf, p); // -123
 
   return p - buf;
 }

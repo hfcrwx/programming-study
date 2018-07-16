@@ -31,7 +31,7 @@ void CountDownLatch::countDown()
   }
 }
 
-int CountDownLatch::getCount() const
+int CountDownLatch::getCount() const // 改变mutex_，但不改变count_
 {
   MutexLockGuard lock(mutex_);
   return count_;

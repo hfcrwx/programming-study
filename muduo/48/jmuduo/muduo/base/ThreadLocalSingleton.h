@@ -66,7 +66,7 @@ class ThreadLocalSingleton : boost::noncopyable
   };
 
   static __thread T* t_value_;
-  static Deleter deleter_;
+  static Deleter deleter_; // 自动销毁
 };
 
 template<typename T>

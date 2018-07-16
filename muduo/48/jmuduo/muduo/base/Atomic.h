@@ -14,8 +14,8 @@ namespace muduo
 
 namespace detail
 {
-template<typename T>
-class AtomicIntegerT : boost::noncopyable
+template<typename T> // 模仿Java原子性操作类写的
+class AtomicIntegerT : boost::noncopyable // 拷贝构造函数、赋值运算符做成私有的
 {
  public:
   AtomicIntegerT()
@@ -37,11 +37,13 @@ class AtomicIntegerT : boost::noncopyable
 
   T get()
   {
+	// 如果value==0,value=0；否则，不修改。返回的都是没有修改的值。
     return __sync_val_compare_and_swap(&value_, 0, 0);
   }
 
   T getAndAdd(T x)
   {
+	// 返回的是没有修改的值
     return __sync_fetch_and_add(&value_, x);
   }
 
@@ -50,11 +52,13 @@ class AtomicIntegerT : boost::noncopyable
     return getAndAdd(x) + x;
   }
 
+  // ++i 自增
   T incrementAndGet()
   {
     return addAndGet(1);
   }
 
+  // --i
   T decrementAndGet()
   {
     return addAndGet(-1);
