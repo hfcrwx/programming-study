@@ -171,7 +171,7 @@ void HttpServer::onMessage(const TcpConnectionPtr& conn,
 {
   HttpContext* context = boost::any_cast<HttpContext>(conn->getMutableContext());
 
-  if (!detail::parseRequest(buf, context, receiveTime))
+  if (!detail::parseRequest(buf, context, receiveTime)) // 更好的做法是把parseRequest作为HttpContext的成员函数
   {
     conn->send("HTTP/1.1 400 Bad Request\r\n\r\n");
     conn->shutdown();
@@ -189,7 +189,7 @@ void HttpServer::onRequest(const TcpConnectionPtr& conn, const HttpRequest& req)
 {
   const string& connection = req.getHeader("Connection");
   bool close = connection == "close" ||
-    (req.getVersion() == HttpRequest::kHttp10 && connection != "Keep-Alive");
+    (req.getVersion() == HttpRequest::kHttp10 && connection != "Keep-Alive"); // 1.0版本只支持短连接
   HttpResponse response(close);
   httpCallback_(req, &response);
   Buffer buf;

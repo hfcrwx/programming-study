@@ -91,9 +91,9 @@ class TcpServer : boost::noncopyable
   /// Not thread safe, but in loop
   void removeConnectionInLoop(const TcpConnectionPtr& conn);
 
-  typedef std::map<string, TcpConnectionPtr> ConnectionMap;
+  typedef std::map<string, TcpConnectionPtr> ConnectionMap; // 连接名称，连接对象的指针
 
-  EventLoop* loop_;  // the acceptor loop
+  EventLoop* loop_;  // the acceptor loop 是acceptor所属的EventLoop，不一定是连接所属的EventLoop
   const string hostport_;		// 服务端口
   const string name_;			// 服务名
   boost::scoped_ptr<Acceptor> acceptor_; // avoid revealing Acceptor

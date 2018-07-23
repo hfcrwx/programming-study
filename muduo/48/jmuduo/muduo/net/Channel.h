@@ -37,7 +37,7 @@ class Channel : boost::noncopyable
   typedef boost::function<void()> EventCallback;
   typedef boost::function<void(Timestamp)> ReadEventCallback;
 
-  Channel(EventLoop* loop, int fd);
+  Channel(EventLoop* loop, int fd); // 一个EventLoop包含多个Channel，但是一个Channel只能够由一个EventLoop负责，它所属的EventLoop只有一个
   ~Channel();
 
   void handleEvent(Timestamp receiveTime);
@@ -52,7 +52,7 @@ class Channel : boost::noncopyable
 
   /// Tie this channel to the owner object managed by shared_ptr,
   /// prevent the owner object being destroyed in handleEvent.
-  void tie(const boost::shared_ptr<void>&);
+  void tie(const boost::shared_ptr<void>&); // 跟TcpConnection的生存期有关系，为了防止这个对象被销毁
 
   int fd() const { return fd_; }
   int events() const { return events_; }
@@ -60,7 +60,7 @@ class Channel : boost::noncopyable
   // int revents() const { return revents_; }
   bool isNoneEvent() const { return events_ == kNoneEvent; }
 
-  void enableReading() { events_ |= kReadEvent; update(); }
+  void enableReading() { events_ |= kReadEvent; update(); } // 关注可读事件，把Channel注册到EventLoop，从而注册到EventLoop所持有的Poller对象当中
   // void disableReading() { events_ &= ~kReadEvent; update(); }
   void enableWriting() { events_ |= kWriteEvent; update(); }
   void disableWriting() { events_ &= ~kWriteEvent; update(); }
@@ -91,11 +91,11 @@ class Channel : boost::noncopyable
   const int  fd_;			// 文件描述符，但不负责关闭该文件描述符
   int        events_;		// 关注的事件
   int        revents_;		// poll/epoll返回的事件
-  int        index_;		// used by Poller.表示在poll的事件数组中的序号
+  int        index_;		// used by Poller.表示在poll的事件数组struct pollfd* fds中的序号 如果小于0，说明是新增的一个事件，还没有添加到数组中，就添加到末尾
   bool       logHup_;		// for POLLHUP
 
-  boost::weak_ptr<void> tie_;
-  bool tied_;
+  boost::weak_ptr<void> tie_; // 负责生存期控制
+  bool tied_; // 负责生存期控制
   bool eventHandling_;		// 是否处于处理事件中
   ReadEventCallback readCallback_;
   EventCallback writeCallback_;

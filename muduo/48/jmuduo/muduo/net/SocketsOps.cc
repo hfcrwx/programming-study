@@ -17,6 +17,7 @@
 #include <stdio.h>  // snprintf
 #include <strings.h>  // bzero
 #include <sys/socket.h>
+#include <sys/uio.h>
 #include <unistd.h>
 
 using namespace muduo;
@@ -27,6 +28,7 @@ namespace
 
 typedef struct sockaddr SA;
 
+// 网际地址指针转换为通用地址指针
 const SA* sockaddr_cast(const struct sockaddr_in* addr)
 {
   return static_cast<const SA*>(implicit_cast<const void*>(addr));
@@ -108,7 +110,7 @@ int sockets::accept(int sockfd, struct sockaddr_in* addr)
 #endif
   if (connfd < 0)
   {
-    int savedErrno = errno;
+    int savedErrno = errno; // 先保存下来，因为下面可能会更改errno的值
     LOG_SYSERR << "Socket::accept";
     switch (savedErrno)
     {
@@ -191,7 +193,7 @@ void sockets::toIp(char* buf, size_t size,
                    const struct sockaddr_in& addr)
 {
   assert(size >= INET_ADDRSTRLEN);
-  ::inet_ntop(AF_INET, &addr.sin_addr, buf, static_cast<socklen_t>(size));
+  ::inet_ntop(AF_INET, &addr.sin_addr, buf, static_cast<socklen_t>(size)); // inet_ntoa
 }
 
 void sockets::fromIpPort(const char* ip, uint16_t port,
@@ -199,7 +201,7 @@ void sockets::fromIpPort(const char* ip, uint16_t port,
 {
   addr->sin_family = AF_INET;
   addr->sin_port = hostToNetwork16(port);
-  if (::inet_pton(AF_INET, ip, &addr->sin_addr) <= 0)
+  if (::inet_pton(AF_INET, ip, &addr->sin_addr) <= 0) // inet_aton
   {
     LOG_SYSERR << "sockets::fromIpPort";
   }

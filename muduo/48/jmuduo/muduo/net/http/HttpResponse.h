@@ -70,7 +70,7 @@ class HttpResponse : public muduo::copyable
   HttpStatusCode statusCode_;			// 状态响应码
   // FIXME: add http version
   string statusMessage_;				// 状态响应码对应的文本信息
-  bool closeConnection_;				// 是否关闭连接
+  bool closeConnection_;				// 是否关闭连接 短连接要关闭连接
   string body_;							// 实体
 };
 

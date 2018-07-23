@@ -34,6 +34,7 @@ class TimerId;
 /// A best efforts timer queue.
 /// No guarantee that the callback will be on time.
 ///
+// 可以看作定时器的管理器，内部维护了一个定时器的列表
 class TimerQueue : boost::noncopyable
 {
  public:
@@ -60,7 +61,7 @@ class TimerQueue : boost::noncopyable
   // 但可以进行移动构造与移动赋值操作，即所有权可以移动到另一个对象（而非拷贝构造）
   typedef std::pair<Timestamp, Timer*> Entry;
   typedef std::set<Entry> TimerList;
-  typedef std::pair<Timer*, int64_t> ActiveTimer;
+  typedef std::pair<Timer*, int64_t> ActiveTimer; // 地址、序号
   typedef std::set<ActiveTimer> ActiveTimerSet;
 
   // 以下成员函数只可能在其所属的I/O线程中调用，因而不必加锁。
@@ -72,7 +73,7 @@ class TimerQueue : boost::noncopyable
   // move out all expired timers
   // 返回超时的定时器列表
   std::vector<Entry> getExpired(Timestamp now);
-  void reset(const std::vector<Entry>& expired, Timestamp now);
+  void reset(const std::vector<Entry>& expired, Timestamp now); // 超时且重复的定时器
 
   bool insert(Timer* timer);
 

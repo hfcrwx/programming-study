@@ -86,7 +86,7 @@ void EPollPoller::fillActiveChannels(int numEvents,
   assert(implicit_cast<size_t>(numEvents) <= events_.size());
   for (int i = 0; i < numEvents; ++i)
   {
-    Channel* channel = static_cast<Channel*>(events_[i].data.ptr);
+    Channel* channel = static_cast<Channel*>(events_[i].data.ptr); // 可以直接得到Channel*
 #ifndef NDEBUG
     int fd = channel->fd();
     ChannelMap::const_iterator it = channels_.find(fd);
@@ -120,7 +120,7 @@ void EPollPoller::updateChannel(Channel* channel)
     channel->set_index(kAdded);
     update(EPOLL_CTL_ADD, channel);
   }
-  else
+  else // kAdded
   {
     // update existing one with EPOLL_CTL_MOD/DEL
     int fd = channel->fd();
@@ -128,9 +128,9 @@ void EPollPoller::updateChannel(Channel* channel)
     assert(channels_.find(fd) != channels_.end());
     assert(channels_[fd] == channel);
     assert(index == kAdded);
-    if (channel->isNoneEvent())
+    if (channel->isNoneEvent()) // 剔除关注
     {
-      update(EPOLL_CTL_DEL, channel);
+      update(EPOLL_CTL_DEL, channel); // 仅仅表示不在epoll中关注，并没有在channels_中移除
       channel->set_index(kDeleted);
     }
     else

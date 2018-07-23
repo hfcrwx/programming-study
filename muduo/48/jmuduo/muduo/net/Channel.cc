@@ -17,14 +17,14 @@
 using namespace muduo;
 using namespace muduo::net;
 
-const int Channel::kNoneEvent = 0;
-const int Channel::kReadEvent = POLLIN | POLLPRI;
+const int Channel::kNoneEvent = 0; // 没有事件
+const int Channel::kReadEvent = POLLIN | POLLPRI; // 可读事件或紧急数据
 const int Channel::kWriteEvent = POLLOUT;
 
 Channel::Channel(EventLoop* loop, int fd__)
   : loop_(loop),
     fd_(fd__),
-    events_(0),
+    events_(0), // kNoneEvent
     revents_(0),
     index_(-1),
     logHup_(true),
@@ -40,7 +40,7 @@ Channel::~Channel()
 
 void Channel::tie(const boost::shared_ptr<void>& obj)
 {
-  tie_ = obj;
+  tie_ = obj; // 弱引用，不会使引用计数加一
   tied_ = true;
 }
 
@@ -61,12 +61,12 @@ void Channel::handleEvent(Timestamp receiveTime)
   boost::shared_ptr<void> guard;
   if (tied_)
   {
-    guard = tie_.lock();
+    guard = tie_.lock(); // 弱引用提升，返回了一个shared_ptr，1-->2
     if (guard)
     {
-      LOG_TRACE << "[6] usecount=" << guard.use_count();
+      LOG_TRACE << "[6] usecount=" << guard.use_count(); // 2
       handleEventWithGuard(receiveTime);
-	  LOG_TRACE << "[12] usecount=" << guard.use_count();
+	  LOG_TRACE << "[12] usecount=" << guard.use_count(); // 2，之后guard销毁，变为1
     }
   }
   else
@@ -75,6 +75,7 @@ void Channel::handleEvent(Timestamp receiveTime)
   }
 }
 
+// man poll
 void Channel::handleEventWithGuard(Timestamp receiveTime)
 {
   eventHandling_ = true;
@@ -88,7 +89,7 @@ void Channel::handleEventWithGuard(Timestamp receiveTime)
 	  LOG_TRACE << "2222222222222222";
   }
   */
-  if ((revents_ & POLLHUP) && !(revents_ & POLLIN))
+  if ((revents_ & POLLHUP) && !(revents_ & POLLIN)) // 被挂断了
   {
     if (logHup_)
     {
@@ -97,7 +98,7 @@ void Channel::handleEventWithGuard(Timestamp receiveTime)
     if (closeCallback_) closeCallback_();
   }
 
-  if (revents_ & POLLNVAL)
+  if (revents_ & POLLNVAL) // 文件描述符没有打开，或者不是一个合法的文件描述符
   {
     LOG_WARN << "Channel::handle_event() POLLNVAL";
   }
@@ -106,7 +107,7 @@ void Channel::handleEventWithGuard(Timestamp receiveTime)
   {
     if (errorCallback_) errorCallback_();
   }
-  if (revents_ & (POLLIN | POLLPRI | POLLRDHUP))
+  if (revents_ & (POLLIN | POLLPRI | POLLRDHUP)) // POLLRDHUP对等方close关闭，或者shutdown关闭了半连接
   {
     if (readCallback_) readCallback_(receiveTime);
   }

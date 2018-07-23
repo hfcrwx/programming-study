@@ -62,6 +62,8 @@ void EventLoopThread::threadFunc()
     MutexLockGuard lock(mutex_);
     // loop_指针指向了一个栈上的对象，threadFunc函数退出之后，这个指针就失效了
     // threadFunc函数退出，就意味着线程退出了，EventLoopThread对象也就没有存在的价值了。
+    // EventLoopThread没有设计为自动销毁型的
+    // 线程池、线程和整个程序的生命期是一样的，loop()退出了，整个程序也退出了，不会再访问loop_了
     // 因而不会有什么大的问题
     loop_ = &loop;
     cond_.notify();

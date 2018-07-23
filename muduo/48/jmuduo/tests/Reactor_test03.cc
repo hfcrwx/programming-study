@@ -16,8 +16,8 @@ void timeout(Timestamp receiveTime)
 {
 	printf("Timeout!\n");
 	uint64_t howmany;
-	::read(timerfd, &howmany, sizeof howmany);
-	g_loop->quit();
+	::read(timerfd, &howmany, sizeof howmany); // 如果不读走，处于高电平状态，会一直触发。
+	g_loop->quit(); // 这里是在I/O线程中调用
 }
 
 int main(void)

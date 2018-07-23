@@ -93,6 +93,7 @@ class Buffer : public muduo::copyable
   // retrieve returns void, to prevent
   // string str(retrieve(readableBytes()), readableBytes());
   // the evaluation of two functions are unspecified
+  // 如果返回readerIndex_，这两个函数的执行顺序未定义
   void retrieve(size_t len)
   {
     assert(len <= readableBytes());
@@ -322,14 +323,14 @@ class Buffer : public muduo::copyable
     else
     {
       // move readable data to the front, make space inside buffer
-      assert(kCheapPrepend < readerIndex_);
+      assert(kCheapPrepend < readerIndex_); // writableBytes() + prependableBytes() >= len + kCheapPrepend > writableBytes() + kCheapPrepend
       size_t readable = readableBytes();
       std::copy(begin()+readerIndex_,
                 begin()+writerIndex_,
                 begin()+kCheapPrepend);
       readerIndex_ = kCheapPrepend;
       writerIndex_ = readerIndex_ + readable;
-      assert(readable == readableBytes());
+      assert(readable == readableBytes()); // 断言挪移前后可读部分一致
     }
   }
 

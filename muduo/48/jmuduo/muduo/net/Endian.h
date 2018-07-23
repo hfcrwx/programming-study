@@ -30,7 +30,7 @@ namespace sockets
 #pragma GCC diagnostic ignored "-Wold-style-cast"
 inline uint64_t hostToNetwork64(uint64_t host64)
 {
-  return htobe64(host64);
+  return htobe64(host64); // 不可移植的；htonl htons posix(Linux/Windows)
 }
 
 inline uint32_t hostToNetwork32(uint32_t host32)

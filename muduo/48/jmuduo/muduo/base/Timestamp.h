@@ -90,6 +90,7 @@ inline double timeDifference(Timestamp high, Timestamp low)
 ///
 /// @return timestamp+seconds as Timestamp
 ///
+// Timestamp没有传引用，按值传递，64位的平台会传到8个字节的寄存器当中，而不是传递到栈中
 inline Timestamp addTime(Timestamp timestamp, double seconds)
 {
   int64_t delta = static_cast<int64_t>(seconds * Timestamp::kMicroSecondsPerSecond);

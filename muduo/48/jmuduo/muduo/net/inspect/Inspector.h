@@ -46,8 +46,8 @@ class Inspector : boost::noncopyable
            const string& help);
 
  private:
-  typedef std::map<string, Callback> CommandList;
-  typedef std::map<string, string> HelpList;
+  typedef std::map<string, Callback> CommandList; // command, Callback
+  typedef std::map<string, string> HelpList; // command, help
 
   void start();
   void onRequest(const HttpRequest& req, HttpResponse* resp);
@@ -55,8 +55,8 @@ class Inspector : boost::noncopyable
   HttpServer server_;
   boost::scoped_ptr<ProcessInspector> processInspector_;
   MutexLock mutex_;
-  std::map<string, CommandList> commands_;
-  std::map<string, HelpList> helps_;
+  std::map<string, CommandList> commands_; // mudule, ...
+  std::map<string, HelpList> helps_; // mudule, ...
 };
 
 }

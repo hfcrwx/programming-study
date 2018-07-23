@@ -26,7 +26,7 @@ namespace net
 class Channel;
 class EventLoop;
 
-// 主动发起连接，带有自动重连功能
+// 主动发起连接，带有自动重连功能（连接没有建立成功，自动重连）
 class Connector : boost::noncopyable,
                   public boost::enable_shared_from_this<Connector>
 {

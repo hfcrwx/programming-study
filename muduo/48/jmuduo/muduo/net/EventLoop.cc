@@ -111,7 +111,7 @@ void EventLoop::loop()
   while (!quit_)
   {
     activeChannels_.clear();
-    pollReturnTime_ = poller_->poll(kPollTimeMs, &activeChannels_);
+    pollReturnTime_ = poller_->poll(kPollTimeMs, &activeChannels_); // 返回活动的通道
     //++iteration_;
     if (Logger::logLevel() <= Logger::TRACE)
     {
@@ -133,6 +133,14 @@ void EventLoop::loop()
   LOG_TRACE << "EventLoop " << this << " stop looping";
   looping_ = false;
 }
+
+// 1处的超时时间是10s。
+// A、I/O线程内调用queueInLoop的话，只可能是在loop的2、3两块发生，在3的情况下必须wakeup，否则循环回到1且没有其他I/O事件触发的情况下，就要等10s才能运行之后代码；
+// B、如果跨线程调用queueInLoop，loop在1、2、3都有可能。1处必须wakeup否则可能要等10s。
+
+// 好像陈硕就是没有细分!isInLoopThread()的情况。比如跨线程调用quit的时候，如果loop处于2、3其实也不用wakeup。而跨线程调用queueInLoop后，如果此时loop正好要进行3也不用wakeup。
+// 跨线程调用的情况比较复杂，要准确考虑到各种时机，好像作者处理方法就是没有细分。
+// 如果是在一个线程里，quit或queueInLoop调用的地方一定会发生在loop的2或3，位置和时机都是明确的，就能写出明确的条件来。同线程调用quit的时候，2、3都可以不wakeup；同线程调用queueInLoop的时候2可以不wakeup。
 
 // 该函数可以跨线程调用
 void EventLoop::quit()

@@ -54,7 +54,7 @@ void Connector::startInLoop()
   {
     connect();
   }
-  else
+  else // 否则不能发起连接，因为可能其他线程调用了stop，使得connect_ = false
   {
     LOG_DEBUG << "do not connect";
   }
@@ -134,7 +134,7 @@ void Connector::connecting(int sockfd)
   setState(kConnecting);
   assert(!channel_);
   // Channel与sockfd关联
-  channel_.reset(new Channel(loop_, sockfd));
+  channel_.reset(new Channel(loop_, sockfd)); // 构造函数中没有
   // 设置可写回调函数，这时候如果socket没有错误，sockfd就处于可写状态
   channel_->setWriteCallback(
       boost::bind(&Connector::handleWrite, this)); // FIXME: unsafe
@@ -153,7 +153,8 @@ int Connector::removeAndResetChannel()
   channel_->remove();			// 从poller移除关注
   int sockfd = channel_->fd();
   // Can't reset channel_ here, because we are inside Channel::handleEvent
-  // 不能在这里重置channel_，因为正在调用Channel::handleEvent
+  // 不能在这里重置channel_，因为正在调用Channel::handleEvent-->Connector::handleWrite-->removeAndResetChannel
+  // 把resetChannel queueInLoop，跳出Channel::handleEvent之后才执行
   loop_->queueInLoop(boost::bind(&Connector::resetChannel, this)); // FIXME: unsafe
   return sockfd;
 }

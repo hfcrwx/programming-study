@@ -27,7 +27,7 @@ install(TARGETS muduo_net DESTINATION lib)
 set(HEADERS
   Acceptor.h
   Buffer.h
-  Channel.h
+  Channel.h #内部类
   Endian.h
   EventLoop.h
   EventLoopThread.h

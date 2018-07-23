@@ -43,7 +43,7 @@ class TimerId : public muduo::copyable
   friend class TimerQueue;
 
  private:
-  Timer* timer_;
+  Timer* timer_; // timer_里面也包含了sequence_
   int64_t sequence_;
 };
 

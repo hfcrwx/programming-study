@@ -171,7 +171,7 @@ void TcpConnection::sendInLoop(const void* data, size_t len)
     }
     else // nwrote < 0
     {
-      nwrote = 0;
+      nwrote = 0; // 归零
       if (errno != EWOULDBLOCK)
       {
         LOG_SYSERR << "TcpConnection::sendInLoop";
@@ -218,7 +218,7 @@ void TcpConnection::shutdown()
 void TcpConnection::shutdownInLoop()
 {
   loop_->assertInLoopThread();
-  if (!channel_->isWriting())
+  if (!channel_->isWriting()) // 如果还处于关注POLLOUT事件，output buffer中还有数据没有发送完，只是把连接状态更改为kDisconnecting，并没有关闭连接
   {
     // we are not writing
     socket_->shutdownWrite();
@@ -235,12 +235,12 @@ void TcpConnection::connectEstablished()
   loop_->assertInLoopThread();
   assert(state_ == kConnecting);
   setState(kConnected);
-  LOG_TRACE << "[3] usecount=" << shared_from_this().use_count();
-  channel_->tie(shared_from_this());
+  LOG_TRACE << "[3] usecount=" << shared_from_this().use_count(); // 3 这是个临时对象，之后又变成2
+  channel_->tie(shared_from_this()); // 3，之后又变成2
   channel_->enableReading();	// TcpConnection所对应的通道加入到Poller关注
 
   connectionCallback_(shared_from_this());
-  LOG_TRACE << "[4] usecount=" << shared_from_this().use_count();
+  LOG_TRACE << "[4] usecount=" << shared_from_this().use_count(); // 3，之后又变成2
 }
 
 void TcpConnection::connectDestroyed()
@@ -374,10 +374,10 @@ void TcpConnection::handleClose()
 
   TcpConnectionPtr guardThis(shared_from_this());
   connectionCallback_(guardThis);		// 这一行，可以不调用
-  LOG_TRACE << "[7] usecount=" << guardThis.use_count();
+  LOG_TRACE << "[7] usecount=" << guardThis.use_count(); // 3
   // must be the last line
   closeCallback_(guardThis);	// 调用TcpServer::removeConnection
-  LOG_TRACE << "[11] usecount=" << guardThis.use_count();
+  LOG_TRACE << "[11] usecount=" << guardThis.use_count(); // 3，之后guardThis销毁，变为2
 }
 
 void TcpConnection::handleError()

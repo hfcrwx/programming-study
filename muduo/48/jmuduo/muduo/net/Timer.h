@@ -24,6 +24,7 @@ namespace net
 ///
 /// Internal class for timer event.
 ///
+// 定时操作的高层次的抽象
 class Timer : boost::noncopyable
 {
  public:

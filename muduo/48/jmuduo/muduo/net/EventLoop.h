@@ -110,24 +110,24 @@ class EventLoop : boost::noncopyable
  private:
   void abortNotInLoopThread();
   void handleRead();  // waked up
-  void doPendingFunctors();
+  void doPendingFunctors(); // 让I/O线程也能执行一些计算任务。当I/O不繁忙、阻塞的状态下也能处理一些计算任务。
 
   void printActiveChannels() const; // DEBUG
 
   typedef std::vector<Channel*> ChannelList;
   
-  bool looping_; /* atomic */
-  bool quit_; /* atomic */
-  bool eventHandling_; /* atomic */
+  bool looping_; /* atomic */ //  是否处于循环的状态
+  bool quit_; /* atomic */ // 是否退出loop
+  bool eventHandling_; /* atomic */ // 当前是否处于事件处理的状态
   bool callingPendingFunctors_; /* atomic */
   const pid_t threadId_;		// 当前对象所属线程ID
-  Timestamp pollReturnTime_;
-  boost::scoped_ptr<Poller> poller_;
+  Timestamp pollReturnTime_; // pool函数返回的时间戳
+  boost::scoped_ptr<Poller> poller_; // Poller的生存期由EventLoop来控制
   boost::scoped_ptr<TimerQueue> timerQueue_;
   int wakeupFd_;				// 用于eventfd
   // unlike in TimerQueue, which is an internal class,
   // we don't expose Channel to client.
-  boost::scoped_ptr<Channel> wakeupChannel_;	// 该通道将会纳入poller_来管理
+  boost::scoped_ptr<Channel> wakeupChannel_;	// 该通道将会纳入poller_来管理，这里EventLoop与Channel是组合的关系，EventLoop销毁，Channel也就跟着销毁
   ChannelList activeChannels_;		// Poller返回的活动通道
   Channel* currentActiveChannel_;	// 当前正在处理的活动通道
   MutexLock mutex_;

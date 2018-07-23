@@ -27,8 +27,8 @@ int main()
 	assert(p.get() == r);
 
 	std::cout<<p.use_count()<<std::endl;
-	boost::shared_ptr<Y> s(r);
-	std::cout<<s.use_count()<<std::endl;
+	boost::shared_ptr<Y> s(r); // 相当于构建了一个新的shared_ptr，而不是把某一个shared_ptr赋值给另一个shared_ptr
+	std::cout<<s.use_count()<<std::endl; // 1
 	assert(p == s);
 
 	return 0;
