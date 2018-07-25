@@ -47,13 +47,13 @@ class ChatServer : boost::noncopyable
         << conn->peerAddress().toIpPort() << " is "
         << (conn->connected() ? "UP" : "DOWN");
 
-    MutexLockGuard lock(mutex_);
+    MutexLockGuard lock(mutex_); // 虽然锁定整个区域，但也不会执行太长的时间，因为不用去遍历列表，不需要去发送
     if (!connections_.unique())		// 说明引用计数大于1
     {
       // new ConnectionList(*connections_)这段代码拷贝了一份ConnectionList
-      connections_.reset(new ConnectionList(*connections_));
+      connections_.reset(new ConnectionList(*connections_)); // 与旧的prt脱离关系，旧的ptr引用计数也-1
     }
-    assert(connections_.unique());
+    assert(connections_.unique()); // 引用计数是1
 
     // 在复本上修改，不会影响读者，所以读者在遍历列表的时候，不需要用mutex保护
     if (conn->connected())

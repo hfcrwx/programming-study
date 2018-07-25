@@ -48,6 +48,7 @@ class ChatServer : boost::noncopyable
              << conn->peerAddress().toIpPort() << " is "
              << (conn->connected() ? "UP" : "DOWN");
 
+    // 每个IO线程都有一个connections_实例，不需要加锁
     if (conn->connected())
     {
       connections_.instance().insert(conn);

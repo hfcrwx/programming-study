@@ -66,7 +66,7 @@ class RecvFileClient : boost::noncopyable
       if (g_disaliveConnections.incrementAndGet() == g_connections)
       {
         LOG_INFO << "all disconnected";
-        g_loop->quit();
+        g_loop->quit(); // 可能main loop销毁了，其他IO线程还没结束，崩溃
         //exit(0);
       }
     }

@@ -32,8 +32,8 @@ void onConnection(const TcpConnectionPtr& conn)
     FILE* fp = ::fopen(g_file, "rb");
     if (fp)
     {
-      FilePtr ctx(fp, ::fclose);
-      conn->setContext(ctx);
+      FilePtr ctx(fp, ::fclose); // 表示ctx引用计数减为0的时候，是通过fclose来销毁fp的。
+      conn->setContext(ctx); // 超过作用域后，ctx引用计数减为1;conn销毁的时候，ctx引用计数为0，调用fclose
       char buf[kBufSize];
       size_t nread = ::fread(buf, 1, sizeof buf, fp);
       conn->send(buf, nread);

@@ -36,7 +36,7 @@ void bench(bool longLog)
     }
     muduo::Timestamp end = muduo::Timestamp::now();
     printf("%f\n", timeDifference(end, start)*1000000/kBatch);
-	// 注释掉，加剧消息堆积
+	// 注释掉，加剧消息堆积，生成的日志文件减小
     //struct timespec ts = { 0, 500*1000*1000 };
     //nanosleep(&ts, NULL);
   }
