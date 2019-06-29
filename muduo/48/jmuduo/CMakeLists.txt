@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.6)
 
-project(muduo CXX)
+project(muduo CXX C)
 
 if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE "Debug")
@@ -16,6 +16,7 @@ set(CXX_FLAGS
  -Werror
  -Wconversion
  -Wno-unused-parameter
+ -Wno-unused-local-typedefs
  -Wold-style-cast
  -Woverloaded-virtual
  -Wpointer-arith
