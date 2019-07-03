@@ -28,7 +28,7 @@ int main(void)
 		ERR_EXIT("read error");
 	printf("buf=%s\n", buf);
 	
-	ret = lseek(fd, 0, SEEK_CUR);
+    ret = lseek(fd, 0, SEEK_CUR);
 	if (ret == -1)
 		ERR_EXIT("lseek");
 

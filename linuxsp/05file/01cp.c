@@ -37,8 +37,12 @@ int main(int argc, char *argv[])
 	int nread;
 	while ((nread = read(infd, buf, 1024)) > 0)
 	{
+        printf("%d\n", nread);
 		write(outfd, buf, nread);
 	}
+
+    int x = write(outfd, buf, 0);
+    printf("%d\n", x);
 
 	close(infd);
 	close(outfd);

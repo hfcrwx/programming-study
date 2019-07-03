@@ -24,7 +24,7 @@ int main(void)
 
 	write(fd, "ABCDE", 5);
 
-	int ret = lseek(fd, 1024*1024*1024, SEEK_CUR); // 32
+    int ret = lseek(fd, 1024*1024*1024, SEEK_CUR); // 32
 	if (ret == -1)
 		ERR_EXIT("lseek error");
 
