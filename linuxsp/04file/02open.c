@@ -17,7 +17,7 @@
 	{ \
 		perror(m); \
 		exit(EXIT_FAILURE); \
-	} while(1) // do-while是一条语句
+    } while(0) // do-while是一条语句
 
 int main(void)
 {
