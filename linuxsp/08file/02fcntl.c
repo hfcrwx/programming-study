@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
 void set_flag(int fd, int flags)
 {
 	int val;
-	val = fcntl(fd, F_GETFL, 0);
+    val = fcntl(fd, F_GETFL/*, 0*/);
 	if (val == -1)
                 ERR_EXIT("fcntl get flag error");
 	val |= flags; // 不改变已有的状态
@@ -55,7 +55,7 @@ void set_flag(int fd, int flags)
 void clr_flag(int fd, int flags)
 {
 	int val;
-	val = fcntl(fd, F_GETFL, 0);
+    val = fcntl(fd, F_GETFL/*, 0*/);
 	if (val == -1)
                 ERR_EXIT("fcntl get flag error");
 	val &= ~flags;
