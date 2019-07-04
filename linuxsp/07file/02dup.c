@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
 
 /*
 	close(1);
-	dup(fd); // 关闭了1, 返回文件描述符1(fd+1)
+    dup(fd); // 关闭了1, 返回文件描述符1；否则返回fd+1
 */
 	dup2(fd, 1);
 	printf("hello\n");
