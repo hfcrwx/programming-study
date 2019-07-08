@@ -25,6 +25,7 @@ int getlocalip(char* ip)
     if ((hp = gethostbyname(host)) == NULL)
         return -1;
 
+//    strcpy(ip, inet_ntoa(*(struct in_addr*)hp->h_addr_list[0]));
     strcpy(ip, inet_ntoa(*(struct in_addr*)hp->h_addr));
     return 0;
 }

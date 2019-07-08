@@ -3,7 +3,7 @@
 
 int main(void)
 {
-    unsigned long addr = inet_addr("192.168.0.100");
+    in_addr_t addr = inet_addr("192.168.0.100");
     printf("addr = %u\n", ntohl(addr));
 
     struct in_addr ipaddr;

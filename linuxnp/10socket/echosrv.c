@@ -156,7 +156,7 @@ int main(void)
 
     pid_t pid;
     while (1) {
-        if ((conn = accept(listenfd, (struct sockaddr*)&peeraddr, &peerlen)) < 0)
+        if ((conn = accept(listenfd, (struct sockaddr*)&peeraddr, &peerlen)) < 0) //NULL, NULL -> getpeername
             ERR_EXIT("accept");
 
         printf("ip = %s, port = %d\n", inet_ntoa(peeraddr.sin_addr), ntohs(peeraddr.sin_port));
