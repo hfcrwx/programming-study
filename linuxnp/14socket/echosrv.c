@@ -129,17 +129,17 @@ ssize_t readline(int sockfd, void* buf, size_t maxline)
 //     }
 // }
 
-void handle_sigchld(int sig)
-{
-//     wait(NULL);
-    while (waitpid(-1, NULL, WNOHANG) > 0)
-        ;
-}
+//void handle_sigchld(int sig)
+//{
+////     wait(NULL);
+//    while (waitpid(-1, NULL, WNOHANG) > 0)
+//        ;
+//}
 
 int main(void)
 {
 //     signal(SIGCHLD, SIG_IGN);
-    signal(SIGCHLD, handle_sigchld);
+//    signal(SIGCHLD, handle_sigchld);
     int listenfd;
     if ((listenfd = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP)) < 0)
 //     if ((listenfd = socket(PF_INET, SOCK_STREAM, 0)) < 0)
@@ -195,7 +195,7 @@ int main(void)
     int nready;
     int maxfd = listenfd;
     fd_set rset; // rset会改变
-    fd_set allset; // se
+    fd_set allset;
     FD_ZERO(&rset);
     FD_ZERO(&allset);
     FD_SET(listenfd, &allset);
@@ -203,7 +203,7 @@ int main(void)
         rset = allset;
         nready = select(maxfd + 1, &rset, NULL, NULL, NULL);
         if (nready == -1) {
-            if (errno == EINTR)
+            if (errno == EINTR) //被信号中断
                 continue;
 
             ERR_EXIT("select");

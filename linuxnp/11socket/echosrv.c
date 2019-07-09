@@ -131,7 +131,12 @@ void echo_srv(int conn)
 void handle_sigchld(int sig)
 {
 //     wait(NULL); // 等待第一个子进程
-//     waitpid(-1, NULL, WNOHANG); // 信号同时到来，只处理一个；不同时到来，依次处理
+
+//    n个信号同时到达，每次只处理1个信号。
+//    5个信号同时到达，有4个僵尸进程；
+//    5个信号分两次同时到达，有3个僵尸进程。
+//     waitpid(-1, NULL, WNOHANG);
+
     while (waitpid(-1, NULL, WNOHANG) > 0) // 信号同时到来，轮询处理
         ;
 }
@@ -139,7 +144,7 @@ void handle_sigchld(int sig)
 int main(void)
 {
 //     signal(SIGCHLD, SIG_IGN);
-    signal(SIGCHLD, handle_sigchld);
+    signal(SIGCHLD, handle_sigchld); //推荐这种方式，处理方法更灵活
     int listenfd;
     if ((listenfd = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP)) < 0)
 //     if ((listenfd = socket(PF_INET, SOCK_STREAM, 0)) < 0)
