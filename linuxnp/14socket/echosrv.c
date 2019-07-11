@@ -254,6 +254,7 @@ int main(void)
                     printf("client close\n");
                     FD_CLR(conn, &allset);
                     client[i] = -1; // 这里i也可能是maxi，应该改变maxi
+                    close(conn);
                 }
 
                 fputs(recvbuf, stdout);

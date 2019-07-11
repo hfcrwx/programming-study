@@ -210,8 +210,8 @@ int connect_timeout(int fd, struct sockaddr_in *addr, unsigned int wait_seconds)
 			/* ret返回为1，可能有两种情况，一种是连接建立成功，一种是套接字产生错误，*/
 			/* 此时错误信息不会保存至errno变量中，因此，需要调用getsockopt来获取。 */
 			int err;
-			socklen_t socklen = sizeof(err);
-			int sockoptret = getsockopt(fd, SOL_SOCKET, SO_ERROR, &err, &socklen);
+            socklen_t optlen = sizeof(err);
+            int sockoptret = getsockopt(fd, SOL_SOCKET, SO_ERROR, &err, &optlen);
 			if (sockoptret == -1)
 			{
 				return -1;
