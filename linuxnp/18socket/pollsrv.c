@@ -184,8 +184,8 @@ int main(void)
 	struct pollfd client[2048];
 	int maxi = 0;
 
-	for (i=0; i<2048; i++)
-		client[i].fd = -1;
+    for (i=0; i<2048; i++)
+        client[i].fd = -1;
 
 	int nready;
 	client[0].fd = listenfd;
@@ -244,7 +244,7 @@ int main(void)
 			if (conn == -1)
 				continue;
 
-			if (client[i].events & POLLIN)
+            if (client[i].revents & POLLIN)
 			{
 				char recvbuf[1024] = {0};
 				int ret = readline(conn, recvbuf, 1024);

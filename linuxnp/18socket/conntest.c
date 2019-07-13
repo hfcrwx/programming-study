@@ -26,7 +26,7 @@ while(1)
 	int sock;
 	if ((sock = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP)) < 0)
 	{
-		sleep(4);
+        sleep(4);
 		ERR_EXIT("socket");
 	}
 

@@ -45,7 +45,7 @@ void echo_srv(int sock)
 int main(void)
 {
 	int sock;
-	if ((sock = socket(PF_INET, SOCK_DGRAM, 0)) < 0)
+    if ((sock = socket(PF_INET, SOCK_DGRAM, 0)) < 0) // IPPROTO_UDP
 		ERR_EXIT("socket");
 
 	struct sockaddr_in servaddr;

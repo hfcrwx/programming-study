@@ -27,7 +27,11 @@ void send_fd(int sock_fd, int send_fd)
 	char sendchar = 0;
 	msg.msg_control = cmsgbuf;
 	msg.msg_controllen = sizeof(cmsgbuf);
-	p_cmsg = CMSG_FIRSTHDR(&msg);
+    p_cmsg = CMSG_FIRSTHDR(&msg);
+//    p_cmsg = (struct cmsghdr *)cmsgbuf;
+//    printf("%p\n", (char*)p_cmsg);
+//    printf("%p\n", cmsgbuf);
+
 	p_cmsg->cmsg_level = SOL_SOCKET;
 	p_cmsg->cmsg_type = SCM_RIGHTS;
 	p_cmsg->cmsg_len = CMSG_LEN(sizeof(send_fd));
@@ -78,7 +82,7 @@ int recv_fd(const int sock_fd)
 		ERR_EXIT("no passed fd");
 
 
-	p_fd = (int*)CMSG_DATA(p_cmsg);
+//	p_fd = (int*)CMSG_DATA(p_cmsg);
 	recv_fd = *p_fd;
 	if (recv_fd == -1)
 		ERR_EXIT("no passed fd");
