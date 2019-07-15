@@ -26,10 +26,10 @@ int main(void)
 
     size_t size;
     pthread_attr_getstacksize(&attr, &size);
-    printf("stacksize: %d\n", size);
+    printf("stacksize: %zu\n", size);
 
     pthread_attr_getguardsize(&attr, &size);
-    printf("guardsize: %d\n", size);
+    printf("guardsize: %zu\n", size);
 
     int scope;
     pthread_attr_getscope(&attr, &scope);

@@ -75,16 +75,15 @@ int main(void)
         printf("ip = %s, port = %d\n", inet_ntoa(peeraddr.sin_addr), ntohs(peeraddr.sin_port));
 
         pthread_t tid;
-//         int ret;
-//         pthread_create(&tid, NULL, thread_routine, (void*)&conn);
+//        int ret;
+//        if ((ret = pthread_create(&tid, NULL, thread_routine, (void*)conn)) != 0) { // 将32位整数强制转换成无类型指针，可能是不可移植的（64位）
+//            fprintf(stderr, "pthread_create: %s\n", strerror(ret));
+//            exit(EXIT_FAILURE);
+//        }
+//        pthread_create(&tid, NULL, thread_routine, (void*)&conn);
         int* p = malloc(sizeof(int));
         *p = conn;
         pthread_create(&tid, NULL, thread_routine, p);
-
-//         if ((ret = pthread_create(&tid, NULL, thread_routine, (void*)conn)) != 0) { // 将32位整数强制转换成无类型指针，可能是不可移植的（64位）
-//             fprintf(stderr, "pthread_create: %s\n", strerror(ret));
-//             exit(EXIT_FAILURE);
-//         }
     }
 
     return 0;
