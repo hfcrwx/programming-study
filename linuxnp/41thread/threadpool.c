@@ -16,7 +16,7 @@ void *thread_routine(void *arg)
 		timeout = 0;
 		condition_lock(&pool->ready);
 		pool->idle++;
-		// 等待队列有任务到来或者线程池销毁通知
+        // 等待队列有任务到来或者线程池销毁通知 或者超时
 		while (pool->first == NULL && !pool->quit)
 		{
 			printf("thread 0x%x is waiting\n", (int)pthread_self());
@@ -48,7 +48,8 @@ void *thread_routine(void *arg)
 			free(t);
 			condition_lock(&pool->ready);
 		}
-		// 如果等待到线程池销毁通知, 且任务都执行完毕
+
+        // 如果等待到线程池销毁通知, 且任务都执行完毕，退出线程函数
 		if (pool->quit && pool->first == NULL)
 		{
 			pool->counter--;
@@ -59,14 +60,15 @@ void *thread_routine(void *arg)
 			// 跳出循环之前要记得解锁
 			break;
 		}
-
-		if (timeout && pool->first == NULL)
+        // 如果超时, 且任务都执行完毕，退出线程函数
+        if (timeout && pool->first == NULL)
 		{
 			pool->counter--;
 			condition_unlock(&pool->ready);
 			// 跳出循环之前要记得解锁
 			break;
 		}
+
 		condition_unlock(&pool->ready);
 	}
 
@@ -121,11 +123,15 @@ void threadpool_add_task(threadpool_t *pool, void *(*run)(void *arg), void *arg)
 // 销毁线程池
 void threadpool_destroy(threadpool_t *pool)
 {
-	if (pool->quit)
-	{
-		return;
-	}
+//	if (pool->quit)
+//	{
+//		return;
+//	}
 	condition_lock(&pool->ready);
+    if (pool->quit)
+    {
+        return;
+    }
 	pool->quit = 1;
 	if (pool->counter > 0)
 	{
@@ -140,6 +146,4 @@ void threadpool_destroy(threadpool_t *pool)
 	}
 	condition_unlock(&pool->ready);
 	condition_destroy(&pool->ready);
-
-
 }
