@@ -41,7 +41,7 @@ int main(void)
 	TestThread* t2 = new TestThread(5);
 	t2->SetAutoDelete(true);
 	t2->Start();
-	t2->Join();
+    t2->Join(); //t2可能已经被销毁了
 
 	for (; ; )
 		pause();

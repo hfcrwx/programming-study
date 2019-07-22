@@ -15,7 +15,7 @@ public:
 int main()
 {
 	Foo foo;
-    boost::function<void (int)> fp = boost::bind(&Foo::memberFunc, &foo, 0.5, -1, 10);
+    boost::function<void (int)> fp = boost::bind(&Foo::memberFunc, &foo, 0.5, _1, 10);
     // (&foo)->memberFunc(0.5, 100, 10);
     fp(100);
 	boost::function<void (int, int)> fp1 = boost::bind(&Foo::memberFunc, &foo, 0.5, _1, _2);

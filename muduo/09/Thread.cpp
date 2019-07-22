@@ -20,7 +20,7 @@ void Thread::Join()
 void* Thread::ThreadRoutine(void* arg)
 {
 	Thread* thread = static_cast<Thread*>(arg);
-	thread->Run();
+    thread->Run();
 	if (thread->autoDelete_)
 		delete thread;
 	return NULL;
