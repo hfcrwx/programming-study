@@ -166,6 +166,7 @@ void TcpConnection::sendInLoop(const void* data, size_t len)
 	  // 写完了，回调writeCompleteCallback_
       if (remaining == 0 && writeCompleteCallback_)
       {
+        // 如果直接调用writeCompleteCallback_，且自定义回调函数里有send，发送的数据量比较小时，eventLoop会一直在处理这个functor，再也无法进行下次循环，响应其他客户端的请求了。
         loop_->queueInLoop(boost::bind(writeCompleteCallback_, shared_from_this()));
       }
     }
