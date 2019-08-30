@@ -75,7 +75,7 @@ typedef __gnu_cxx::__sso_string string; // 短字符优化
 // implicit_cast would have been part of the C++ standard library,
 // but the proposal was submitted too late.  It will probably make
 // its way into the language in the future.
-template<typename To, typename From>
+template<typename To, typename From> // 为了阅读代码的方便
 inline To implicit_cast(From const &f) {
   return f;
 }

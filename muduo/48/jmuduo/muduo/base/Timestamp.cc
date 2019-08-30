@@ -2,7 +2,7 @@
 
 #include <sys/time.h>
 #include <stdio.h>
-#define __STDC_FORMAT_MACROS // Debian9 不需要
+#define __STDC_FORMAT_MACROS // Debian9 CentOS7不需要
 #include <inttypes.h>
 #undef __STDC_FORMAT_MACROS
 
@@ -22,7 +22,16 @@ string Timestamp::toString() const
   char buf[32] = {0};
   int64_t seconds = microSecondsSinceEpoch_ / kMicroSecondsPerSecond;
   int64_t microseconds = microSecondsSinceEpoch_ % kMicroSecondsPerSecond;
-  snprintf(buf, sizeof(buf)-1, "%" PRId64 ".%06" PRId64 "", seconds, microseconds);
+  snprintf(buf, sizeof(buf)-1, "%" PRId64 ".%06" PRId64 "", seconds, microseconds); // sizeof(buf) or sizeof(buf)-1
+
+//  char buf1[32] = {0};
+//  char buf2[32] = {0};
+//  char buf3[32] = {0};
+//  std::string fmt1("%" PRId64 ".%06" PRId64 "");
+//  std::string fmt2("%" PRId64 ".%06" PRId64);
+//  snprintf(buf1, sizeof(buf1)-1, fmt1.c_str(), seconds, microseconds);
+//  snprintf(buf2, sizeof(buf2), fmt2.c_str(), seconds, microseconds);
+//  snprintf(buf3, sizeof(buf3), "%" PRId64 ".%06" PRId64, seconds, microseconds); // sizeof(buf) or sizeof(buf)-1
   return buf;
 }
 

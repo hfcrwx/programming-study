@@ -35,7 +35,7 @@ class Timestamp : public muduo::copyable,
 
   void swap(Timestamp& that)
   {
-    std::swap(microSecondsSinceEpoch_, that.microSecondsSinceEpoch_);
+    std::swap(microSecondsSinceEpoch_, that.microSecondsSinceEpoch_); // 引用传递
   }
 
   // default copy/assignment/dtor are Okay
