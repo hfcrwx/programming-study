@@ -74,12 +74,12 @@ ThreadPool::Task ThreadPool::take()
 {
   MutexLockGuard lock(mutex_);
   // always use a while-loop, due to spurious wakeup
-  while (queue_.empty() && running_)
+  while (queue_.empty() && running_) // 等待任务，或者等待结束条件
   {
     cond_.wait();
   }
   Task task;
-  if(!queue_.empty())
+  if(!queue_.empty()) //等待到任务
   {
     task = queue_.front();
     queue_.pop_front();
