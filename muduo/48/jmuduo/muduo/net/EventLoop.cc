@@ -148,7 +148,7 @@ void EventLoop::quit()
   quit_ = true;
   if (!isInLoopThread())
   {
-    wakeup();
+    wakeup(); // 防止一直阻塞在poll，不能及时进行下次循环 ，判断quit_
   }
 }
 

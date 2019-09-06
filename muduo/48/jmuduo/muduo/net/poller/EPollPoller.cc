@@ -112,7 +112,7 @@ void EPollPoller::updateChannel(Channel* channel)
       assert(channels_.find(fd) == channels_.end());
       channels_[fd] = channel;
     }
-    else // index == kDeleted
+    else // index == kDeleted，channels_中并没有移除
     {
       assert(channels_.find(fd) != channels_.end());
       assert(channels_[fd] == channel);
@@ -130,7 +130,7 @@ void EPollPoller::updateChannel(Channel* channel)
     assert(index == kAdded);
     if (channel->isNoneEvent()) // 剔除关注
     {
-      update(EPOLL_CTL_DEL, channel); // 仅仅表示不在epoll中关注，并没有在channels_中移除
+      update(EPOLL_CTL_DEL, channel); // 不在epoll中关注（PollPoller中是将fd置为-fd-1，并没有移除），并没有在channels_中移除
       channel->set_index(kDeleted);
     }
     else

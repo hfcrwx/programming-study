@@ -33,7 +33,7 @@ class Timer : boost::noncopyable
       expiration_(when),
       interval_(interval),
       repeat_(interval > 0.0),
-      sequence_(s_numCreated_.incrementAndGet())
+      sequence_(s_numCreated_.incrementAndGet()) // 1
   { }
 
   void run() const

@@ -161,10 +161,10 @@ void TimerQueue::cancelInLoop(TimerId timerId)
     delete it->first; // FIXME: no delete please,如果用了unique_ptr,这里就不需要手动删除了
     activeTimers_.erase(it);
   }
-  else if (callingExpiredTimers_)
+  else if (callingExpiredTimers_) // 在handleRead里调用的定时器回调函数中取消定时器
   {
     // 已经到期，并且正在调用回调函数的定时器
-    cancelingTimers_.insert(timer);
+    cancelingTimers_.insert(timer); // 等运行到reset时，检测删除
   }
   assert(timers_.size() == activeTimers_.size());
 }

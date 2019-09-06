@@ -107,7 +107,7 @@ void Channel::handleEventWithGuard(Timestamp receiveTime)
   {
     if (errorCallback_) errorCallback_();
   }
-  if (revents_ & (POLLIN | POLLPRI | POLLRDHUP)) // POLLRDHUP对等方close关闭，或者shutdown关闭了半连接
+  if (revents_ & (POLLIN | POLLPRI | POLLRDHUP)) // POLLRDHUP对等方close关闭，或者shutdown关闭了写半连接
   {
     if (readCallback_) readCallback_(receiveTime);
   }
