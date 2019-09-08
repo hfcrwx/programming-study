@@ -79,7 +79,7 @@ class TimerQueue : boost::noncopyable
 
   EventLoop* loop_;		// 所属EventLoop
   const int timerfd_;
-  Channel timerfdChannel_;
+  Channel timerfdChannel_; // 组合
   // Timer list sorted by expiration
   TimerList timers_;	// timers_是按到期时间排序
 

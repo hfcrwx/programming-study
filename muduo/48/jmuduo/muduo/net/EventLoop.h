@@ -128,7 +128,7 @@ class EventLoop : boost::noncopyable
   // unlike in TimerQueue, which is an internal class,
   // we don't expose Channel to client.
   boost::scoped_ptr<Channel> wakeupChannel_;	// 该通道将会纳入poller_来管理，这里EventLoop与Channel是组合的关系，EventLoop销毁，Channel也就跟着销毁
-  ChannelList activeChannels_;		// Poller返回的活动通道
+  ChannelList activeChannels_;		// Poller返回的活动通道，是TimerQueue、TcpConnection、Acceptor、Connector中的Channel，聚合
   Channel* currentActiveChannel_;	// 当前正在处理的活动通道
   MutexLock mutex_;
   std::vector<Functor> pendingFunctors_; // @BuardedBy mutex_

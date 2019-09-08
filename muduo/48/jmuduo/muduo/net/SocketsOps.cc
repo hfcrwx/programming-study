@@ -110,7 +110,7 @@ int sockets::accept(int sockfd, struct sockaddr_in* addr)
 #endif
   if (connfd < 0)
   {
-    int savedErrno = errno; // 先保存下来，因为下面可能会更改errno的值
+    int savedErrno = errno; // 先保存下来，因为下面LOG_SYSERR <<可能会更改errno的值
     LOG_SYSERR << "Socket::accept";
     switch (savedErrno)
     {
@@ -158,7 +158,7 @@ ssize_t sockets::readv(int sockfd, const struct iovec *iov, int iovcnt)
   return ::readv(sockfd, iov, iovcnt);
 }
 
-ssize_t sockets::write(int sockfd, const void *buf, size_t count)
+ssize_t sockets::write(int sockfd, const void *buf, size_t count) // writev
 {
   return ::write(sockfd, buf, count);
 }

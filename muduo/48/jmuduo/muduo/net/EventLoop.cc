@@ -127,7 +127,7 @@ void EventLoop::loop()
     }
     currentActiveChannel_ = NULL;
     eventHandling_ = false;
-    doPendingFunctors();
+    doPendingFunctors(); // 让I/O线程也能执行一些计算任务
   }
 
   LOG_TRACE << "EventLoop " << this << " stop looping";

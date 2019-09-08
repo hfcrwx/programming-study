@@ -12,7 +12,7 @@ BOOST_AUTO_TEST_CASE(testInetAddress)
 {
   InetAddress addr1(1234);
   BOOST_CHECK_EQUAL(addr1.toIp(), string("0.0.0.0"));
-  BOOST_CHECK_EQUAL(addr1.toIpPort(), string("0.0.0.0:1234"));
+  BOOST_CHECK_EQUAL(addr1.toIpPort(), string("0.0.0.0:1234")); // toHostPort
 
   InetAddress addr2("1.2.3.4", 8888);
   BOOST_CHECK_EQUAL(addr2.toIp(), string("1.2.3.4"));
