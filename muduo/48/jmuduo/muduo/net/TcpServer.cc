@@ -164,7 +164,7 @@ void TcpServer::removeConnectionInLoop(const TcpConnectionPtr& conn)
   assert(n == 1);
   
   EventLoop* ioLoop = conn->getLoop();
-  ioLoop->queueInLoop(
+  ioLoop->queueInLoop( // 为了保证TcpConnection引用计数不为0，必须异步调用
       boost::bind(&TcpConnection::connectDestroyed, conn)); // 3
 
   //loop_->queueInLoop(

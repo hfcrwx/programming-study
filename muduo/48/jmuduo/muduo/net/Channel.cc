@@ -66,7 +66,7 @@ void Channel::handleEvent(Timestamp receiveTime)
     {
       LOG_TRACE << "[6] usecount=" << guard.use_count(); // 2
       handleEventWithGuard(receiveTime);
-	  LOG_TRACE << "[12] usecount=" << guard.use_count(); // 2，之后guard销毁，变为1
+      LOG_TRACE << "[12] usecount=" << guard.use_count(); // 2，之后guard销毁，变为1，处于functors中
     }
   }
   else

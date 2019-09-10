@@ -240,14 +240,14 @@ void TcpConnection::connectEstablished()
   channel_->tie(shared_from_this()); // 3，之后又变成2
   channel_->enableReading();	// TcpConnection所对应的通道加入到Poller关注
 
-  connectionCallback_(shared_from_this());
+  connectionCallback_(shared_from_this()); // 3，之后又变成2
   LOG_TRACE << "[4] usecount=" << shared_from_this().use_count(); // 3，之后又变成2
 }
 
 void TcpConnection::connectDestroyed()
 {
   loop_->assertInLoopThread();
-  if (state_ == kConnected)
+  if (state_ == kConnected) // 在handleClose中已经设置为kDisconnected
   {
     setState(kDisconnected);
     channel_->disableAll();
@@ -373,8 +373,8 @@ void TcpConnection::handleClose()
   setState(kDisconnected);
   channel_->disableAll();
 
-  TcpConnectionPtr guardThis(shared_from_this());
-  connectionCallback_(guardThis);		// 这一行，可以不调用
+  TcpConnectionPtr guardThis(shared_from_this()); // 3
+  connectionCallback_(guardThis);		// 这一行，可以不调用(setState(kDisconnected);channel_->disableAll();也不用调用)
   LOG_TRACE << "[7] usecount=" << guardThis.use_count(); // 3
   // must be the last line
   closeCallback_(guardThis);	// 调用TcpServer::removeConnection
