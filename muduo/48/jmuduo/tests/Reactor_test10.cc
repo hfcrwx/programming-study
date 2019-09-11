@@ -70,5 +70,5 @@ int main()
   TestServer server(&loop, listenAddr,4);
   server.start();
 
-  loop.loop();
+  loop.loop(); // 主线程的事件循环，内部还有4个事件循环
 }
