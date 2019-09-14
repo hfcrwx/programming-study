@@ -39,7 +39,7 @@ namespace net
 namespace detail
 {
 
-void removeConnection(EventLoop* loop, const TcpConnectionPtr& conn)
+void removeConnection(EventLoop* loop, const TcpConnectionPtr& conn) // 没有重连
 {
   loop->queueInLoop(boost::bind(&TcpConnection::connectDestroyed, conn));
 }

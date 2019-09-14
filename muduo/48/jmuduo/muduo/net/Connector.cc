@@ -171,7 +171,7 @@ void Connector::handleWrite()
 
   if (state_ == kConnecting)
   {
-    int sockfd = removeAndResetChannel();	// 从poller中移除关注，并将channel置空
+    int sockfd = removeAndResetChannel();	// 从poller中移除关注，防止busy loop，并将channel置空
     // socket可写并不意味着连接一定建立成功
     // 还需要用getsockopt(sockfd, SOL_SOCKET, SO_ERROR, ...)再次确认一下。
     int err = sockets::getSocketError(sockfd);

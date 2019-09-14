@@ -126,7 +126,7 @@ class TcpConnection : boost::noncopyable,
   size_t highWaterMark_;		// 高水位标
   Buffer inputBuffer_;			// 应用层接收缓冲区
   Buffer outputBuffer_;			// 应用层发送缓冲区
-  boost::any context_;			// 绑定一个未知类型的上下文对象
+  boost::any context_;			// 绑定一个未知类型(上层应用程序)的上下文对象
 };
 
 typedef boost::shared_ptr<TcpConnection> TcpConnectionPtr;
