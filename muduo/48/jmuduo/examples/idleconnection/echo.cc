@@ -76,7 +76,7 @@ void EchoServer::onMessage(const TcpConnectionPtr& conn,
 
 void EchoServer::onTimer()
 {
-  // 相当于将tail位置原有的Bucket删除了，然后增加了一个空的Bucket
+  // 相当于每个位置的Bucket前移一个位置（下标减一），删除旧head，增加新tail
   connectionBuckets_.push_back(Bucket());
   dumpConnectionBuckets();
 }

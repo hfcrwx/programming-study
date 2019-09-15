@@ -25,7 +25,7 @@ class LengthHeaderCodec : boost::noncopyable
                  muduo::net::Buffer* buf,
                  muduo::Timestamp receiveTime)
   {
-    // 这里用while而不用if
+    // 这里用while而不用if，可能不止一条消息
     while (buf->readableBytes() >= kHeaderLen) // kHeaderLen == 4
     {
       // FIXME: use Buffer::peekInt32()

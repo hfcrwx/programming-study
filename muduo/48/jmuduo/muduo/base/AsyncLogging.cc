@@ -75,7 +75,7 @@ void AsyncLogging::threadFunc()
 
     {
       muduo::MutexLockGuard lock(mutex_);
-      if (buffers_.empty())  // unusual usage!（注意，这里是一个非常规用法）
+      if (buffers_.empty()) // unusual usage!（注意，这里是一个非常规用法）
       {
         cond_.waitForSeconds(flushInterval_); // 等待前端写满了一个或者多个buffer,或者一个超时时间到来
       } // 即使虚假唤醒，仍然写日志。用waitForSeconds，超时而不空的情况下也应该写日志，不能用while
