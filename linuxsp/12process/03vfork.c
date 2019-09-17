@@ -33,7 +33,8 @@ int main(int argc, char *argv[])
 	else if (pid == 0) {
 		gval++;
 		printf("this is child pid=%d parentpid=%d gval=%d\n", getpid(), getppid(), gval);
-		exit(0); // _exit(0) return 0
+        exit(0); // _exit(0)
+        // return 0 段错误
 	}
 
 	return 0;

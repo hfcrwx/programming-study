@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
 {
 	atexit(my_exit1);
 	atexit(my_exit2);
-	_exit(0); // 不会调用终止处理程序
-	// exit(0);
-	// return 0;
+//	_exit(0); // 不会调用终止处理程序
+//	exit(0);
+    return 0;
 }

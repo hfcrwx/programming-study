@@ -17,7 +17,7 @@ int setup_daemon(int nochdir, int noclose);
 int main(int argc, char* argv[])
 {
 	setup_daemon(0, 0);
-	// daemon(1, 1);
+    // daemon(0, 0);
 	printf("test ...\n");
 	for (;;) ;
 	return 0;

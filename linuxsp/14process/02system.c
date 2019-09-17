@@ -36,14 +36,16 @@ int my_system(const char* command)
 	}
 	else {
 		while (waitpid(pid, &status, 0) < 0) {
-// 			if (errno == EINTR)
-// 				continue;
-// 			
-// 			status = -1;
-// 			break;
-			if (errno != EINTR) {
-				return -1;
-			}
+            if (errno == EINTR)
+                continue;
+
+            status = -1;
+            break;
+
+//            if (errno != EINTR) {
+//                status = -1;
+//                break;
+//            }
 		}
 	}
 
