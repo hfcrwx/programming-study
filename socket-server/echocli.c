@@ -53,8 +53,8 @@ int main(void)
 	{
 		if (strncmp(buf, "quit", 4) == 0)
 			break;
-		buf[strlen(buf)-1] = '\n';		// È¥³ý\n
-		char* sendbuf = (char*)malloc(sizeof(buf)+1);
+        buf[strlen(buf)-1] = '\0';		// È¥³ý\n
+        char* sendbuf = (char*)malloc(strlen(buf)+1);
 		memcpy(sendbuf, buf, strlen(buf)+1);
 		socket_server_send(ss, conn_id, sendbuf, strlen(sendbuf));
 	}
