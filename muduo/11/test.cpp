@@ -35,6 +35,6 @@ int main(void)
 	D* pd = NULL;
 
 	pb = pd;
-	pb = implicit_cast<B*, D*>(pd);
+	pb = implicit_cast<B*>(pd);
 	return 0;
 }
