@@ -168,6 +168,7 @@ again:
   case 0:
     /* Initial state, start making the connection. */
     status= mysql_real_connect_start(&sd->ret, &sd->mysql, opt_host, opt_user, opt_password, opt_db, opt_port, opt_socket, 0);
+    printf("mysql_real_connect_start! line: %d, event: %d\n", __LINE__, status);
     if (status)
       /* Wait for connect to complete. */
       next_event(1, status, sd);
@@ -176,7 +177,9 @@ again:
     break;
 
   case 1:
+    printf("line: %d, revent: %d\n", __LINE__, mysql_status(event));
     status= mysql_real_connect_cont(&sd->ret, &sd->mysql, mysql_status(event));
+    printf("line: %d, event: %d\n", __LINE__, status);
     if (status)
       next_event(1, status, sd);
     else
@@ -203,6 +206,7 @@ again:
     printf("%d ! %s\n", sd->index, sd->query_element->query);
     status= mysql_real_query_start(&sd->err, &sd->mysql, sd->query_element->query,
                                    strlen(sd->query_element->query));
+    printf("mysql_real_query_start! line: %d, event: %d\n", __LINE__, status);
     if (status)
       next_event(11, status, sd);
     else
@@ -210,7 +214,9 @@ again:
     break;
 
   case 11:
+    printf("line: %d, revent: %d\n", __LINE__, mysql_status(event));
     status= mysql_real_query_cont(&sd->err, &sd->mysql, mysql_status(event));
+    printf("line: %d, event: %d\n", __LINE__, status);
     if (status)
       next_event(11, status, sd);
     else
@@ -236,6 +242,7 @@ again:
 
   case 30:
     status= mysql_fetch_row_start(&sd->row, sd->result);
+    printf("mysql_fetch_row_start! line: %d, event: %d\n", __LINE__, status);
     if (status)
       next_event(31, status, sd);
     else
@@ -243,7 +250,9 @@ again:
     break;
 
   case 31:
+    printf("line: %d, revent: %d\n", __LINE__, mysql_status(event));
     status= mysql_fetch_row_cont(&sd->row, sd->result, mysql_status(event));
+    printf("line: %d, event: %d\n", __LINE__, status);
     if (status)
       next_event(31, status, sd);
     else
@@ -255,10 +264,10 @@ again:
     {
       /* Got a row. */
       unsigned int i;
-      printf("%d - ", sd->index);
-      for (i= 0; i < mysql_num_fields(sd->result); i++)
-        printf("%s%s", (i ? "\t" : ""), (sd->row[i] ? sd->row[i] : "(null)"));
-      printf ("\n");
+//      printf("%d - ", sd->index);
+//      for (i= 0; i < mysql_num_fields(sd->result); i++)
+//        printf("%s%s", (i ? "\t" : ""), (sd->row[i] ? sd->row[i] : "(null)"));
+//      printf ("\n");
       NEXT_IMMEDIATE(sd, 30);
     }
     else
@@ -280,6 +289,7 @@ again:
 
   case 40:
     status= mysql_close_start(&sd->mysql);
+    printf("mysql_close_start! line: %d, event: %d\n", __LINE__, status);
     if (status)
       next_event(41, status, sd);
     else
@@ -287,7 +297,9 @@ again:
     break;
 
   case 41:
+    printf("line: %d, revent: %d\n", __LINE__, mysql_status(event));
     status= mysql_close_cont(&sd->mysql, mysql_status(event));
+    printf("line: %d, event: %d\n", __LINE__, status);
     if (status)
       next_event(41, status, sd);
     else
@@ -343,7 +355,7 @@ handle_option(int optid, const struct my_option *opt __attribute__((unused)),
   case '?':
     printf("Usage: async_queries [OPTIONS] query ...\n");
     my_print_help(options);
-    // my_print_variables(options);
+//    my_print_variables(options);
     exit(0);
     break;
 
@@ -358,6 +370,7 @@ handle_option(int optid, const struct my_option *opt __attribute__((unused)),
   return 0;
 }
 
+//./async_queries -h127.0.0.1 -uroot -p123456 -n1 "SHOW DATABASES"
 
 int
 main(int argc, char *argv[])

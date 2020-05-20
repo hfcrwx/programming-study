@@ -90,6 +90,7 @@ wait_for_mysql(MYSQL *mysql, int status)
     timeout= 1000*mysql_get_timeout_value(mysql);
   else
     timeout= -1;
+//  printf("timeout: %d\n", timeout);
   res= poll(&pfd, 1, timeout);
   if (res == 0)
     return MYSQL_WAIT_TIMEOUT;
@@ -137,20 +138,29 @@ doit(const char *host, const char *user, const char *password)
   /* Returns 0 when done, else flag for what to wait for when need to block. */
   status= mysql_real_connect_start(&ret, &mysql, host, user, password, NULL,
                                    0, NULL, 0);
+  printf("mysql_real_connect_start! line: %d, event: %d\n", __LINE__, status);
   while (status)
   {
     status= wait_for_mysql(&mysql, status);
+    printf("line: %d, revent: %d\n", __LINE__, status);
     status= mysql_real_connect_cont(&ret, &mysql, status);
+    printf("line: %d, event: %d\n", __LINE__, status);
   }
 
   if (!ret)
     fatal(&mysql, "Failed to mysql_real_connect()");
+//  if (ret == &mysql)
+//    printf("ret == &mysql\n");
 
-  status= mysql_real_query_start(&err, &mysql, SL("SHOW STATUS"));
+//  status= mysql_real_query_start(&err, &mysql, SL("SHOW STATUS"));
+  status= mysql_real_query_start(&err, &mysql, SL("SHOW DATABASES"));
+  printf("mysql_real_query_start! line: %d, event: %d\n", __LINE__, status);
   while (status)
   {
     status= wait_for_mysql(&mysql, status);
+    printf("line: %d, revent: %d\n", __LINE__, status);
     status= mysql_real_query_cont(&err, &mysql, status);
+    printf("line: %d, event: %d\n", __LINE__, status);
   }
   if (err)
     fatal(&mysql, "mysql_real_query() returns error");
@@ -163,14 +173,17 @@ doit(const char *host, const char *user, const char *password)
   for (;;)
   {
     status= mysql_fetch_row_start(&row, res);
+    printf("mysql_fetch_row_start! line: %d, event: %d\n", __LINE__, status);
     while (status)
     {
       status= wait_for_mysql(&mysql, status);
+      printf("line: %d, revent: %d\n", __LINE__, status);
       status= mysql_fetch_row_cont(&row, res, status);
+      printf("line: %d, event: %d\n", __LINE__, status);
     }
     if (!row)
       break;
-    printf("%s: %s\n", row[0], row[1]);
+//    printf("%s: %s\n", row[0], row[1]);
   }
   if (mysql_errno(&mysql))
     fatal(&mysql, "Got error while retrieving rows");
@@ -183,10 +196,13 @@ doit(const char *host, const char *user, const char *password)
     blocking mysql_close().
    */
   status= mysql_close_start(&mysql);
+  printf("mysql_close_start! line: %d, event: %d\n", __LINE__, status);
   while (status)
   {
     status= wait_for_mysql(&mysql, status);
+    printf("line: %d, revent: %d\n", __LINE__, status);
     status= mysql_close_cont(&mysql, status);
+    printf("line: %d, event: %d\n", __LINE__, status);
   }
 }
 
