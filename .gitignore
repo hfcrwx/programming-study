@@ -1,3 +1,5 @@
+cmake-build-debug/
+.idea/
 # Custom.gitignore
 
 [Bb]uild/
