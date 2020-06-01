@@ -20,7 +20,7 @@
 // 时间复杂度O(n)
 // 空间复杂度O(1)
 
-bool duplicate(int* arr, int len, int* res) {
+bool getDuplication(int* arr, int len, int* res) {
   if (arr==nullptr || len <= 2) {
     return false;
   }
