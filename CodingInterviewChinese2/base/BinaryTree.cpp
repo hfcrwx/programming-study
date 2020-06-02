@@ -15,9 +15,9 @@ https://github.com/zhedahht/CodingInterviewChinese2/blob/master/LICENSE.txt)
 #include <cstdio>
 #include "BinaryTree.h"
 
-BinaryTreeNode* CreateBinaryTreeNode(int value)
+BinaryTreeNodeEx* CreateBinaryTreeNode(int value)
 {
-    BinaryTreeNode* pNode = new BinaryTreeNode();
+    BinaryTreeNodeEx* pNode = new BinaryTreeNodeEx();
     pNode->value_ = value;
     pNode->left_ = nullptr;
     pNode->right_ = nullptr;
@@ -25,7 +25,7 @@ BinaryTreeNode* CreateBinaryTreeNode(int value)
     return pNode;
 }
 
-void ConnectTreeNodes(BinaryTreeNode* pParent, BinaryTreeNode* pLeft, BinaryTreeNode* pRight)
+void ConnectTreeNodes(BinaryTreeNodeEx* pParent, BinaryTreeNodeEx* pLeft, BinaryTreeNodeEx* pRight)
 {
     if(pParent != nullptr)
     {
@@ -34,7 +34,7 @@ void ConnectTreeNodes(BinaryTreeNode* pParent, BinaryTreeNode* pLeft, BinaryTree
     }
 }
 
-void PrintTreeNode(const BinaryTreeNode* pNode)
+void PrintTreeNode(const BinaryTreeNodeEx* pNode)
 {
     if(pNode != nullptr)
     {
@@ -58,7 +58,7 @@ void PrintTreeNode(const BinaryTreeNode* pNode)
     printf("\n");
 }
 
-void PrintTree(const BinaryTreeNode* pRoot)
+void PrintTree(const BinaryTreeNodeEx* pRoot)
 {
     PrintTreeNode(pRoot);
 
@@ -72,12 +72,12 @@ void PrintTree(const BinaryTreeNode* pRoot)
     }
 }
 
-void DestroyTree(BinaryTreeNode* pRoot)
+void DestroyTree(BinaryTreeNodeEx* pRoot)
 {
     if(pRoot != nullptr)
     {
-        BinaryTreeNode* pLeft = pRoot->left_;
-        BinaryTreeNode* pRight = pRoot->right_;
+        BinaryTreeNodeEx* pLeft = pRoot->left_;
+        BinaryTreeNodeEx* pRight = pRoot->right_;
 
         delete pRoot;
         pRoot = nullptr;
