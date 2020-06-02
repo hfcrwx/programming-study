@@ -3,6 +3,10 @@
 // 则输出“We%20are%20happy.”。
 
 // len为字符数组str的总容量，大于或等于字符串str的实际长度
+
+// 时间复杂度O(n)
+// 空间复杂度O(1)
+
 void replaceSpaces(char* str, int len) {
   if (str==nullptr || len <= 0) {
     return;
