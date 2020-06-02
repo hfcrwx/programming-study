@@ -15,10 +15,10 @@
 #include <base/BinaryTree.h>
 #include <assert.h>
 
-BinaryTreeNodeEx* construct(int* preorder, int* inorder, int len) {
+BinaryTreeNode* construct(int* preorder, int* inorder, int len) {
   assert(preorder!=nullptr && inorder!=nullptr && len > 0);
   int rootValue = preorder[0];
-  BinaryTreeNodeEx* root = new BinaryTreeNodeEx();
+  BinaryTreeNode* root = new BinaryTreeNode();
   root->value_ = rootValue;
   root->left_ = nullptr;
   root->right_ = nullptr;
@@ -42,6 +42,6 @@ BinaryTreeNodeEx* construct(int* preorder, int* inorder, int len) {
 int main() {
   int preorder[] = {1, 2, 4, 7, 3, 5, 6, 8};
   int inorder[] = {4, 7, 2, 1, 5, 3, 8, 6};
-  BinaryTreeNodeEx* res = construct(preorder, inorder, sizeof(preorder)/sizeof(preorder[0]));
+  BinaryTreeNode* res = construct(preorder, inorder, sizeof(preorder)/sizeof(preorder[0]));
   return 0;
 }

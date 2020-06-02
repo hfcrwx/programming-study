@@ -14,15 +14,15 @@ https://github.com/zhedahht/CodingInterviewChinese2/blob/master/LICENSE.txt)
 
 #pragma once
 
-struct BinaryTreeNodeEx
+struct BinaryTreeNode
 {
     int                    value_;
-    BinaryTreeNodeEx*        left_;
-    BinaryTreeNodeEx*        right_;
+    BinaryTreeNode*        left_;
+    BinaryTreeNode*        right_;
 };
 
-BinaryTreeNodeEx* CreateBinaryTreeNode(int value);
-void ConnectTreeNodes(BinaryTreeNodeEx* pParent, BinaryTreeNodeEx* pLeft, BinaryTreeNodeEx* pRight);
-void PrintTreeNode(const BinaryTreeNodeEx* pNode);
-void PrintTree(const BinaryTreeNodeEx* pRoot);
-void DestroyTree(BinaryTreeNodeEx* pRoot);
+BinaryTreeNode* CreateBinaryTreeNode(int value);
+void ConnectTreeNodes(BinaryTreeNode* pParent, BinaryTreeNode* pLeft, BinaryTreeNode* pRight);
+void PrintTreeNode(const BinaryTreeNode* pNode);
+void PrintTree(const BinaryTreeNode* pRoot);
+void DestroyTree(BinaryTreeNode* pRoot);
