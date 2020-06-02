@@ -16,16 +16,16 @@ https://github.com/zhedahht/CodingInterviewChinese2/blob/master/LICENSE.txt)
 #include <stdio.h>
 #include <stdlib.h>
 
-ListNode* CreateListNode(int value)
+ListNode* createListNode(int value)
 {
     ListNode* pNode = new ListNode();
-    pNode->m_nValue = value;
-    pNode->m_pNext = nullptr;
+    pNode->value_ = value;
+    pNode->next_ = nullptr;
 
     return pNode;
 }
 
-void ConnectListNodes(ListNode* pCurrent, ListNode* pNext)
+void connectListNodes(ListNode* pCurrent, ListNode* pNext)
 {
     if(pCurrent == nullptr)
     {
@@ -33,7 +33,7 @@ void ConnectListNodes(ListNode* pCurrent, ListNode* pNext)
         exit(1);
     }
 
-    pCurrent->m_pNext = pNext;
+    pCurrent->next_ = pNext;
 }
 
 void PrintListNode(ListNode* pNode)
@@ -44,30 +44,30 @@ void PrintListNode(ListNode* pNode)
     }
     else
     {
-        printf("The key in node is %d.\n", pNode->m_nValue);
+        printf("The key in node is %d.\n", pNode->value_);
     }
 }
 
-void PrintList(ListNode* pHead)
+void printList(ListNode* pHead)
 {
-    printf("PrintList starts.\n");
+    printf("printList starts.\n");
     
     ListNode* pNode = pHead;
     while(pNode != nullptr)
     {
-        printf("%d\t", pNode->m_nValue);
-        pNode = pNode->m_pNext;
+        printf("%d\t", pNode->value_);
+        pNode = pNode->next_;
     }
 
-    printf("\nPrintList ends.\n");
+    printf("\nprintList ends.\n");
 }
 
-void DestroyList(ListNode* pHead)
+void destroyList(ListNode* pHead)
 {
     ListNode* pNode = pHead;
     while(pNode != nullptr)
     {
-        pHead = pHead->m_pNext;
+        pHead = pHead->next_;
         delete pNode;
         pNode = pHead;
     }
@@ -76,8 +76,8 @@ void DestroyList(ListNode* pHead)
 void AddToTail(ListNode** pHead, int value)
 {
     ListNode* pNew = new ListNode();
-    pNew->m_nValue = value;
-    pNew->m_pNext = nullptr;
+    pNew->value_ = value;
+    pNew->next_ = nullptr;
 
     if(*pHead == nullptr)
     {
@@ -86,10 +86,10 @@ void AddToTail(ListNode** pHead, int value)
     else
     {
         ListNode* pNode = *pHead;
-        while(pNode->m_pNext != nullptr)
-            pNode = pNode->m_pNext;
+        while(pNode->next_ != nullptr)
+            pNode = pNode->next_;
 
-        pNode->m_pNext = pNew;
+        pNode->next_ = pNew;
     }
 }
 
@@ -99,21 +99,21 @@ void RemoveNode(ListNode** pHead, int value)
         return;
 
     ListNode* pToBeDeleted = nullptr;
-    if((*pHead)->m_nValue == value)
+    if((*pHead)->value_ == value)
     {
         pToBeDeleted = *pHead;
-        *pHead = (*pHead)->m_pNext;
+        *pHead = (*pHead)->next_;
     }
     else
     {
         ListNode* pNode = *pHead;
-        while(pNode->m_pNext != nullptr && pNode->m_pNext->m_nValue != value)
-            pNode = pNode->m_pNext;
+        while(pNode->next_ != nullptr && pNode->next_->value_ != value)
+            pNode = pNode->next_;
 
-        if(pNode->m_pNext != nullptr && pNode->m_pNext->m_nValue == value)
+        if(pNode->next_ != nullptr && pNode->next_->value_ == value)
         {
-            pToBeDeleted = pNode->m_pNext;
-            pNode->m_pNext = pNode->m_pNext->m_pNext;
+            pToBeDeleted = pNode->next_;
+            pNode->next_ = pNode->next_->next_;
         }
     }
 
