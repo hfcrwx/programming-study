@@ -16,3 +16,5 @@ add_executable(04_FindInPartiallySortedMatrix 04_FindInPartiallySortedMatrix/mai
 add_executable(05_ReplaceSpaces 05_ReplaceSpaces/main.cc)
 add_executable(06_PrintListInReverseOrder 06_PrintListInReverseOrder/main.cc)
 target_link_libraries(06_PrintListInReverseOrder base)
+add_executable(07_ConstructBinaryTree 07_ConstructBinaryTree/main.cc)
+target_link_libraries(07_ConstructBinaryTree base)

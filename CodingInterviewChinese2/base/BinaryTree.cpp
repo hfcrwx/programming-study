@@ -18,9 +18,9 @@ https://github.com/zhedahht/CodingInterviewChinese2/blob/master/LICENSE.txt)
 BinaryTreeNode* CreateBinaryTreeNode(int value)
 {
     BinaryTreeNode* pNode = new BinaryTreeNode();
-    pNode->m_nValue = value;
-    pNode->m_pLeft = nullptr;
-    pNode->m_pRight = nullptr;
+    pNode->value_ = value;
+    pNode->left_ = nullptr;
+    pNode->right_ = nullptr;
 
     return pNode;
 }
@@ -29,8 +29,8 @@ void ConnectTreeNodes(BinaryTreeNode* pParent, BinaryTreeNode* pLeft, BinaryTree
 {
     if(pParent != nullptr)
     {
-        pParent->m_pLeft = pLeft;
-        pParent->m_pRight = pRight;
+        pParent->left_ = pLeft;
+        pParent->right_ = pRight;
     }
 }
 
@@ -38,15 +38,15 @@ void PrintTreeNode(const BinaryTreeNode* pNode)
 {
     if(pNode != nullptr)
     {
-        printf("value of this node is: %d\n", pNode->m_nValue);
+        printf("value of this node is: %d\n", pNode->value_);
 
-        if(pNode->m_pLeft != nullptr)
-            printf("value of its left child is: %d.\n", pNode->m_pLeft->m_nValue);
+        if(pNode->left_ != nullptr)
+            printf("value of its left child is: %d.\n", pNode->left_->value_);
         else
             printf("left child is nullptr.\n");
 
-        if(pNode->m_pRight != nullptr)
-            printf("value of its right child is: %d.\n", pNode->m_pRight->m_nValue);
+        if(pNode->right_ != nullptr)
+            printf("value of its right child is: %d.\n", pNode->right_->value_);
         else
             printf("right child is nullptr.\n");
     }
@@ -64,11 +64,11 @@ void PrintTree(const BinaryTreeNode* pRoot)
 
     if(pRoot != nullptr)
     {
-        if(pRoot->m_pLeft != nullptr)
-            PrintTree(pRoot->m_pLeft);
+        if(pRoot->left_ != nullptr)
+            PrintTree(pRoot->left_);
 
-        if(pRoot->m_pRight != nullptr)
-            PrintTree(pRoot->m_pRight);
+        if(pRoot->right_ != nullptr)
+            PrintTree(pRoot->right_);
     }
 }
 
@@ -76,8 +76,8 @@ void DestroyTree(BinaryTreeNode* pRoot)
 {
     if(pRoot != nullptr)
     {
-        BinaryTreeNode* pLeft = pRoot->m_pLeft;
-        BinaryTreeNode* pRight = pRoot->m_pRight;
+        BinaryTreeNode* pLeft = pRoot->left_;
+        BinaryTreeNode* pRight = pRoot->right_;
 
         delete pRoot;
         pRoot = nullptr;

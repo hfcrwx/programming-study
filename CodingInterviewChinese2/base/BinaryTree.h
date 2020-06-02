@@ -16,9 +16,9 @@ https://github.com/zhedahht/CodingInterviewChinese2/blob/master/LICENSE.txt)
 
 struct BinaryTreeNode 
 {
-    int                    m_nValue; 
-    BinaryTreeNode*        m_pLeft;  
-    BinaryTreeNode*        m_pRight; 
+    int                    value_;
+    BinaryTreeNode*        left_;
+    BinaryTreeNode*        right_;
 };
 
 BinaryTreeNode* CreateBinaryTreeNode(int value);
