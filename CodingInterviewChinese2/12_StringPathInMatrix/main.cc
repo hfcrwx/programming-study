@@ -35,6 +35,8 @@ bool hasPath(const char* matrix, size_t rows, size_t cols, const char* str) {
       }
     }
   }
+
+  delete[] visited;
   return false;
 }
 
