@@ -1,0 +1,53 @@
+// 面试题23：链表中环的入口结点
+// 题目：一个链表中包含环，如何找出环的入口结点？例如，在图3.8的链表中，
+// 环的入口结点是结点3。
+
+#include <base/List.h>
+#include <assert.h>
+#include <stddef.h>
+
+size_t circleSize(const ListNode* head) {
+  if (head==nullptr) {
+    return 0;
+  }
+  const ListNode* fast = head->next_;
+  const ListNode* slow = head;
+  while (fast!=slow) {
+    assert(fast!=nullptr);
+    fast = fast->next_;
+    assert(fast!=nullptr);
+    fast = fast->next_;
+    assert(slow!=nullptr);
+    slow = slow->next_;
+  }
+  size_t size = 1;
+  assert(slow!=nullptr);
+  fast = slow->next_;
+  while (fast!=slow) {
+    assert(fast!=nullptr);
+    fast = fast->next_;
+    ++size;
+  }
+  return size;
+}
+
+const ListNode* EntryNode(const ListNode* head) {
+  if (head==nullptr) {
+    return nullptr;
+  }
+  const ListNode* ahead = head;
+  size_t size = circleSize(head);
+  for (size_t i = 0; i < size; ++i) {
+    ahead = ahead->next_;
+  }
+  const ListNode* behind = head;
+  while (ahead!=behind) {
+    ahead = ahead->next_;
+    behind = behind->next_;
+  }
+  return ahead;
+}
+
+int main() {
+  return 0;
+}
