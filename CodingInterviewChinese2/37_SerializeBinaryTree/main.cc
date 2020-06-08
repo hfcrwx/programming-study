@@ -22,8 +22,9 @@ bool readStream(std::istream& is, int* num) {
   is >> ch;
   char buf[32];
   buf[0] = '\0';
+  char* p = buf;
   while (!is.eof() && ch!=',') {
-    *buf++ = ch;
+    *p++ = ch;
     is >> ch;
   }
   if (buf[0]!='$') {
@@ -35,7 +36,7 @@ bool readStream(std::istream& is, int* num) {
 
 void deserialize(BinaryTreeNode** root, std::istream& is) {
   int num;
-  if (readStream(is, num)) {
+  if (readStream(is, &num)) {
     *root = new BinaryTreeNode();
     (*root)->value_ = num;
     (*root)->left_ = nullptr;
