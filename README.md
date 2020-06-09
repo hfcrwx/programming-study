@@ -1,1 +1,1 @@
-# studying-linux-programming
+# programming-study
