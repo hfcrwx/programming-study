@@ -9,7 +9,7 @@
 char firstNotRepeated(const char* str) {
   assert(str != nullptr);
 
-  char hash[128];
+  char hash[256];
   bzero(hash, sizeof(hash));
   const char* p = str;
   while (*p != '\0') {
