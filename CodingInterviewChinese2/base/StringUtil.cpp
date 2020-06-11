@@ -13,18 +13,17 @@ https://github.com/zhedahht/CodingInterviewChinese2/blob/master/LICENSE.txt)
 //==================================================================
 
 #include "StringUtil.h"
+#include <assert.h>
 
-void Reverse(char *pBegin, char *pEnd)
-{
-    if(pBegin == nullptr || pEnd == nullptr)
-        return;
+void reverse(char* begin, char* end) {
+  assert (begin != nullptr && end != nullptr);
 
-    while(pBegin < pEnd)
-    {
-        char temp = *pBegin;
-        *pBegin = *pEnd;
-        *pEnd = temp;
+  while (begin < end) {
+    char temp = *begin;
+    *begin = *end;
+    *end = temp;
 
-        pBegin ++, pEnd --;
-    }
+    begin++;
+    end--;
+  }
 }
