@@ -16,9 +16,9 @@ ListNode* reverseList(ListNode* head) {
 
   ListNode* pre = nullptr;
   ListNode* cur = head;
-  while (cur!=nullptr) {
+  while (cur != nullptr) {
     ListNode* next = cur->next_;
-    if (next==nullptr) {
+    if (next == nullptr) {
       reverseHead = cur;
     }
     cur->next_ = pre;
@@ -26,6 +26,7 @@ ListNode* reverseList(ListNode* head) {
     pre = cur;
     cur = next;
   }
+
   return reverseHead;
 }
 
