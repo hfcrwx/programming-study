@@ -6,6 +6,7 @@
 
 #include <assert.h>
 #include <stddef.h>
+#include <stdlib.h>
 
 int maxProfit(const int* prices, size_t len) {
   assert(prices != nullptr);

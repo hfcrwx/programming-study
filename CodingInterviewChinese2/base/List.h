@@ -12,10 +12,9 @@ https://github.com/zhedahht/CodingInterviewChinese2/blob/master/LICENSE.txt)
 // 作者：何海涛
 //==================================================================
 
-struct ListNode
-{
-    int       value_;
-    ListNode* next_;
+struct ListNode {
+  int value_;
+  ListNode* next_;
 };
 
 ListNode* createListNode(int value);

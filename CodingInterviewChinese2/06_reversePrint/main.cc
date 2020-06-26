@@ -5,23 +5,23 @@
 // 面试题6：从尾到头打印链表
 // 题目：输入一个链表的头结点，从尾到头反过来打印出每个结点的值。
 
-void printListReversingly_iteratively(ListNode* head) {
-  std::stack<ListNode*> nodes;
-  while (head!=nullptr) {
+void reversePrint_iteratively(const ListNode* head) {
+  std::stack<const ListNode*> nodes;
+  while (head != nullptr) {
     nodes.push(head);
     head = head->next_;
   }
+
   while (!nodes.empty()) {
     printf("%d ", nodes.top()->value_);
     nodes.pop();
   }
-  printf("\n");
 }
 
-void printListReversingly_recursively(ListNode* head) {
-  if (head!=nullptr) {
-    if (head->next_!=nullptr) {
-      printListReversingly_recursively(head->next_);
+void reversePrint_recursively(const ListNode* head) {
+  if (head != nullptr) {
+    if (head->next_ != nullptr) {
+      reversePrint_recursively(head->next_);
     }
     printf("%d ", head->value_);
   }
@@ -40,8 +40,9 @@ int main() {
   connectListNodes(node4, node5);
 
   printList(node1);
-  printListReversingly_iteratively(node1);
-  printListReversingly_recursively(node1);
+  reversePrint_iteratively(node1);
+  printf("\n");
+  reversePrint_recursively(node1);
 
   destroyList(node1);
 
