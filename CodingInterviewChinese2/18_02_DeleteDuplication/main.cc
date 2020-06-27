@@ -1,27 +1,28 @@
 // 面试题18（二）：删除链表中重复的结点
-// 题目：在一个排序的链表中，如何删除重复的结点？例如，在图3.4（a）中重复
-// 结点被删除之后，链表如图3.4（b）所示。
+// 题目：在一个排序的链表中，如何删除重复的结点？例如，在图3.4（a）中重复的结点被删除之后，链表如
+// 图3.4（b）所示。
 
 // 1 2 3 3 4 4 5
 // 1 2 5
 
 #include <base/List.h>
 
-void deleteDuplicatedNode(ListNode** head) {
-  if (head==nullptr || *head==nullptr) {
+void deleteDuplication(ListNode** head) {
+  if (head == nullptr || *head == nullptr) {
     return;
   }
+
   ListNode* pre = nullptr;
   ListNode* cur = *head;
-  while (cur!=nullptr) {
+  while (cur != nullptr) {
     ListNode* next = cur->next_;
     bool found = false;
-    if (next!=nullptr && next->value_==cur->value_) {
+    if (next != nullptr && next->value_ == cur->value_) {
       found = true;
     }
     if (found) {
       int val = cur->value_;
-      while (cur!=nullptr && cur->value_==val) {
+      while (cur != nullptr && cur->value_ == val) {
         next = cur->next_;
 
         delete cur;
@@ -29,8 +30,8 @@ void deleteDuplicatedNode(ListNode** head) {
 
         cur = next;
       }
-      if (pre==nullptr) {
-        *head = next;
+      if (pre == nullptr) {
+        *head = cur;
       } else {
         pre->next_ = cur;
       }
@@ -57,6 +58,6 @@ int main() {
   connectListNodes(pNode5, pNode6);
   connectListNodes(pNode6, pNode7);
 
-  deleteDuplicatedNode(&pNode1);
+  deleteDuplication(&pNode1);
   return 0;
 }

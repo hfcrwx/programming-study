@@ -1,14 +1,14 @@
-// 面试题18（一）：在O(1)时间删除链表结点
-// 题目：给定单向链表的头指针和一个结点指针，定义一个函数在O(1)时间删除该
-// 结点。
+// 面试题18（一）：在O(1)时间内删除链表结点
+// 题目：给定单向链表的头指针和一个结点指针，定义一个函数在O(1)时间内删除该结点。
 
 #include <base/List.h>
 
-void DeleteNode(ListNode** head, ListNode* target) {
-  if (head==nullptr || *head==nullptr || target==nullptr) {
+void deleteNode(ListNode** head, ListNode* target) {
+  if (head == nullptr || *head == nullptr || target == nullptr) {
     return;
   }
-  if (target->next_!=nullptr) {
+
+  if (target->next_ != nullptr) {
     ListNode* next = target->next_;
     target->value_ = next->value_;
     target->next_ = next->next_;
