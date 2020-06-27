@@ -15,7 +15,7 @@ size_t length(const ListNode* head) {
   return len;
 }
 
-const ListNode* firstCommonNode(const ListNode* head1, const ListNode* head2) {
+const ListNode* getIntersectionNode(const ListNode* head1, const ListNode* head2) {
   if (head1 == nullptr || head2 == nullptr) {
     return nullptr;
   }
