@@ -1,13 +1,18 @@
+// 面试题32（二）：分行从上到下打印二叉树
+// 题目：从上到下按层打印二叉树，同一层的结点按从左到右的顺序打印，每一层打印到一行。
+
 #include <base/BinaryTree.h>
 #include <queue>
 #include <stdio.h>
 
-void printTreeInLine(BinaryTreeNode* root) {
-  if (root==nullptr) {
+void levelOrder(BinaryTreeNode* root) {
+  if (root == nullptr) {
     return;
   }
+
   std::queue<BinaryTreeNode*> queue;
   queue.push(root);
+
   int numToBePrinted = 1;
   int numNextLine = 0;
   while (!queue.empty()) {
@@ -16,17 +21,17 @@ void printTreeInLine(BinaryTreeNode* root) {
     printf("%d ", node->value_);
     --numToBePrinted;
 
-    if (node->left_!=nullptr) {
+    if (node->left_ != nullptr) {
       queue.push(node->left_);
       ++numNextLine;
     }
 
-    if (node->right_!=nullptr) {
+    if (node->right_ != nullptr) {
       queue.push(node->right_);
       ++numNextLine;
     }
 
-    if (numToBePrinted==0) {
+    if (numToBePrinted == 0) {
       printf("\n");
       numToBePrinted = numNextLine;
       numNextLine = 0;
@@ -47,7 +52,7 @@ int main() {
   ConnectTreeNodes(node6, node5, node7);
   ConnectTreeNodes(node10, node9, node11);
 
-  printTreeInLine(node8);
+  levelOrder(node8);
   printf("\n");
 
   DestroyTree(node8);
