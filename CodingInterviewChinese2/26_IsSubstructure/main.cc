@@ -13,30 +13,34 @@
 
 bool doesTree1HasTree2(BinaryTreeNode* root1, BinaryTreeNode* root2);
 
-bool hasSubTree(BinaryTreeNode* root1, BinaryTreeNode* root2) {
+// find root2
+bool isSubstructure(BinaryTreeNode* root1, BinaryTreeNode* root2) {
   bool result = false;
-  if (root1!=nullptr && root2!=nullptr) {
-    if (root1->value_==root2->value_) {
+  if (root1 != nullptr && root2 != nullptr) {
+    if (root1->value_ == root2->value_) {
       result = doesTree1HasTree2(root1, root2);
     }
     if (!result) {
-      result = hasSubTree(root1->left_, root2);
+      result = isSubstructure(root1->left_, root2);
     }
     if (!result) {
-      result = hasSubTree(root1->right_, root2);
+      result = isSubstructure(root1->right_, root2);
     }
   }
+
   return result;
 }
 
+// same root
 bool doesTree1HasTree2(BinaryTreeNode* root1, BinaryTreeNode* root2) {
-  if (root2==nullptr) {
+  if (root2 == nullptr) {
     return true;
   }
-  if (root1==nullptr) {
+  if (root1 == nullptr) {
     return false;
   }
-  return root1->value_==root2->value_
+
+  return root1->value_ == root2->value_
       && doesTree1HasTree2(root1->left_, root2->left_)
       && doesTree1HasTree2(root1->right_, root2->right_);
 }

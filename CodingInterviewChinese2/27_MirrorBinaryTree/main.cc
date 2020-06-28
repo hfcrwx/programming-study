@@ -4,30 +4,31 @@
 #include <base/BinaryTree.h>
 #include <stack>
 
-void mirror(BinaryTreeNode* root) {
-  if (root==nullptr) {
+void mirrorBinaryTree(BinaryTreeNode* root) {
+  if (root == nullptr) {
     return;
   }
-  if (root->left_==nullptr && root->right_==nullptr) {
+  if (root->left_ == nullptr && root->right_ == nullptr) {
     return;
   }
+
   BinaryTreeNode* tmp = root->left_;
   root->left_ = root->right_;
   root->right_ = tmp;
 
-  if (root->left_!=nullptr) {
-    mirror(root->left_);
+  if (root->left_ != nullptr) {
+    mirrorBinaryTree(root->left_);
   }
-  if (root->right_!=nullptr) {
-    mirror(root->right_);
+  if (root->right_ != nullptr) {
+    mirrorBinaryTree(root->right_);
   }
 }
 
-void mirror2(BinaryTreeNode* root) {
-  if (root==nullptr) {
+void mirrorBinaryTree2(BinaryTreeNode* root) {
+  if (root == nullptr) {
     return;
   }
-  if (root->left_==nullptr && root->right_==nullptr) {
+  if (root->left_ == nullptr && root->right_ == nullptr) {
     return;
   }
   std::stack<BinaryTreeNode*> nodes;
@@ -41,11 +42,12 @@ void mirror2(BinaryTreeNode* root) {
     node->left_ = node->right_;
     node->right_ = tmp;
 
-    if (node->left_!=nullptr) {
-      nodes.push(node->left_);
-    }
-    if (node->right_!=nullptr) {
+    if (node->right_ != nullptr) {
       nodes.push(node->right_);
+    }
+
+    if (node->left_ != nullptr) {
+      nodes.push(node->left_);
     }
   }
 }
