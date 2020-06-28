@@ -1,37 +1,39 @@
 // 面试题8：二叉树的下一个结点
-// 题目：给定一棵二叉树和其中的一个结点，如何找出中序遍历顺序的下一个结点？
-// 树中的结点除了有两个分别指向左右子结点的指针以外，还有一个指向父结点的指针。
+// 题目：给定一棵二叉树和其中的一个结点，如何找出中序遍历的下一个结点？树中的结点除了有两个分别指向
+// 左、右子结点的指针，还有一个指向父结点的指针。
 
 //             6
 //      2         8
 //   1     4    7    9
 //       3   5
 
-#include <base/BinaryTreeEx.h>
+#include "BinaryTreeEx.h"
 #include <assert.h>
 
 BinaryTreeNodeEx* getNext(BinaryTreeNodeEx* node) {
-  if (node==nullptr) {
+  if (node == nullptr) {
     return nullptr;
   }
+
   BinaryTreeNodeEx* next = nullptr;
-  if (node->right_!=nullptr) {
+  if (node->right_ != nullptr) {
     BinaryTreeNodeEx* tmp = node->right_;
-    while (tmp->left_!=nullptr) {
+    while (tmp->left_ != nullptr) {
       tmp = tmp->left_;
     }
     next = tmp;
-  } else if (node->parent_!=nullptr) {
-    if (node==node->parent_->left_) {
+  } else if (node->parent_ != nullptr) {
+    if (node == node->parent_->left_) {
       next = node->parent_;
     } else {
       BinaryTreeNodeEx* tmp = node;
-      while (tmp->parent_!=nullptr && tmp->parent_->right_==tmp) {
+      while (tmp->parent_ != nullptr && tmp->parent_->right_ == tmp) {
         tmp = tmp->parent_;
       }
       next = tmp->parent_;
     }
   }
+
   return next;
 }
 
@@ -59,15 +61,15 @@ int main() {
   BinaryTreeNodeEx* r8 = getNext(node8);
   BinaryTreeNodeEx* r9 = getNext(node9);
 
-  assert(r1==node2);
-  assert(r2==node3);
-  assert(r3==node4);
-  assert(r4==node5);
-  assert(r5==node6);
-  assert(r6==node7);
-  assert(r7==node8);
-  assert(r8==node9);
-  assert(r9==nullptr);
+  assert(r1 == node2);
+  assert(r2 == node3);
+  assert(r3 == node4);
+  assert(r4 == node5);
+  assert(r5 == node6);
+  assert(r6 == node7);
+  assert(r7 == node8);
+  assert(r8 == node9);
+  assert(r9 == nullptr);
 
   return 0;
 }

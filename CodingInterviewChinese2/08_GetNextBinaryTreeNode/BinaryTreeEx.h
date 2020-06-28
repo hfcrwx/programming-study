@@ -2,8 +2,8 @@
 // Created by root on 2020/6/2.
 //
 
-#ifndef CODINGINTERVIEWCHINESE2_BASE_BINARYTREEEX_H_
-#define CODINGINTERVIEWCHINESE2_BASE_BINARYTREEEX_H_
+#ifndef CODINGINTERVIEWCHINESE2_BINARYTREEEX_H_
+#define CODINGINTERVIEWCHINESE2_BINARYTREEEX_H_
 
 struct BinaryTreeNodeEx {
   int value_;
@@ -18,4 +18,4 @@ void connectNodes(BinaryTreeNodeEx* parent, BinaryTreeNodeEx* left, BinaryTreeNo
 
 void destroy(BinaryTreeNodeEx* root);
 
-#endif //CODINGINTERVIEWCHINESE2_BASE_BINARYTREEEX_H_
+#endif //CODINGINTERVIEWCHINESE2_BINARYTREEEX_H_
