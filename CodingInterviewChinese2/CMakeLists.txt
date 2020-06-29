@@ -54,6 +54,8 @@ add_executable(32_01_PrintTreeFromTopToBottom 32_01_PrintTreeFromTopToBottom/mai
 target_link_libraries(32_01_PrintTreeFromTopToBottom base)
 add_executable(32_02_PrintTreeInLine 32_02_PrintTreeInLine/main.cc)
 target_link_libraries(32_02_PrintTreeInLine base)
+add_executable(32_03_PrintTreeInZigZag 32_03_PrintTreeInZigZag/main.cc)
+target_link_libraries(32_03_PrintTreeInZigZag base)
 add_executable(33_SequenceOfBST 33_SequenceOfBST/main.cc)
 target_link_libraries(33_SequenceOfBST base)
 add_executable(34_PathInTree 34_PathInTree/main.cc)

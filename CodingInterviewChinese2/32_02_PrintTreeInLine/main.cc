@@ -5,36 +5,36 @@
 #include <queue>
 #include <stdio.h>
 
-void levelOrder(BinaryTreeNode* root) {
+void levelOrder(const BinaryTreeNode* root) {
   if (root == nullptr) {
     return;
   }
 
-  std::queue<BinaryTreeNode*> queue;
+  std::queue<const BinaryTreeNode*> queue;
   queue.push(root);
 
-  int numToBePrinted = 1;
-  int numNextLine = 0;
+  int numCurrent = 1;
+  int numNext = 0;
   while (!queue.empty()) {
-    BinaryTreeNode* node = queue.front();
+    const BinaryTreeNode* node = queue.front();
     queue.pop();
     printf("%d ", node->value_);
-    --numToBePrinted;
+    --numCurrent;
 
     if (node->left_ != nullptr) {
       queue.push(node->left_);
-      ++numNextLine;
+      ++numNext;
     }
 
     if (node->right_ != nullptr) {
       queue.push(node->right_);
-      ++numNextLine;
+      ++numNext;
     }
 
-    if (numToBePrinted == 0) {
+    if (numCurrent == 0) {
       printf("\n");
-      numToBePrinted = numNextLine;
-      numNextLine = 0;
+      numCurrent = numNext;
+      numNext = 0;
     }
   }
 }
