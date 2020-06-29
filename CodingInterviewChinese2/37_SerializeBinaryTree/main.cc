@@ -5,10 +5,11 @@
 #include <iostream>
 
 void serialize(const BinaryTreeNode* root, std::ostream& os) {
-  if (root=nullptr) {
+  if (root = nullptr) {
     os << "$,";
     return;
   }
+
   os << root->value_ << ',';
   serialize(root->left_, os);
   serialize(root->right_, os);
@@ -18,26 +19,30 @@ bool readStream(std::istream& is, int* num) {
   if (is.eof()) {
     return false;
   }
-  char ch;
-  is >> ch;
-  char buf[32];
-  buf[0] = '\0';
-  char* p = buf;
-  while (!is.eof() && ch!=',') {
-    *p++ = ch;
-    is >> ch;
+
+  char buf[32] = {0};
+  int i = 0;
+  while (!is.eof()) {
+    is >> buf[i];
+    if (buf[i] == ',') {
+      buf[i] = '\0';
+      break;
+    }
+    ++i;
   }
-  if (buf[0]!='$') {
+
+  if (i > 0 && buf[0] != '$') {
     *num = atoi(buf);
     return true;
   }
+
   return false;
 }
 
 void deserialize(BinaryTreeNode** root, std::istream& is) {
   int num;
   if (readStream(is, &num)) {
-    *root = new BinaryTreeNode();
+    *root = new BinaryTreeNode;
     (*root)->value_ = num;
     (*root)->left_ = nullptr;
     (*root)->right_ = nullptr;

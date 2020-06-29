@@ -15,39 +15,30 @@ void levelOrder(const BinaryTreeNode* root) {
   int current = 0;
   int next = 1;
   stacks[current].push(root);
-  int numCurrent = 1;
-  int numNext = 0;
 
   while (!stacks[current].empty()) {
     const BinaryTreeNode* node = stacks[current].top();
     stacks[current].pop();
     printf("%d ", node->value_);
-    --numCurrent;
 
     if (current == 0) {
       if (node->left_ != nullptr) {
         stacks[next].push(node->left_);
-        ++numNext;
       }
       if (node->right_ != nullptr) {
         stacks[next].push(node->right_);
-        ++numNext;
       }
     } else {
       if (node->right_ != nullptr) {
         stacks[next].push(node->right_);
-        ++numNext;
       }
       if (node->left_ != nullptr) {
         stacks[next].push(node->left_);
-        ++numNext;
       }
     }
 
-    if (numCurrent == 0) {
+    if (stacks[current].empty()) {
       printf("\n");
-      numCurrent = numNext;
-      numNext = 0;
 
       current = 1 - next;
       next = 1- current;
