@@ -4,21 +4,20 @@
 
 #include <base/BinaryTree.h>
 #include <assert.h>
-#include <inttypes.h>
 #include <stdlib.h>
 
-bool isBalanced(const BinaryTreeNode* root, uint32_t* depth) {
+bool isBalanced(const BinaryTreeNode* root, int* depth) {
   assert(depth != nullptr);
-  
+
   if (root == nullptr) {
     *depth = 0;
     return true;
   }
 
-  uint32_t left = 0;
-  uint32_t right = 0;
+  int left = 0;
+  int right = 0;
   if (isBalanced(root->left_, &left) && isBalanced(root->right_, &right)) {
-    if (abs(left, right) <= 1) {
+    if (abs(left - right) <= 1) {
       *depth = (left > right ? left : right) + 1;
       return true;
     }
@@ -28,7 +27,7 @@ bool isBalanced(const BinaryTreeNode* root, uint32_t* depth) {
 }
 
 bool isBalanced(const BinaryTreeNode* root) {
-  uint32_t depth = 0;
+  int depth = 0;
   return isBalanced(root, &depth);
 }
 
