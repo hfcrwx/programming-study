@@ -10,8 +10,8 @@ add_library(base base/Array.cpp base/BinaryTree.cpp 08_GetNextBinaryTreeNode/Bin
 include_directories(${PROJECT_SOURCE_DIR})
 
 add_executable(01_AssignmentOperator 01_AssignmentOperator/main.cc)
-add_executable(03_01_DuplicationInArray 03_01_DuplicationInArray/main.cc)
-add_executable(03_02_DuplicationInArrayNoEdit 03_02_DuplicationInArrayNoEdit/main.cc)
+add_executable(03_01_FindRepeatNumber 03_01_FindRepeatNumber/main.cc)
+add_executable(03_02_FindRepeatNumber 03_02_FindRepeatNumber/main.cc)
 add_executable(04_FindInPartiallySortedMatrix 04_FindInPartiallySortedMatrix/main.cc)
 add_executable(05_ReplaceSpaces 05_ReplaceSpaces/main.cc)
 add_executable(06_ReversePrint 06_ReversePrint/main.cc)

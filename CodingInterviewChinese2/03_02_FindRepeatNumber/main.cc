@@ -22,7 +22,7 @@ int countInRange(int* arr, int len, int begin, int end);
 // 时间复杂度O(nlogn)
 // 空间复杂度O(1)
 
-bool getDuplication(int* arr, int len, int* res) {
+bool findRepeatNumber(int* arr, int len, int* res) {
   if (arr==nullptr || len <= 2) {
     return false;
   }
