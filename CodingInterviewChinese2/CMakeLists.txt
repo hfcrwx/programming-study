@@ -22,7 +22,7 @@ add_executable(08_GetNextBinaryTreeNode 08_GetNextBinaryTreeNode/main.cc 08_GetN
 target_link_libraries(08_GetNextBinaryTreeNode base)
 add_executable(09_QueueWithTwoStacks 09_QueueWithTwoStacks/main.cc)
 add_executable(10_Fibonacci 10_Fibonacci/main.cc)
-add_executable(11_MinNumberInRotatedArray 11_MinNumberInRotatedArray/main.cc)
+add_executable(11_FindMin 11_FindMin/main.cc)
 add_executable(12_StringPathInMatrix 12_StringPathInMatrix/main.cc)
 add_executable(13_RobotMove 13_RobotMove/main.cc)
 add_executable(14_CuttingRope 14_CuttingRope/main.cc)

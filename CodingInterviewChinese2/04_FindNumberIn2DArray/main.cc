@@ -19,7 +19,7 @@ bool findNumberIn2DArray(const int** matrix,
   size_t j = column - 1;
   while (i <= row - 1 && j >= 0) {
     int val = matrix[i][j];
-    if (val = target) {
+    if (val == target) {
       return true;
     } else if (val < target) {
       ++i;
