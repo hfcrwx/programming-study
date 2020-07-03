@@ -6,7 +6,7 @@
 
 int numberEqualToIndex(const int* nums, int size) {
   assert(nums != nullptr && size > 0);
-  
+
   int low = 0;
   int high = size - 1;
   int middle;
