@@ -26,7 +26,7 @@ int lengthOfLongestSubstring(const char* str) {
       maxLen = curLen;
     }
   }
-  
+
   return maxLen;
 }
 
