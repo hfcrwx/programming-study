@@ -3,21 +3,12 @@
 // 为简单起见，标点符号和普通字母一样处理。例如输入字符串"I am a student."，
 // 则输出"student. a am I"。
 
+#include <base/StringUtil.h>
 #include <assert.h>
-
-void reverse(char* begin, char* end) {
-  assert(begin != nullptr && end != nullptr);
-
-  while (begin < end) {
-    char tmp = *begin;
-    *begin = *end;
-    *end = tmp;
-  }
-}
 
 char* reverseWords(char* str) {
   assert(str != nullptr);
-  
+
   char* begin = str;
   char* end = str;
   while (*end != '\0') {
