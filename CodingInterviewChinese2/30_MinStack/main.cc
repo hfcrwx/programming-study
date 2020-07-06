@@ -11,7 +11,7 @@ class MinStack {
   void push(const T& v);
   void pop();
   const T& min();
-  const T& top() const ;
+  const T& top() const;
   T& top();
 
  private:
@@ -20,7 +20,7 @@ class MinStack {
 };
 
 template<typename T>
-void MinStack<T>::push(const T &v) {
+void MinStack<T>::push(const T& v) {
   data_.push(v);
   if (min_.empty() || v < min_.top()) {
     min_.push(v);
@@ -35,6 +35,23 @@ void MinStack<T>::pop() {
   data_.pop();
   min_.pop();
 }
+
+//template<typename T>
+//void MinStack<T>::push(const T& v) {
+//  data_.push(v);
+//  if (min_.empty() || v <= min_.top()) {
+//    min_.push(v);
+//  }
+//}
+//
+//template<typename T>
+//void MinStack<T>::pop() {
+//  assert(!data_.empty() && !min_.empty());
+//  if (data.top() == min.top()) {
+//    min_.pop();
+//  }
+//  data_.pop();
+//}
 
 template<typename T>
 const T& MinStack<T>::min() {
