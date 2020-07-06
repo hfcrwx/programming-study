@@ -1,4 +1,4 @@
-// 面试题10：斐波那契数列
+// 面试题10（一）：斐波那契数列
 // 题目：写一个函数，输入n，求斐波那契（Fibonacci）数列的第n项。
 
 #include <inttypes.h>
@@ -22,12 +22,14 @@ uint64_t fabonacci2(uint32_t i) {
   if (i == 1) {
     return f1;
   }
+
   uint64_t f2 = f0 + f1;
-  for (int k = 2; k < i; ++k) {
+  for (int k = 3; k <= i; ++k) {
     f0 = f1;
     f1 = f2;
     f2 = f0 + f1;
   }
+
   return f2;
 }
 
