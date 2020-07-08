@@ -38,6 +38,9 @@ uint32_t numberOf1Bits__(uint32_t n) {
 }
 
 int main() {
+  int x = 0x80000000 >> 1;
+  int y = 0x40000000;
+
   assert(numberOf1Bits(0x7FFFFFFF)==31);
   assert(numberOf1Bits_(0x7FFFFFFF)==31);
   assert(numberOf1Bits__(0x7FFFFFFF)==31);
