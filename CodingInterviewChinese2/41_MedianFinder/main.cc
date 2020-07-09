@@ -32,7 +32,7 @@ class MedianFinder {
 
   double findMedian() {
     assert(max_.size() + min_.size() != 0);
-    if (((max_.size() + min_.size()) & 1) == 1) {
+    if (max_.size() > min_.size()) {
       return max_.top();
     } else {
       return (max_.top() + min_.top()) / 2.0;
