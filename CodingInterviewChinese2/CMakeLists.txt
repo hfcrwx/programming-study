@@ -95,6 +95,7 @@ add_executable(57_02_FindContinuousSequence 57_02_FindContinuousSequence/main.cc
 add_executable(58_01_ReverseWords 58_01_ReverseWords/main.cc)
 target_link_libraries(58_01_ReverseWords base)
 add_executable(58_02_ReverseLeftWords 58_02_ReverseLeftWords/main.cc)
+add_executable(59_01_MaxSlidingWindow 59_01_MaxSlidingWindow/main.cc)
 target_link_libraries(58_02_ReverseLeftWords base)
 add_executable(63_MaxProfit 63_MaxProfit/main.cc)
 add_executable(66_ConstructArr 66_ConstructArr/main.cc)
