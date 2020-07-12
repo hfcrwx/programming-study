@@ -10,8 +10,12 @@ size_t loopSize(const ListNode* head) {
     return 0;
   }
 
-  const ListNode* fast = head->next_;
-  const ListNode* slow = head;
+  const ListNode* slow = head->next_;
+  if (slow == nullptr) {
+    return 0;
+  }
+  const ListNode* fast = slow->next_;
+
   while (fast != slow) {
     if (fast == nullptr) {
       return 0;
