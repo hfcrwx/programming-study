@@ -4,25 +4,26 @@
 // 这个链表的倒数第3个结点是值为4的结点。
 
 #include <base/List.h>
-#include <stdint.h>
 
-const ListNode* getKthFromEnd(const ListNode* head, uint32_t k) {
-  if (head == nullptr || k == 0) {
+const ListNode* getKthFromEnd(const ListNode* head, int k) {
+  if (head == nullptr || k <= 0) {
     return nullptr;
   }
 
   const ListNode* ahead = head;
-  for (uint32_t i = 0; i < k - 1; ++i) {
+  for (int i = 0; i < k - 1; ++i) {
     ahead = ahead->next_;
     if (ahead == nullptr) {
       return nullptr;
     }
   }
+
   const ListNode* behind = head;
   while (ahead->next_ != nullptr) {
     ahead = ahead->next_;
     behind = behind->next_;
   }
+
   return behind;
 }
 
