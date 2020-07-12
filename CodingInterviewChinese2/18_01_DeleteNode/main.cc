@@ -16,20 +16,66 @@ void deleteNode(ListNode** head, ListNode* target) {
     next = nullptr;
   } else {
     if (target == *head) {
+      *head = nullptr;
       delete target;
       target = nullptr;
-      *head = nullptr;
     } else {
-      ListNode* node = *head;
-      while (node->next_ != target) {
-        node = node->next_;
+      ListNode* prev = *head;
+      while (prev->next_ != target) {
+        prev = prev->next_;
       }
-      node->next_ = nullptr;
+      prev->next_ = nullptr;
       delete target;
       target = nullptr;
     }
   }
 }
+
+//203
+class Solution {
+ public:
+  ListNode* removeElements1(ListNode* head, int val) {
+    if (head == nullptr) {
+      return nullptr;
+    }
+
+    ListNode* prev = head;
+    while (prev->next_ != nullptr) {
+      ListNode* curr = prev->next_;
+      if (curr->value_ == val) {
+        prev->next_ = curr->next_;
+        delete curr;
+      } else {
+        prev = prev->next_;
+      }
+    }
+    if (head->value_ == val) {
+      ListNode* next = head->next_;
+      delete head;
+      return next;
+    } else {
+      return head;
+    }
+  }
+
+  ListNode* removeElements(ListNode* head, int val) {
+    ListNode dummy;
+    dummy.next_ = head;
+
+    ListNode* prev = &dummy;
+    while (prev->next_ != nullptr) {
+      ListNode* curr = prev->next_;
+      if (curr->value_ == val) {
+        prev->next_ = curr->next_;
+        delete curr;
+      } else {
+        prev = prev->next_;
+      }
+    }
+
+    return dummy.next_;
+  }
+};
 
 int main() {
   return 0;
