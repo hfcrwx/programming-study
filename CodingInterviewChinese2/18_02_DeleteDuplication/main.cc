@@ -12,32 +12,32 @@ void deleteDuplication(ListNode** head) {
     return;
   }
 
-  ListNode* pre = nullptr;
-  ListNode* cur = *head;
-  while (cur != nullptr) {
-    ListNode* next = cur->next_;
+  ListNode* prev = nullptr;
+  ListNode* curr = *head;
+  while (curr != nullptr) {
+    ListNode* next = curr->next_;
     bool found = false;
-    if (next != nullptr && next->value_ == cur->value_) {
+    if (next != nullptr && next->value_ == curr->value_) {
       found = true;
     }
     if (found) {
-      int val = cur->value_;
-      while (cur != nullptr && cur->value_ == val) {
-        next = cur->next_;
+      int val = curr->value_;
+      while (curr != nullptr && curr->value_ == val) {
+        next = curr->next_;
 
-        delete cur;
-        cur = nullptr;
+        delete curr;
+        curr = nullptr;
 
-        cur = next;
+        curr = next;
       }
-      if (pre == nullptr) {
-        *head = cur;
+      if (prev == nullptr) {
+        *head = curr;
       } else {
-        pre->next_ = cur;
+        prev->next_ = curr;
       }
     } else {
-      pre = cur;
-      cur = next;
+      prev = curr;
+      curr = next;
     }
   }
 }

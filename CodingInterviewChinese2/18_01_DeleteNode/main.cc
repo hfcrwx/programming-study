@@ -58,6 +58,27 @@ class Solution {
     }
   }
 
+  ListNode* removeElements2(ListNode* head, int val) {
+    ListNode* prev = nullptr;
+    ListNode* curr = head;
+    while (curr != nullptr) {
+      ListNode* next = curr->next_;
+      if (curr->value_ == val) {
+        if (prev == nullptr) {
+          head = next;
+        } else {
+          prev->next_ = next;
+        }
+        delete curr;
+      } else {
+        prev = curr;
+      }
+      curr = next;
+    }
+
+    return head;
+  }
+
   ListNode* removeElements(ListNode* head, int val) {
     ListNode dummy;
     dummy.next_ = head;
