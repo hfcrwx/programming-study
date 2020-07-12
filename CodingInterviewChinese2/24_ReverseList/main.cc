@@ -4,29 +4,40 @@
 // ->h->i->j->k->
 // ...
 // <-h  i->j->k->
-// <-h  i  j->k->
 // <-h<-i  j->k->
 // ...
 
 #include <base/List.h>
 
-ListNode* reverseList(ListNode* head) {
-  ListNode* reverseHead = nullptr;
+ListNode* reverseList_iteratively(ListNode* head) {
+//  assert(head != nullptr);
+  ListNode* prev = nullptr;
+  while (head != nullptr) {
+    ListNode* next = head->next_;
+    head->next_ = prev;
 
-  ListNode* pre = nullptr;
-  ListNode* cur = head;
-  while (cur != nullptr) {
-    ListNode* next = cur->next_;
-    if (next == nullptr) {
-      reverseHead = cur;
-    }
-    cur->next_ = pre;
-
-    pre = cur;
-    cur = next;
+    prev = head;
+    head = next;
   }
 
-  return reverseHead;
+  return prev;
+}
+
+ListNode* reverseList_recursively(ListNode* head) {
+//  assert(head != nullptr);
+  if (head == nullptr) {
+    return nullptr;
+  }
+
+  if (head->next_ == nullptr) {
+    return head;
+  }
+
+  ListNode* result = reverseList_recursively(head->next_);
+  head->next_->next_ = head;
+  head->next_ = nullptr;
+
+  return result;
 }
 
 int main() {
