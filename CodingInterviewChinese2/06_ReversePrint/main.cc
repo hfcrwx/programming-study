@@ -20,9 +20,7 @@ void reversePrint_iteratively(const ListNode* head) {
 
 void reversePrint_recursively(const ListNode* head) {
   if (head != nullptr) {
-    if (head->next_ != nullptr) {
-      reversePrint_recursively(head->next_);
-    }
+    reversePrint_recursively(head->next_);
     printf("%d ", head->value_);
   }
 }
