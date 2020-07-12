@@ -30,38 +30,38 @@ ListNode* mergeTwoLists(ListNode* head1, ListNode* head2) {
 
 ListNode* mergeTwoLists2(ListNode* head1, ListNode* head2) {
   if (head1 == nullptr) {
-    return nullptr;
+    return head2;
   }
   if (head2 == nullptr) {
-    return nullptr;
+    return head1;
   }
 
   ListNode* newHead = nullptr;
-  if (head1->value_ < head2->value_) {
-    newHead = head1;
-    head1 = head1->next_;
-  } else {
-    newHead = head2;
-    head2 = head2->next_;
-  }
-  ListNode* pre = newHead;
-
+  ListNode* prev = nullptr;
   while (head1 != nullptr && head2 != nullptr) {
+    ListNode* node = nullptr;
     if (head1->value_ < head2->value_) {
-      pre->next_ = head1;
+      node = head1;
       head1 = head1->next_;
     } else {
-      pre->next_ = head2;
+      node = head2;
       head2 = head2->next_;
     }
-    pre = pre->next_;
+
+    if (prev == nullptr) {
+      newHead = node;
+    } else {
+      prev->next_ = node;
+    }
+
+    prev = node;
   }
 
   if (head1 == nullptr) {
-    pre->next_ = head2;
+    prev->next_ = head2;
   }
   if (head2 == nullptr) {
-    pre->next_ = head1;
+    prev->next_ = head1;
   }
 
   return newHead;
