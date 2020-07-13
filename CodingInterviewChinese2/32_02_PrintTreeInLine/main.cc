@@ -39,6 +39,41 @@ void levelOrder(const BinaryTreeNode* root) {
   }
 }
 
+std::vector<std::vector<int>> levelOrder3(BinaryTreeNode* root) {
+  std::vector<std::vector<int>> vv;
+  if (root == nullptr) {
+    return vv;
+  }
+
+  std::queue<BinaryTreeNode*> q;
+  q.push(root);
+  int level = 0; // current level.
+  BinaryTreeNode* last = root; // last node of current level.
+  vv.push_back(std::vector<int>());
+
+  while (!q.empty()) {
+    BinaryTreeNode* p = q.front();
+    q.pop();
+    vv[level].push_back(p->value_);
+
+    if (p->left_) {
+      q.push(p->left_);
+    }
+    if (p->right_) {
+      q.push(p->right_);
+    }
+
+    if (p == last) {
+      level++;
+      last = q.back();
+      vv.push_back(std::vector<int>()); // new buffer for next row.
+    }
+  }
+  vv.pop_back();
+
+  return vv;
+}
+
 int main() {
   BinaryTreeNode* node8 = CreateBinaryTreeNode(8);
   BinaryTreeNode* node6 = CreateBinaryTreeNode(6);

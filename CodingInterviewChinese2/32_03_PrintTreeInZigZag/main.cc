@@ -40,8 +40,8 @@ void levelOrder(const BinaryTreeNode* root) {
     if (stacks[current].empty()) {
       printf("\n");
 
-      current = 1 - next;
-      next = 1- current;
+      current = 1 - current;
+      next = 1 - next;
     }
   }
 }
