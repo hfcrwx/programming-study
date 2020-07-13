@@ -6,7 +6,7 @@
 #include <algorithm>
 #include <stddef.h>
 
-size_t length(const ListNode* head) {
+size_t getListLength(const ListNode* head) {
   size_t len = 0;
   while (head != nullptr) {
     ++len;
@@ -20,8 +20,8 @@ const ListNode* getIntersectionNode(const ListNode* head1, const ListNode* head2
     return nullptr;
   }
 
-  size_t len1 = length(head1);
-  size_t len2 = length(head2);
+  size_t len1 = getListLength(head1);
+  size_t len2 = getListLength(head2);
 
   if (len1 < len2) {
     std::swap(head1, head2);
