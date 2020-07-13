@@ -32,8 +32,8 @@ void copyNodes(Node* head) {
   while (node != nullptr) {
     Node* cloned = new Node;
     cloned->value_ = node->value_;
-    cloned->next_ = node->next_;
     cloned->random_ = nullptr;
+    cloned->next_ = node->next_;
     node->next_ = cloned;
 
     node = cloned->next_;
@@ -59,19 +59,52 @@ Node* reconnectNodes(Node* head) {
 
   Node* clonedHead = head->next_;
 
-  Node* cloned = head->next_;
-
   Node* node = head;
-  node->next_ = cloned->next_;
-  node = cloned->next_;
-
+  Node* cloned = head->next_;
   while (node != nullptr) {
-    cloned->next_ = node->next_;
-    cloned = node->next_;
+    assert(cloned != nullptr);
+    node->next_ = node->next_->next_;
+    if (cloned->next_ != nullptr) {
+      cloned->next_ = cloned->next_->next_;
+    }
 
-    node->next_ = cloned->next_;
-    node = cloned->next_;
+    node = node->next_;
+    cloned = cloned->next_;
   }
+
+  return clonedHead;
+}
+
+#include <map>
+
+Node* copyRandomList2(Node* head) {
+  std::map<Node*, Node*> originToCloned;
+  Node* node = head;
+  Node* clonedHead = nullptr;
+  Node* cloned = nullptr;
+  while (node != nullptr) {
+    Node* p = new Node;
+    p->value_ = node->value_;
+    originToCloned[node] = p;
+    if (cloned == nullptr) {
+      clonedHead = p;
+    } else {
+      cloned->next_ = p;
+    }
+    cloned = p;
+
+    node = node->next_;
+  }
+
+  node = head;
+  cloned = clonedHead;
+  while (cloned != nullptr) {
+    cloned->random_ = originToCloned[node->random_];
+
+    node = node->next_;
+    cloned = cloned->next_;
+  }
+
   return clonedHead;
 }
 
