@@ -29,7 +29,7 @@ BinaryTreeNode* buildBinaryTree(int* preorder, int* inorder, int len) {
   }
 
   int leftLen = 0;
-  for (; *(inorder + leftLen) != rootValue; ++leftLen) {
+  for (; *(inorder + leftLen) != rootValue && leftLen < len; ++leftLen) {
   }
   assert(leftLen < len);
 
@@ -41,7 +41,62 @@ BinaryTreeNode* buildBinaryTree(int* preorder, int* inorder, int len) {
                                    inorder + leftLen + 1,
                                    len - 1 - leftLen);
   }
+
   return root;
+}
+
+#include <vector>
+
+BinaryTreeNode* buildTree(std::vector<int>::iterator preBegin,
+                          std::vector<int>::iterator preEnd,
+                          std::vector<int>::iterator inBegin,
+                          std::vector<int>::iterator inEnd) {
+  assert(preBegin != preEnd && inBegin != inEnd
+             && preEnd - preBegin == inEnd - inBegin);
+
+  int rootValue = *preBegin;
+  BinaryTreeNode* root = new BinaryTreeNode;
+  root->value_ = rootValue;
+  root->left_ = nullptr;
+  root->right_ = nullptr;
+
+  int len = preEnd - preBegin;
+  if (len == 1) {
+    assert(*inBegin == rootValue);
+    return root;
+  }
+
+  int leftLen = 0;
+  for (; *(inBegin + leftLen) != rootValue && leftLen < len; ++leftLen) {
+  }
+  assert(leftLen < len);
+
+  if (leftLen > 0) {
+    root->left_ = buildTree(preBegin + 1,
+                            preBegin + 1 + leftLen,
+                            inBegin,
+                            inBegin + leftLen);
+  }
+  if (len - 1 - leftLen > 0) {
+    root->right_ = buildTree(preBegin + 1 + leftLen,
+                             preBegin + len,
+                             inBegin + leftLen + 1,
+                             inBegin + len);
+  }
+
+  return root;
+}
+
+BinaryTreeNode* buildTree(std::vector<int>& preorder,
+                          std::vector<int>& inorder) {
+  if (preorder.empty() || inorder.empty()
+      || preorder.size() != inorder.size()) {
+    return nullptr;
+  }
+  return buildTree(preorder.begin(),
+                   preorder.end(),
+                   inorder.begin(),
+                   inorder.end());
 }
 
 int main() {
@@ -49,5 +104,10 @@ int main() {
   int inorder[] = {4, 7, 2, 1, 5, 3, 8, 6};
   BinaryTreeNode* res =
       buildBinaryTree(preorder, inorder, sizeof(preorder)/sizeof(preorder[0]));
+
+  std::vector<int>
+      pre(preorder, preorder + sizeof(preorder)/sizeof(preorder[0]));
+  std::vector<int> in(inorder, inorder + sizeof(inorder)/sizeof(inorder[0]));
+  res = buildTree(pre, in);
   return 0;
 }
