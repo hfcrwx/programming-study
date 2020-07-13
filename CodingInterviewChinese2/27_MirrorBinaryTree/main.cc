@@ -24,20 +24,28 @@ void mirrorBinaryTree(BinaryTreeNode* root) {
   }
 }
 
-void mirrorBinaryTree2(BinaryTreeNode* root) {
+BinaryTreeNode* invertTree_recursive(BinaryTreeNode* root) {
   if (root == nullptr) {
-    return;
+    return nullptr;
   }
-  if (root->left_ == nullptr && root->right_ == nullptr) {
-    return;
+  BinaryTreeNode* tmp = invertTree_recursive(root->left_);
+  root->left_ = invertTree_recursive(root->right_);
+  root->right_ = tmp;
+
+  return root;
+}
+
+BinaryTreeNode* invertTree_non_recursive(BinaryTreeNode* root) {
+  if (root == nullptr) {
+    return nullptr;
   }
+
   std::stack<BinaryTreeNode*> nodes;
   nodes.push(root);
 
   while (!nodes.empty()) {
     BinaryTreeNode* node = nodes.top();
     nodes.pop();
-
     BinaryTreeNode* tmp = node->left_;
     node->left_ = node->right_;
     node->right_ = tmp;
@@ -45,11 +53,12 @@ void mirrorBinaryTree2(BinaryTreeNode* root) {
     if (node->right_ != nullptr) {
       nodes.push(node->right_);
     }
-
     if (node->left_ != nullptr) {
       nodes.push(node->left_);
     }
   }
+
+  return root;
 }
 
 int main() {
