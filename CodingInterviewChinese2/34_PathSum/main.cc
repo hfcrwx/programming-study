@@ -4,47 +4,42 @@
 
 #include <base/BinaryTree.h>
 #include <vector>
-#include <stdio.h>
 
 void pathSum(const BinaryTreeNode* root,
              int expectedSum,
-             int& currentSum,
-             std::vector<int>& path);
+             int currentSum,
+             std::vector<int>& path,
+             std::vector<std::vector<int>>& result);
 
-void pathSum(const BinaryTreeNode* root, int expectedSum) {
-  if (root == nullptr) {
-    return;
-  }
-
-  int currentSum = 0;
+std::vector<std::vector<int>> pathSum(const BinaryTreeNode* root,
+                                      int expectedSum) {
   std::vector<int> path;
-  pathSum(root, expectedSum, currentSum, path);
+  std::vector<std::vector<int>> result;
+  pathSum(root, expectedSum, 0, path, result);
+
+  return result;
 }
 
 void pathSum(const BinaryTreeNode* root,
              int expectedSum,
-             int& currentSum,
-             std::vector<int>& path) {
+             int currentSum,
+             std::vector<int>& path,
+             std::vector<std::vector<int>>& result) {
+  if (root == nullptr) {
+    return;
+  }
+
   currentSum += root->value_;
   path.push_back(root->value_);
 
   if (currentSum == expectedSum && root->left_ == nullptr
       && root->right_ == nullptr) {
-    for (std::vector<int>::iterator it = path.begin(); it != path.end(); ++it) {
-      printf("%d, ", *it);
-    }
-    printf("\n");
+    result.push_back(path);
   }
 
-  if (root->left_ != nullptr) {
-    pathSum(root->left_, expectedSum, currentSum, path);
-  }
+  pathSum(root->left_, expectedSum, currentSum, path, result);
+  pathSum(root->right_, expectedSum, currentSum, path, result);
 
-  if (root->right_ != nullptr) {
-    pathSum(root->right_, expectedSum, currentSum, path);
-  }
-
-  currentSum -= root->value_;
   path.pop_back();
 }
 
