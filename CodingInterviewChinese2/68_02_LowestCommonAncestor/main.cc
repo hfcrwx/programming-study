@@ -8,8 +8,8 @@ BinaryTreeNode* lowestCommonAncestor(BinaryTreeNode* root,
                                      BinaryTreeNode* q) {
   if (root == nullptr)
     return nullptr;
-  if (root == p || root == q)
-    return root;
+  if (p == root || q == root)
+    return root; // 同时查找两个结点
 
   BinaryTreeNode* left = lowestCommonAncestor(root->left_, p, q);
   BinaryTreeNode* right = lowestCommonAncestor(root->right_, p, q);
@@ -21,7 +21,7 @@ BinaryTreeNode* lowestCommonAncestor(BinaryTreeNode* root,
     return left;
   //如果left和right都不为空，说明这两个节点一个在root的左子树上一个在root的右子树上，
   //我们只需要返回root结点即可。
-  return root;
+  return root; //ok!后续的遍历实际已经没有意义
 }
 
 int main() {
