@@ -2,56 +2,52 @@
 // 题目：请实现两个函数，分别用来序列化和反序列化二叉树。
 
 #include <base/BinaryTree.h>
-#include <iostream>
+#include <sstream>
+#include <string>
 
-void serialize(const BinaryTreeNode* root, std::ostream& os) {
-  if (root = nullptr) {
-    os << "$,";
+void serialize(const BinaryTreeNode* root, std::ostringstream& os) {
+  if (root == nullptr) {
+    os << "# ";
     return;
   }
 
-  os << root->value_ << ',';
+  os << root->value_ << ' ';
   serialize(root->left_, os);
   serialize(root->right_, os);
 }
 
-bool readStream(std::istream& is, int* num) {
-  if (is.eof()) {
-    return false;
-  }
-
-  char buf[32] = {0};
-  int i = 0;
-  while (!is.eof()) {
-    is >> buf[i];
-    if (buf[i] == ',') {
-      buf[i] = '\0';
-      break;
-    }
-    ++i;
-  }
-
-  if (i > 0 && buf[0] != '$') {
-    *num = atoi(buf);
-    return true;
-  }
-
-  return false;
+std::string serialize(const BinaryTreeNode* root) {
+  std::ostringstream os;
+  serialize(root, os);
+  return os.str();
 }
 
-void deserialize(BinaryTreeNode** root, std::istream& is) {
-  int num;
-  if (readStream(is, &num)) {
-    *root = new BinaryTreeNode;
-    (*root)->value_ = num;
-    (*root)->left_ = nullptr;
-    (*root)->right_ = nullptr;
-
-    deserialize(&((*root)->left_), is);
-    deserialize(&((*root)->right_), is);
+BinaryTreeNode* deserialize(std::istringstream& is) {
+  std::string val;
+  is >> val;
+  if (val == "#" || val.empty()) {
+    return nullptr;
   }
+
+  BinaryTreeNode* node = new BinaryTreeNode;
+  node->value_ = stoi(val);
+  node->left_ = deserialize(is);
+  node->right_ = deserialize(is);
+
+  return node;
 }
 
-int main() {
+BinaryTreeNode* deserialize(const std::string& data) {
+  std::istringstream is(data);
+  return deserialize(is);
+}
+
+int main(int argc, char** argv) {
+  std::string s = "1 2 3 # # 4 5 #";
+  if (argc > 1) {
+    s = argv[1];
+  }
+  std::string str = serialize(deserialize(s));
+
   return 0;
 }
