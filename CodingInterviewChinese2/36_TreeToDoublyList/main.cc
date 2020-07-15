@@ -37,51 +37,7 @@ BinaryTreeNode* treeToDoublyList(BinaryTreeNode* root) {
   return head;
 }
 
-class Solution {
- public:
-  BinaryTreeNode* treeToDoublyList(BinaryTreeNode* root) {
-    if (root == nullptr) {
-      return nullptr;
-    }
-    BinaryTreeNode* head, * tail;
-    treeToDoublyList(root, head, tail);
-    head->left_ = tail;
-    tail->right_ = head;
-    return head;
-  }
-
-  void treeToDoublyList(BinaryTreeNode* r,
-                        BinaryTreeNode*& head,
-                        BinaryTreeNode*& tail) {
-    if (r == nullptr) {
-      return;
-    }
-
-    BinaryTreeNode* lhead = nullptr;
-    BinaryTreeNode* ltail = nullptr;
-    if (r->left_ != nullptr) {
-      treeToDoublyList(r->left_, lhead, ltail);
-      head = lhead;
-
-      r->left_ = ltail;
-      ltail->right_ = r;
-    } else {
-      head = r;
-    }
-
-    BinaryTreeNode* rhead = nullptr;
-    BinaryTreeNode* rtail = nullptr;
-    if (r->right_ != nullptr) {
-      treeToDoublyList(r->right_, rhead, rtail);
-      tail = rtail;
-
-      r->right_ = rhead;
-      rhead->left_ = r;
-    } else {
-      tail = r;
-    }
-  }
-};
+#include <assert.h>
 
 class Solution2 {
  public:
@@ -89,45 +45,41 @@ class Solution2 {
     if (root == nullptr) {
       return nullptr;
     }
-    BinaryTreeNode* head, * tail;
+    BinaryTreeNode* head = nullptr;
+    BinaryTreeNode* tail = nullptr;
     treeToDoublyList(root, &head, &tail);
     head->left_ = tail;
     tail->right_ = head;
     return head;
   }
 
-  void treeToDoublyList(BinaryTreeNode* r,
+  void treeToDoublyList(BinaryTreeNode* root,
                         BinaryTreeNode** head,
-                        BinaryTreeNode** tail)
-  {
-    if (r == nullptr) {
-      return;
-    }
+                        BinaryTreeNode** tail) {
+    assert(root != nullptr && head != nullptr && tail != nullptr);
 
     BinaryTreeNode* lhead = nullptr;
     BinaryTreeNode* ltail = nullptr;
-    if (r->left_ != nullptr) {
-      treeToDoublyList(r->left_, &lhead, &ltail);
-      *head = lhead;
+    if (root->left_ != nullptr) {
+      treeToDoublyList(root->left_, &lhead, &ltail);
+      root->left_ = ltail;
+      ltail->right_ = root;
 
-      r->left_ = ltail;
-      ltail->right_ = r;
-    }
-    else {
-      *head = r;
+      *head = lhead;
+    } else {
+      *head = root;
     }
 
     BinaryTreeNode* rhead = nullptr;
     BinaryTreeNode* rtail = nullptr;
-    if (r->right_ != nullptr) {
-      treeToDoublyList(r->right_, &rhead, &rtail);
-      *tail = rtail;
+    if (root->right_ != nullptr) {
+      treeToDoublyList(root->right_, &rhead, &rtail);
+      root->right_ = rhead;
+      rhead->left_ = root;
 
-      r->right_ = rhead;
-      rhead->left_ = r;
-    }
-    else {
-      *tail = r;
+      *tail = rtail;
+    } else {
+      *tail = root;
     }
   }
 };

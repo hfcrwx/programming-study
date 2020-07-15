@@ -4,42 +4,30 @@
 
 #include <stddef.h>
 
-bool verifyPostorder(const int* seq, size_t len) {
-  if (seq == nullptr || len == 0) {
+bool verifyPostorder(const int* postorder, int len) {
+  if (postorder == nullptr || len <= 0) {
     return false;
   }
 
-  int root = seq[len - 1];
-  size_t i = 0;
+  int rootValue = postorder[len - 1];
+
+  int i = 0;
   for (; i < len - 1; ++i) {
-    if (seq[i] > root) {
+    if (postorder[i] > rootValue) {
       break;
     }
   }
 
-  for (size_t j = i + 1; j < len - 1; ++j) {
-    if (seq[j] < root) {
+  for (int j = i + 1; j < len - 1; ++j) {
+    if (postorder[j] < rootValue) {
       return false;
     }
   }
 
-  bool left = true;
-  if (i > 0) {
-    left = verifyPostorder(seq, i);
-  }
-  if (!left) {
-    return false;
-  }
+  bool left = verifyPostorder(postorder, i);
+  bool right = verifyPostorder(postorder + i, len - 1 - i);
 
-  bool right = true;
-  if (i < len - 1) {
-    right = verifyPostorder(seq + i, len - 1 - i);
-  }
-  if (!right) {
-    return false;
-  }
-
-  return true;
+  return left && right;
 }
 
 int main() {
