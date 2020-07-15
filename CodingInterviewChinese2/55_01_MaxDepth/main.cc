@@ -10,7 +10,7 @@ int maxDepth(const BinaryTreeNode* root) {
   }
 
   int left = maxDepth(root->left_);
-  int right =  maxDepth(root->right_);
+  int right = maxDepth(root->right_);
   return (left > right ? left : right) + 1;
 }
 

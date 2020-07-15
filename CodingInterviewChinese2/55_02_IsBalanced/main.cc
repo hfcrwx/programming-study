@@ -14,19 +14,22 @@ bool isBalanced(const BinaryTreeNode* root, int* depth) {
     return true;
   }
 
-  int left = 0;
-  int right = 0;
-  if (isBalanced(root->left_, &left) && isBalanced(root->right_, &right)) {
-    if (abs(left - right) <= 1) {
-      *depth = (left > right ? left : right) + 1;
-      return true;
-    }
+  int leftDepth = 0;
+  int rightDepth = 0;
+  bool isLeftBalanced = isBalanced(root->left_, &leftDepth);
+  bool isRightBalanced = isBalanced(root->right_, &rightDepth);
+  if (isLeftBalanced && isRightBalanced && abs(leftDepth - rightDepth) <= 1) {
+    *depth = (leftDepth > rightDepth ? leftDepth : rightDepth) + 1;
+    return true;
   }
 
   return false;
 }
 
 bool isBalanced(const BinaryTreeNode* root) {
+  if (root == nullptr) {
+    return true;
+  }
   int depth = 0;
   return isBalanced(root, &depth);
 }
