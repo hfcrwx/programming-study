@@ -18,6 +18,29 @@ BinaryTreeNode* lowestCommonAncestor(BinaryTreeNode* root,
   return root;
 }
 
+class Solution {
+ public:
+  BinaryTreeNode* lowestCommonAncestor(BinaryTreeNode* root,
+                                       BinaryTreeNode* p,
+                                       BinaryTreeNode* q) {
+
+    while (root) {
+      if (root->value_ < p->value_ && root->value_ < q->value_) {
+        root = root->right_;
+        continue;
+      }
+      if (root->value_ > p->value_ && root->value_ > q->value_) {
+        root = root->left_;
+        continue;
+      }
+      return root;
+
+    }
+    
+    return nullptr;
+  }
+};
+
 int main() {
   return 0;
 }

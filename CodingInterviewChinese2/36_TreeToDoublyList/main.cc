@@ -39,7 +39,7 @@ BinaryTreeNode* treeToDoublyList(BinaryTreeNode* root) {
 
 #include <assert.h>
 
-class Solution2 {
+class Solution {
  public:
   BinaryTreeNode* treeToDoublyList(BinaryTreeNode* root) {
     if (root == nullptr) {

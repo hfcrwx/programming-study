@@ -2,29 +2,29 @@
 // 题目：给定一棵二叉搜索树，请找出其中第k大的结点。
 
 #include <base/BinaryTree.h>
-#include <inttypes.h>
+#include <assert.h>
 
-const BinaryTreeNode* kthLargest(const BinaryTreeNode* root, uint32_t k) {
-  if (root == nullptr || k == 0) {
+const BinaryTreeNode* kthLargestCore(const BinaryTreeNode* root, int& k) {
+  if (root == nullptr || k <= 0) {
     return nullptr;
   }
 
-  const BinaryTreeNode* target = nullptr;
-
-  if (root->right_ != nullptr) {
-    target = kthLargest(root->right_, k);
-  }
-  if (target == nullptr) {
-    --k;
-    if (k == 0) {
-      target = root;
-    }
-  }
-  if (target == nullptr && root->left_ != nullptr) {
-    target = kthLargest(root->left_, k);
+  const BinaryTreeNode* target = kthLargestCore(root->right_, k);
+  if (target != nullptr) {
+    return target;
   }
 
-  return target;
+  --k;
+  if (k == 0) {
+    return root;
+  }
+
+  return kthLargestCore(root->left_, k);
+}
+
+int kthLargest(const BinaryTreeNode* root, int k) {
+  assert(root != nullptr && k > 0);
+  return kthLargestCore(root, k)->value_;
 }
 
 int main() {
