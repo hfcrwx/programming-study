@@ -2,10 +2,13 @@
 // 题目：给定一个二叉树, 找到该树中两个指定结点的最近公共祖先。
 
 #include <base/BinaryTree.h>
+#include <assert.h>
 
 BinaryTreeNode* lowestCommonAncestor(BinaryTreeNode* root,
                                      BinaryTreeNode* p,
                                      BinaryTreeNode* q) {
+  assert(p != nullptr && q != nullptr);
+  
   if (root == nullptr)
     return nullptr;
   if (p == root || q == root)

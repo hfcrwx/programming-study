@@ -7,14 +7,18 @@
 BinaryTreeNode* lowestCommonAncestor(BinaryTreeNode* root,
                                      BinaryTreeNode* p,
                                      BinaryTreeNode* q) {
-  assert(root != nullptr && p != nullptr && q != nullptr);
+  assert(p != nullptr && q != nullptr);
 
+  if (root == nullptr) {
+    return nullptr;
+  }
   if (root->value_ < p->value_ && root->value_ < q->value_) {
     return lowestCommonAncestor(root->right_, p, q);
   }
   if (root->value_ > p->value_ && root->value_ > q->value_) {
     return lowestCommonAncestor(root->left_, p, q);
   }
+
   return root;
 }
 
@@ -23,8 +27,9 @@ class Solution {
   BinaryTreeNode* lowestCommonAncestor(BinaryTreeNode* root,
                                        BinaryTreeNode* p,
                                        BinaryTreeNode* q) {
+    assert(p != nullptr && q != nullptr);
 
-    while (root) {
+    while (root != nullptr) {
       if (root->value_ < p->value_ && root->value_ < q->value_) {
         root = root->right_;
         continue;
@@ -34,9 +39,8 @@ class Solution {
         continue;
       }
       return root;
-
     }
-    
+
     return nullptr;
   }
 };
