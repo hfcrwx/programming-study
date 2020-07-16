@@ -34,7 +34,7 @@ bool validateStackSequences(const int* pushed,
     ++pop;
   }
 
-  return false;
+  return true;
 }
 
 int main() {
