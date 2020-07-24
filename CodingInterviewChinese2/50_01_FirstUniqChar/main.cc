@@ -9,17 +9,27 @@ char firstUniqChar(const char* str) {
 
   int hash[256];
   bzero(hash, sizeof(hash));
-  const char* p = str;
-  while (*p != '\0') {
-    ++hash[*(unsigned char*)(p++)];
+//  const char* p = str;
+//  while (*p != '\0') {
+//    ++hash[*(const unsigned char*)(p++)];
+//  }
+
+//  p = str;
+//  while (*p != '\0') {
+//    if (hash[*(const unsigned char*)p] == 1) {
+//      return *p;
+//    }
+//    ++p;
+//  }
+
+  for (const char* p = str; *p != '\0'; ++p) {
+    ++hash[*(const unsigned char*) p];
   }
 
-  p = str;
-  while (*p != '\0') {
-    if (hash[*(unsigned char*)p] == 1) {
+  for (const char* p = str; *p != '\0'; ++p) {
+    if (hash[*(const unsigned char*) p] == 1) {
       return *p;
     }
-    ++p;
   }
 
   return '\0';
