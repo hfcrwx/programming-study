@@ -22,8 +22,9 @@ uint32_t climbStairs(uint32_t n) {
   for (int i = 4; i <= n; ++i) {
     f1 = f2;
     f2 = f3;
-    f3 = f1 + f2;
+    f3 = f2 + f1;
   }
+
   return f3;
 }
 

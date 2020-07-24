@@ -5,19 +5,18 @@
 // 时间复杂度O(n)
 // 空间复杂度O(1)
 
+#include <assert.h>
 #include <stddef.h>
 
 bool findNumberIn2DArray(const int** matrix,
-                         size_t row,
-                         size_t column,
+                         size_t rows,
+                         size_t cols,
                          int target) {
-  if (matrix == nullptr || row == 0 || column == 0) {
-    return false;
-  }
+  assert(matrix != nullptr && rows != 0 && cols != 0);
 
   size_t i = 0;
-  size_t j = column - 1;
-  while (i <= row - 1 && j >= 0) {
+  size_t j = cols - 1;
+  while (i <= rows - 1 && j >= 0) {
     int val = matrix[i][j];
     if (val == target) {
       return true;

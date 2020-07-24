@@ -27,7 +27,7 @@ int findMin(const int* arr, size_t len) {
     }
   }
 
-  return arr[left];
+  return arr[left]; //left == right
 }
 
 int main() {

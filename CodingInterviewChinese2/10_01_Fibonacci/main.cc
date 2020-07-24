@@ -27,7 +27,7 @@ uint64_t fabonacci2(uint32_t i) {
   for (int k = 3; k <= i; ++k) {
     f0 = f1;
     f1 = f2;
-    f2 = f0 + f1;
+    f2 = f1 + f0;
   }
 
   return f2;
@@ -35,6 +35,6 @@ uint64_t fabonacci2(uint32_t i) {
 
 int main() {
   uint64_t res = fabonacci(10);
-  uint64_t res2 = fabonacci2(10);
+  uint64_t res2 = fabonacci2(100);
   return 0;
 }

@@ -61,7 +61,7 @@
 //  return false;
 //}
 
-bool exist(char* matrix,
+bool exist(char* board,
            size_t rows,
            size_t cols,
            const char* word,
@@ -72,17 +72,18 @@ bool exist(char* matrix,
     return true;
   }
   if (0 <= i && i < rows && 0 <= j && j < cols
-      && matrix[i*cols + j] == word[idx]) {
-    matrix[i*cols + j] = '\0';
+      && board[i*cols + j] == word[idx]) {
+    board[i*cols + j] = '\0';
 
-    bool has = exist(matrix, rows, cols, word, i, j - 1, idx + 1)
-        || exist(matrix, rows, cols, word, i, j + 1, idx + 1)
-        || exist(matrix, rows, cols, word, i - 1, j, idx + 1)
-        || exist(matrix, rows, cols, word, i + 1, j, idx + 1);
+    bool has = exist(board, rows, cols, word, i, j - 1, idx + 1)
+        || exist(board, rows, cols, word, i, j + 1, idx + 1)
+        || exist(board, rows, cols, word, i - 1, j, idx + 1)
+        || exist(board, rows, cols, word, i + 1, j, idx + 1);
+
     if (has) {
       return true;
     } else {
-      matrix[i*cols + j] = word[idx];
+      board[i*cols + j] = word[idx];
       return false;
     }
   } else {
@@ -90,12 +91,12 @@ bool exist(char* matrix,
   }
 }
 
-bool exist(char* matrix, size_t rows, size_t cols, const char* str) {
-  assert(matrix != nullptr && str != nullptr);
+bool exist(char* board, size_t rows, size_t cols, const char* word) {
+  assert(board != nullptr && word != nullptr);
 
   for (size_t i = 0; i < rows; ++i) {
     for (size_t j = 0; j < cols; ++j) {
-      if (exist(matrix, rows, cols, str, i, j, 0)) {
+      if (exist(board, rows, cols, word, i, j, 0)) {
         return true;
       }
     }
