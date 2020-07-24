@@ -4,10 +4,11 @@
 // 则输出"student. a am I"。
 
 #include <base/StringUtil.h>
-#include <assert.h>
 
 char* reverseWords(char* str) {
-  assert(str != nullptr);
+  if (str == nullptr) {
+    return nullptr;
+  }
 
   char* begin = str;
   char* end = str;
