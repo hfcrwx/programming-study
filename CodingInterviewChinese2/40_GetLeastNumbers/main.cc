@@ -12,7 +12,7 @@ void getLeastNumbers(const std::vector<int>& data,
                      std::multiset<int, std::greater<int>>& result) {
   result.clear();
 
-  if (data.empty() || k == 0) {
+  if (k == 0) {
     return;
   }
 
@@ -35,7 +35,7 @@ class Solution {
  public:
   //STL using qsort to solve this problem
   std::vector<int> getLeastNumbers_buildin(std::vector<int>& nums, int k) {
-    std::nth_element(nums.begin(),nums.begin() + k - 1,nums.end());
+    std::nth_element(nums.begin(), nums.begin() + k - 1, nums.end());
     return std::vector<int>(nums.begin(), nums.begin() + k);
   }
 
@@ -44,7 +44,7 @@ class Solution {
     int pivot = nums[left];
     int l = left + 1, r = right;
     while (l <= r) {
-      if (nums[l] > pivot && nums[r] < pivot){
+      if (nums[l] > pivot && nums[r] < pivot) {
         std::swap(nums[l++], nums[r--]);
       }
       if (nums[l] <= pivot) l++;
@@ -54,16 +54,24 @@ class Solution {
     return r;
   }
 
+  void quickSort(std::vector<int>& nums, int left, int right) {
+    if (left >= right) {
+      return;
+    }
+    int pos = partition(nums, left, right);
+    quickSort(nums, left, pos - 1);
+    quickSort(nums, pos + 1, right);
+  }
+
   std::vector<int> getLeastNumbers_qsort(std::vector<int>& nums, int k) {
     int left = 0, right = nums.size() - 1;
     while (true) {
       int pos = partition(nums, left, right);
-      if (pos == k - 1){
+      if (pos == k - 1) {
         return std::vector<int>(nums.begin(), nums.begin() + k);
-      }
-      if (pos > k - 1) {
+      } else if (pos > k - 1) {
         right = pos - 1;
-      }else{
+      } else {
         left = pos + 1;
       }
     }
