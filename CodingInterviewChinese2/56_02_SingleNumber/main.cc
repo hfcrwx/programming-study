@@ -28,6 +28,35 @@ int singleNumber(const int* nums, int size) {
   return result;
 }
 
+#include <vector>
+
+class Solution {
+ public:
+  int singleNumber(std::vector<int>& nums) {
+    int bits[32] = {0};
+    for (std::vector<int>::size_type i = 0; i != nums.size(); ++i) {
+      int num = nums[i];
+      for (int j = 0; j < 32 && num != 0; ++j) {
+        if ((num & 1) == 1) {
+          ++bits[j];
+        }
+        num >>= 1;
+      }
+    }
+
+    int result = bits[31]%3;
+    for (int i = 30; i >= 0; --i) {
+      result <<= 1;
+      result += bits[i]%3;
+    }
+
+    return result;
+  }
+};
+
 int main() {
+  Solution sln;
+  std::vector<int> t{3,4,3,3};
+  int i = sln.singleNumber(t);
   return 0;
 }
