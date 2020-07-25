@@ -12,27 +12,29 @@
 // 时间复杂度O(n)
 // 空间复杂度O(1)
 
+#include <algorithm>
 #include <stddef.h>
 
-int findRepeatNumber(int* arr, size_t len) {
-  if (arr == nullptr || len <= 2) {
+int findRepeatNumber(int* nums, size_t len) {
+  if (nums == nullptr || len < 2) {
     return -1;
   }
 
   for (int i = 0; i < len; ++i) {
-    if (arr[i] < 0 || arr[i] > len - 1) {
+    if (nums[i] < 0 || nums[i] >= len) {
       return -1;
     }
   }
 
   for (int i = 0; i < len; ++i) {
-    while (arr[i] != i) {
-      if (arr[i] == arr[arr[i]]) {
-        return arr[i];
+    while (nums[i] != i) {
+      if (nums[i] == nums[nums[i]]) {
+        return nums[i];
       }
-      int tmp = arr[i];
-      arr[i] = arr[tmp];
-      arr[tmp] = tmp;
+      std::swap(nums[i], nums[nums[i]]);
+//      int tmp = nums[i];
+//      nums[i] = nums[tmp];
+//      nums[tmp] = tmp;
     }
   }
 

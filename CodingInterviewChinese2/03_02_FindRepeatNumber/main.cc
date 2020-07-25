@@ -22,20 +22,27 @@ uint32_t findRepeatNumber(const uint32_t* arr, uint32_t len) {
     return 0;
   }
 
-  uint32_t begin = 1; //1
-  uint32_t end = len - 1; //n
-  while (begin < end) {
-    uint32_t middle = begin + ((end - begin) >> 1u);
-    uint32_t count = countInRange(arr, len, begin, middle);
+  uint32_t left = 1; //1
+  uint32_t right = len - 1; //n
+  while (left <= right) {
+    uint32_t mid = left + ((right - left) >> 1u);
+    uint32_t count = countInRange(arr, len, left, mid);
 
-    if (count > middle - begin + 1) {
-      end = middle;
+    if (left == right) {
+      if (count > 1) {
+        return left;
+      } else {
+        break;
+      }
+    }
+    if (count > mid - left + 1) {
+      right = mid;
     } else {
-      begin = middle + 1;
+      left = mid + 1;
     }
   }
 
-  return begin;
+  return -1;
 }
 
 uint32_t countInRange(const uint32_t* arr,
