@@ -9,9 +9,8 @@ int missingNumber(const int* nums, int size) {
 
   int low = 0;
   int high = size - 1;
-  int mid;
   while (low <= high) {
-    mid = (low + high)/2;
+    int mid = low + (high - low)/2;
     if (nums[mid] == mid) {
       low = mid + 1;
     } else {

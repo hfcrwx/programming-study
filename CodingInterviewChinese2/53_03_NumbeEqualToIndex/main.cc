@@ -9,15 +9,14 @@ int numberEqualToIndex(const int* nums, int size) {
 
   int low = 0;
   int high = size - 1;
-  int middle;
   while (low <= high) {
-    middle = (low + high)/2;
-    if (nums[middle] < middle) {
-      high = middle + 1;
-    } else if (nums[middle] > middle) {
-      low = middle - 1;
+    int mid = low + (high - low)/2;
+    if (nums[mid] < mid) {
+      low = mid + 1;
+    } else if (nums[mid] > mid) {
+      high = mid - 1;
     } else {
-      return middle;
+      return mid;
     }
   }
 

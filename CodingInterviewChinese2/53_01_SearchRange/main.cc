@@ -6,7 +6,7 @@
 
 int binarySearch(const int* nums, int low, int high, int target) {
   while (low <= high) {
-    int mid = (low + high)/2;
+    int mid = low + (high - low)/2;
     if (nums[mid] < target) {
       low = mid + 1;
     } else if (nums[mid] > target) {

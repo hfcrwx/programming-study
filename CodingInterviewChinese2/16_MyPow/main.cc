@@ -6,19 +6,16 @@
 #include <stdint.h>
 
 double myPow(double x, int n) {
-  bool sign = false;
-  unsigned int exp = n;
-  if (n < 0) {
-    exp = -n;
-    sign = true;
-  }
+  bool sign = n < 0;
+  unsigned int exp = n < 0 ? -n : n;
+
   double result = 1.0;
   while (exp > 0) {
-    if ((exp & 1) == 1) {
+    if ((exp & 1u) == 1) {
       result *= x;
     }
     x *= x;
-    exp >>= 1;
+    exp >>= 1u;
   }
 
   return sign ? 1/result : result;
@@ -34,7 +31,7 @@ bool equal(double v1, double v2) {
 double powerWithUnsignedExp(double base, uint32_t exp) {
   double res = 1;
   for (uint32_t i = 0; i < exp; ++i) {
-    res *= res;
+    res *= base;
   }
   return res;
 }
@@ -45,9 +42,9 @@ double powerWithUnsignedExp_Recusive(double base, uint32_t exp) {
   } else if (exp == 1) {
     return base;
   } else {
-    double res = powerWithUnsignedExp_Recusive(base, exp >> 1);
+    double res = powerWithUnsignedExp_Recusive(base, exp >> 1u);
     res *= res;
-    if ((exp & 0x1) == 1) {
+    if ((exp & 1u) == 1) {
       res *= base;
     }
     return res;

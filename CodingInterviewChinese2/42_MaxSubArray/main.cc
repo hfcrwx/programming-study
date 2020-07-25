@@ -19,9 +19,7 @@ int maxSubArray(const int* nums, size_t size) {
     if (sum > m) {
       m = sum;
     }
-  }
-
-  return m;
+  }  return m;
 }
 
 int main() {

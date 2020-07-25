@@ -8,27 +8,27 @@
 uint32_t numberOf1Bits(uint32_t n) {
   uint32_t count = 0;
   while (n > 0) {
-    if ((n & 1) == 1) {
+    if ((n & 1u) == 1) {
       ++count;
     }
-    n >>= 1;
+    n >>= 1u;
   }
   return count;
 }
 
-uint32_t numberOf1Bits_(uint32_t n) {
+uint32_t numberOf1Bits2(uint32_t n) {
   uint32_t count = 0;
   uint32_t flag = 1;
   while (flag > 0) {
     if ((n & flag) == 1) {
       ++count;
     }
-    flag <<= 1;
+    flag <<= 1u;
   }
   return count;
 }
 
-uint32_t numberOf1Bits__(uint32_t n) {
+uint32_t numberOf1Bits3(uint32_t n) {
   uint32_t count = 0;
   while (n > 0) {
     ++count;
@@ -38,11 +38,11 @@ uint32_t numberOf1Bits__(uint32_t n) {
 }
 
 int main() {
-  int x = 0x80000000 >> 1;
+  int x = 0x80000000 >> 1u;
   int y = 0x40000000;
 
-  assert(numberOf1Bits(0x7FFFFFFF)==31);
-  assert(numberOf1Bits_(0x7FFFFFFF)==31);
-  assert(numberOf1Bits__(0x7FFFFFFF)==31);
+  assert(numberOf1Bits(0x7FFFFFFF) == 31);
+  assert(numberOf1Bits2(0x7FFFFFFF) == 31);
+  assert(numberOf1Bits3(0x7FFFFFFF) == 31);
   return 0;
 }

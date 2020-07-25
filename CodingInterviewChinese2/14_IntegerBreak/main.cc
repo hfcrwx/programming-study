@@ -9,7 +9,7 @@
 
 uint32_t integerBreakCore(uint32_t n) {
   if (n < 4) {
-    return n;
+    return n; //not cut
   } else {
     uint32_t max = n - 1;
     for (uint32_t i = 1; i <= n/2; ++i) {
