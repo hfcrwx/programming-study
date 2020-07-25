@@ -1,12 +1,13 @@
 // 面试题39：数组中出现次数超过一半的数字
-// 题目：数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。例如输入一个长度为9的数组{1
-// , 2, 3, 2, 2, 2, 5, 4, 2}。由于数字2在数组中出现了5次，超过数组长度的一半，因此输出2。
+// 题目：数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。例如输入一个长度为9的数组
+// {1, 2, 3, 2, 2, 2, 5, 4, 2}。由于数字2在数组中出现了5次，超过数组长度的一半，因此输出2。
 
 #include <assert.h>
 #include <stddef.h>
+#include <stdlib.h>
 
 int majorityElement(const int* nums, size_t len) {
-  assert(nums != nullptr && len != 0);
+  assert(nums != nullptr);
 
   int majority;
   size_t count = 0;
@@ -22,7 +23,7 @@ int majorityElement(const int* nums, size_t len) {
     }
   }
 
-  return majority;
+  abort();
 }
 
 int main() {

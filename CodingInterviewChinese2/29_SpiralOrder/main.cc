@@ -18,11 +18,11 @@ void spiralOrder(const int** matrix, size_t rows, size_t cols) {
   if (matrix == nullptr || rows == 0 || cols == 0) {
     return;
   }
-  
+
   size_t min = rows < cols ? rows : cols;
-  size_t startMax = (min + 1) >> 1u;
-  for (size_t start = 0; start < startMax; ++start) {
-    printCircle(matrix, rows, cols, start);
+  size_t numCircle = (min + 1) >> 1u;
+  for (size_t i = 0; i < numCircle; ++i) {
+    printCircle(matrix, rows, cols, i);
   }
 }
 

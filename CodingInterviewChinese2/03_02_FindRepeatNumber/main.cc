@@ -13,12 +13,12 @@
 
 #include <inttypes.h>
 
-uint32_t countInRange(const uint32_t* arr,
+uint32_t countInRange(const uint32_t* nums,
                       uint32_t len,
                       uint32_t begin,
                       uint32_t end);
-uint32_t findRepeatNumber(const uint32_t* arr, uint32_t len) {
-  if (arr == nullptr || len < 2) {
+int32_t findRepeatNumber(const uint32_t* nums, uint32_t len) {
+  if (nums == nullptr || len < 2) {
     return 0;
   }
 
@@ -26,7 +26,7 @@ uint32_t findRepeatNumber(const uint32_t* arr, uint32_t len) {
   uint32_t right = len - 1; //n
   while (left <= right) {
     uint32_t mid = left + ((right - left) >> 1u);
-    uint32_t count = countInRange(arr, len, left, mid);
+    uint32_t count = countInRange(nums, len, left, mid);
 
     if (left == right) {
       if (count > 1) {
@@ -45,13 +45,13 @@ uint32_t findRepeatNumber(const uint32_t* arr, uint32_t len) {
   return -1;
 }
 
-uint32_t countInRange(const uint32_t* arr,
+uint32_t countInRange(const uint32_t* nums,
                       uint32_t len,
                       uint32_t begin,
                       uint32_t end) {
   uint32_t count = 0;
   for (int i = 0; i < len; ++i) {
-    if (arr[i] >= begin && arr[i] <= end) {
+    if (nums[i] >= begin && nums[i] <= end) {
       ++count;
     }
   }

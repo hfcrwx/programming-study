@@ -4,30 +4,27 @@
 
 #include <assert.h>
 
-bool isOne(int num, int pos) {
-  num = num >> pos;
-  return (num & 1) == 1;
-}
-
 void singleNumbers(const int* nums, int size, int* num1, int* num2) {
-  assert(nums != nullptr && size >= 4 && num1 != nullptr && num2 != nullptr);
+  assert(nums != nullptr && (size & 1) == 0 && size >= 4 && num1 != nullptr
+             && num2 != nullptr);
 
   int xors = 0;
   for (int i = 0; i < size; ++i) {
     xors ^= nums[i];
   }
+  assert(xors != 0);
 
   int pos = 0;
-  while ((xors & 1) != 1 && pos < 32) {
+  while ((xors & 1) == 0/* && pos < 32*/) {
     xors >> 1;
     ++pos;
   }
-  assert(pos != 32);
+//  assert(pos != 32);
 
   *num1 = 0;
   *num2 = 0;
   for (int i = 0; i < size; ++i) {
-    if (isOne(nums[i], pos)) {
+    if (((nums[i] >> pos) & 1) == 1) {
       *num1 ^= nums[i];
     } else {
       *num2 ^= nums[i];

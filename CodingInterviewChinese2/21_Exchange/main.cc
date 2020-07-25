@@ -31,7 +31,5 @@ void exchange(int* nums, size_t len) {
 }
 
 int main() {
-  size_t x = 0;
-  --x;
   return 0;
 }
