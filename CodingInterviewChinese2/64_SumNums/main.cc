@@ -10,6 +10,11 @@ class Solution {
     assert(n > 0);
     return n == 1 ? 1 : sumNums(n - 1) + n;
   }
+
+  int sumNums2(int n) {
+    n && (n += sumNums(n - 1));
+    return n;
+  }
 };
 
 int main() {
