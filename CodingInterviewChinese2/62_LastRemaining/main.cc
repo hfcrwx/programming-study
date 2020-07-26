@@ -10,9 +10,18 @@ class Solution {
     assert(n > 0 && m > 0);
     int f = 0;
     for (int i = 2; i <= n; ++i) {
-      f = (f + m)%n;
+      f = (f + m)%i;
     }
     return f;
+  }
+
+  int lastRemaining2(int n, int m) {
+    assert(n > 0 && m > 0);
+    if (n == 1) {
+      return 0;
+    } else {
+      return (lastRemaining(n - 1, m) + m)%n;
+    }
   }
 };
 
