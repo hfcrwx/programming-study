@@ -10,7 +10,7 @@
 
 void reverseLeftWords(char* str, size_t n) {
   assert(str != nullptr);
-  assert(n < strlen(str));
+  assert(0 < n && n < strlen(str));
 
   char* begin1 = str;
   char* end1 = str + n - 1;

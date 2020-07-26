@@ -9,16 +9,16 @@ std::vector<int> constructArr(const std::vector<int>& a) {
   assert(!a.empty());
 
   std::vector<int> b;
-  int sz = a.size();
-  b.reserve(sz);
+  int n = a.size();
+  b.reserve(n);
 
   b[0] = 1;
-  for (int i = 1; i < sz; ++i) {
+  for (int i = 1; i < n; ++i) {
     b[i] = b[i-1] * a[i-1];
   }
 
   int tmp = 1;
-  for (int i = sz-2; i >=0; --i) {
+  for (int i = n-2; i >=0; --i) {
     tmp *= a[i+1];
     b[i] *= tmp;
   }

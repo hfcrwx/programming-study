@@ -9,7 +9,9 @@ class Solution {
  public:
   std::vector<std::vector<int>> findContinuousSequence(int target) {
     std::vector<std::vector<int>> result;
-    for (int left = 1, right = 2; left < right;) {
+    int left = 1;
+    int right = 2;
+    while (left < right) {
       int sum = (right - left + 1)*(right + left)/2;
       if (sum == target) {
         std::vector<int> v;
