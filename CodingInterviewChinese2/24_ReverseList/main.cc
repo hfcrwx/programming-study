@@ -23,11 +23,10 @@ ListNode* reverseList_iteratively(ListNode* head) {
   return prev;
 }
 
+#include <assert.h>
+
 ListNode* reverseList_recursively(ListNode* head) {
-//  assert(head != nullptr);
-  if (head == nullptr) {
-    return nullptr;
-  }
+  assert(head != nullptr);
 
   if (head->next_ == nullptr) {
     return head;
