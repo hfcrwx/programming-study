@@ -25,6 +25,17 @@ void reversePrint_recursively(const ListNode* head) {
   }
 }
 
+#include <assert.h>
+
+void reversePrint_recursively2(const ListNode* head) {
+  assert(head != nullptr);
+
+  if (head->next_ != nullptr) {
+    reversePrint_recursively2(head->next_);
+  }
+  printf("%d ", head->value_);
+}
+
 int main() {
   ListNode* node1 = createListNode(1);
   ListNode* node2 = createListNode(2);
@@ -41,6 +52,8 @@ int main() {
   reversePrint_iteratively(node1);
   printf("\n");
   reversePrint_recursively(node1);
+  printf("\n");
+  reversePrint_recursively2(node1);
 
   destroyList(node1);
 
