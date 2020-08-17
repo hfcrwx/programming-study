@@ -46,6 +46,7 @@ void connectRandomNodes(Node* head) {
   Node* node = head;
   while (node != nullptr) {
     Node* cloned = node->next_;
+    assert(cloned != nullptr);
     if (node->random_ != nullptr) {
       cloned->random_ = node->random_->next_;
     }

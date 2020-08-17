@@ -34,29 +34,29 @@ void deleteNode(ListNode** head, ListNode* target) {
 //203
 class Solution {
  public:
-  ListNode* removeElements1(ListNode* head, int val) {
-    if (head == nullptr) {
-      return nullptr;
-    }
-
-    ListNode* prev = head;
-    while (prev->next_ != nullptr) {
-      ListNode* curr = prev->next_;
-      if (curr->value_ == val) {
-        prev->next_ = curr->next_;
-        delete curr;
-      } else {
-        prev = prev->next_;
-      }
-    }
-    if (head->value_ == val) {
-      ListNode* next = head->next_;
-      delete head;
-      return next;
-    } else {
-      return head;
-    }
-  }
+//  ListNode* removeElements1(ListNode* head, int val) {
+//    if (head == nullptr) {
+//      return nullptr;
+//    }
+//
+//    ListNode* prev = head;
+//    while (prev->next_ != nullptr) {
+//      ListNode* curr = prev->next_;
+//      if (curr->value_ == val) {
+//        prev->next_ = curr->next_;
+//        delete curr;
+//      } else {
+//        prev = prev->next_;
+//      }
+//    }
+//    if (head->value_ == val) {
+//      ListNode* next = head->next_;
+//      delete head;
+//      return next;
+//    } else {
+//      return head;
+//    }
+//  }
 
   ListNode* removeElements2(ListNode* head, int val) {
     ListNode* prev = nullptr;
