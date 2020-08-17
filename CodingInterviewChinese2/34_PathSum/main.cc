@@ -4,6 +4,7 @@
 
 #include <base/BinaryTree.h>
 #include <vector>
+#include <assert.h>
 
 void pathSum(const BinaryTreeNode* root,
              int expectedSum,
@@ -15,7 +16,9 @@ std::vector<std::vector<int>> pathSum(const BinaryTreeNode* root,
                                       int expectedSum) {
   std::vector<int> path;
   std::vector<std::vector<int>> result;
-  pathSum(root, expectedSum, 0, path, result);
+  if (root != nullptr) {
+    pathSum(root, expectedSum, 0, path, result);
+  }
 
   return result;
 }
@@ -25,9 +28,7 @@ void pathSum(const BinaryTreeNode* root,
              int currentSum,
              std::vector<int>& path,
              std::vector<std::vector<int>>& result) {
-  if (root == nullptr) {
-    return;
-  }
+  assert(root != nullptr);
 
   currentSum += root->value_;
   path.push_back(root->value_);
@@ -35,10 +36,14 @@ void pathSum(const BinaryTreeNode* root,
   if (currentSum == expectedSum && root->left_ == nullptr
       && root->right_ == nullptr) {
     result.push_back(path);
+  } else {
+    if (root->left_ != nullptr) {
+      pathSum(root->left_, expectedSum, currentSum, path, result);
+    }
+    if (root->right_ != nullptr) {
+      pathSum(root->right_, expectedSum, currentSum, path, result);
+    }
   }
-
-  pathSum(root->left_, expectedSum, currentSum, path, result);
-  pathSum(root->right_, expectedSum, currentSum, path, result);
 
   path.pop_back();
 }

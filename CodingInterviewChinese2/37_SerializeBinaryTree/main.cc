@@ -25,7 +25,7 @@ std::string serialize(const BinaryTreeNode* root) {
 BinaryTreeNode* deserialize(std::istringstream& is) {
   std::string val;
   is >> val;
-  if (val == "#" || val.empty()) {
+  if (val == "#"/* || val.empty()*/) {
     return nullptr;
   }
 
@@ -43,7 +43,7 @@ BinaryTreeNode* deserialize(const std::string& data) {
 }
 
 int main(int argc, char** argv) {
-  std::string s = "1 2 3 # # 4 5 #";
+  std::string s = "1 2 3 # # 4 5 # # # #";
   if (argc > 1) {
     s = argv[1];
   }
