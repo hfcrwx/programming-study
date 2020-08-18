@@ -21,7 +21,7 @@ int findRepeatNumber(int* nums, size_t len) {
   }
 
   for (int i = 0; i < len; ++i) {
-    if (nums[i] < 0 || nums[i] >= len) {
+    if (nums[i] < 0 || nums[i] > len - 1) {
       return -1;
     }
   }

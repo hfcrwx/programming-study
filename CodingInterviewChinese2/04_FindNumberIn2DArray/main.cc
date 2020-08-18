@@ -31,8 +31,8 @@ bool findNumberIn2DArray(const int** matrix,
 }
 
 int main() {
-  int matrix[][4] =
-      {{1, 2, 8, 9}, {2, 4, 9, 12}, {4, 7, 10, 13}, {6, 8, 11, 15}};
+  int matrix[][3] =
+      {{1, 2, 8}, {2, 4, 9}, {4, 7, 10}, {6, 8, 11}};
   const int* a[4] = {matrix[0], matrix[1], matrix[2], matrix[3]};
   bool res = findNumberIn2DArray(a, 4, 4, 8);
   return 0;

@@ -30,6 +30,7 @@ void getLeastNumbers(const std::vector<int>& data,
 }
 
 #include <algorithm>
+#include <assert.h>
 
 class Solution {
  public:
@@ -47,8 +48,12 @@ class Solution {
       if (nums[l] > pivot && nums[r] < pivot) {
         std::swap(nums[l++], nums[r--]);
       }
-      if (nums[l] <= pivot) l++;
-      if (nums[r] >= pivot) r--;
+      if (nums[l] <= pivot) {
+        l++;
+      }
+      if (nums[r] >= pivot) {
+        r--;
+      }
     }
     std::swap(nums[left], nums[r]);
     return r;
@@ -64,6 +69,8 @@ class Solution {
   }
 
   std::vector<int> getLeastNumbers_qsort(std::vector<int>& nums, int k) {
+    assert(k >=0 && k <= nums.size());
+
     int left = 0, right = nums.size() - 1;
     while (true) {
       int pos = partition(nums, left, right);

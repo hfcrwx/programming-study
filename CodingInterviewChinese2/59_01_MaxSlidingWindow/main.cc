@@ -14,18 +14,18 @@ class Solution {
     assert(k > 0 && k <= nums.size());
 
     std::vector<int> result;
-    std::deque<int> q;
+    std::deque<int> d;
     for (std::vector<int>::size_type i = 0; i < nums.size(); ++i) {
-      if (!q.empty() && q.front() == i - k) {
-        q.pop_front();
+      if (!d.empty() && d.front() == i - k) {
+        d.pop_front();
       }
-      while (!q.empty() && nums[q.back()] < nums[i]) {
-        q.pop_back();
+      while (!d.empty() && nums[d.back()] < nums[i]) {
+        d.pop_back();
       }
-      q.push_back(i);
+      d.push_back(i);
 
       if (i >= k - 1) {
-        result.push_back(nums[q.front()]);
+        result.push_back(nums[d.front()]);
       }
     }
 

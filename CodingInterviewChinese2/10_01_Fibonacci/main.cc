@@ -15,10 +15,11 @@ uint64_t fabonacci(uint32_t i) {
 
 uint64_t fabonacci2(uint32_t i) {
   uint64_t f0 = 0;
-  uint64_t f1 = 1;
   if (i == 0) {
     return f0;
   }
+
+  uint64_t f1 = 1;
   if (i == 1) {
     return f1;
   }
