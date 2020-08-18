@@ -8,6 +8,8 @@
 #include <stdio.h>
 
 void permutation(char* str, char* start) {
+  assert(str != nullptr && start != nullptr);
+
   if (*start == '\0') {
     printf("%s\n", str);
     return;
@@ -21,7 +23,9 @@ void permutation(char* str, char* start) {
 }
 
 void permutation(char* str) {
-  assert(str != nullptr);
+  if (str == nullptr) {
+    return;
+  }
   permutation(str, str);
 }
 

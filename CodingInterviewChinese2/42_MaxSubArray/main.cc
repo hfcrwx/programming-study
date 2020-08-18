@@ -5,21 +5,27 @@
 #include <assert.h>
 #include <stddef.h>
 
+//i=0: s[0]=n[0]
+//i>0: s[i-1]>0:  s[i]=s[i-1]+n[i]
+//     s[i-1]<=0: s[i]=n[i]
+//x=max(s[i])
+
 int maxSubArray(const int* nums, size_t size) {
   assert(nums != nullptr && size != 0);
 
   int sum = nums[0];
-  int m = sum;
+  int maxSum = sum;
   for (size_t i = 1; i < size; ++i) {
-    if (sum < 0) {
+    if (sum <= 0) {
       sum = nums[i];
     } else {
       sum += nums[i];
     }
-    if (sum > m) {
-      m = sum;
+    if (sum > maxSum) {
+      maxSum = sum;
     }
-  }  return m;
+  }
+  return maxSum;
 }
 
 int main() {
