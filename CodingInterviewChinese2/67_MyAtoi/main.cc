@@ -12,12 +12,15 @@ int myAtoi(const char* str) {
   assert(str != nullptr);
 
   for (; isspace(*str); ++str);
-  bool neg = false;
-  if (*str == '+') {
-    ++str;
-  } else if (*str == '-') {
+  bool neg;
+  if (*str == '-') {
     neg = true;
     ++str;
+  } else if (*str == '+') {
+    neg = false;
+    ++str;
+  } else {
+    neg = false;
   }
 
   int ret = 0;

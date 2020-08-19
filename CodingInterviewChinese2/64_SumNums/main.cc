@@ -12,6 +12,7 @@ class Solution {
   }
 
   int sumNums2(int n) {
+    assert(n >= 0);
     n && (n += sumNums(n - 1));
     return n;
   }
