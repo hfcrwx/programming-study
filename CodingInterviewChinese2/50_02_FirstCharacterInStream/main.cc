@@ -7,16 +7,17 @@
 #include <limits>
 #include <string.h>
 
-class CharStat {
+class CharStatistics {
  public:
-  CharStat() : index_(0) {
+  CharStatistics() : index_(0) {
     memset(hash_, -1, sizeof(hash_));
   }
   void add(char c) {
-    if (hash_[c] == -1) {
-      hash_[c] = index_;
-    } else if (hash_[c] >= 0) {
-      hash_[c] = -2;
+    unsigned char u = (unsigned char) c;
+    if (hash_[u] == -1) {
+      hash_[u] = index_;
+    } else if (hash_[u] >= 0) {
+      hash_[u] = -2;
     }
     ++index_;
   }
@@ -27,7 +28,7 @@ class CharStat {
     for (size_t i = 0; i < sizeof(hash_)/sizeof(hash_[0]); ++i) {
       if (hash_[i] >= 0 && hash_[i] < minIndex) {
         minIndex = hash_[i];
-        c = (char)i;
+        c = (char) i;
       }
     }
     return c;
@@ -39,25 +40,25 @@ class CharStat {
 };
 
 int main() {
-  CharStat c;
+  CharStatistics c;
 
   c.add('g');
-  assert(c.firstAppearingOnce()=='g');
+  assert(c.firstAppearingOnce() == 'g');
 
   c.add('o');
-  assert(c.firstAppearingOnce()=='g');
+  assert(c.firstAppearingOnce() == 'g');
 
   c.add('o');
-  assert(c.firstAppearingOnce()=='g');
+  assert(c.firstAppearingOnce() == 'g');
 
   c.add('g');
-  assert(c.firstAppearingOnce()=='\0');
+  assert(c.firstAppearingOnce() == '\0');
 
   c.add('l');
-  assert(c.firstAppearingOnce()=='l');
+  assert(c.firstAppearingOnce() == 'l');
 
   c.add('e');
-  assert(c.firstAppearingOnce()=='l');
+  assert(c.firstAppearingOnce() == 'l');
 
   return 0;
 }
