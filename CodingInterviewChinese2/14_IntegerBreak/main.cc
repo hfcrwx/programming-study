@@ -49,14 +49,14 @@ uint32_t integerBreak1(uint32_t n) {
   products[2] = 2;
   products[3] = 3;
   for (uint32_t i = 4; i <= n; ++i) {
-    uint32_t max = i - 1;
+    uint32_t maxProduct = i - 1;
     for (uint32_t j = 1; j <= i/2; ++j) {
       uint32_t product = products[j]*products[i - j];
-      if (product > max) {
-        max = product;
+      if (product > maxProduct) {
+        maxProduct = product;
       }
     }
-    products[i] = max;
+    products[i] = maxProduct;
   }
   uint32_t max = products[n];
   delete[] products;
@@ -73,7 +73,7 @@ uint32_t integerBreak2(uint32_t n) {
   }
 
   uint32_t result = 1;
-  while( n > 4 ) {
+  while (n > 4) {
     result *= 3;
     n -= 3;
   }

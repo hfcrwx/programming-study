@@ -7,7 +7,7 @@
 #include <stdlib.h>
 
 int majorityElement(const int* nums, size_t len) {
-  assert(nums != nullptr);
+  assert(nums != nullptr && len != 0);
 
   int majority;
   size_t count = 0;
@@ -23,7 +23,7 @@ int majorityElement(const int* nums, size_t len) {
     }
   }
 
-  abort();
+  return majority;
 }
 
 int main() {

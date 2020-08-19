@@ -22,17 +22,22 @@ class Solution {
 
     for (int i = 2; i <= n; ++i) {
       for (int s = i; s <= 6*i; ++s) {
-        for (int cur = 1; cur < s && cur <= 6; cur++) {
-          dp[i][s] += dp[i - 1][s - cur];
+        for (int t = 1; t < s && t <= 6; t++) {
+          dp[i][s] += dp[i - 1][s - t];
         }
       }
     }
 
     int all = static_cast<int>(pow(6, n));
     vector<double> ret;
-    for (int i = n; i <= 6*n; i++) {
-      ret.emplace_back(dp[n][i]*1.0/all);
+    for (int s = n; s <= 6*n; s++) {
+      ret.emplace_back(dp[n][s]*1.0/all);
     }
+
+    for (int i = 0; i < n + 1; ++i) {
+      delete[] dp[i];
+    }
+    delete[] dp;
 
     return ret;
   }
