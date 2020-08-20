@@ -79,10 +79,11 @@ Node* reconnectNodes(Node* head) {
 #include <map>
 
 Node* copyRandomList2(Node* head) {
-  std::map<Node*, Node*> originToCloned;
-  Node* node = head;
   Node* clonedHead = nullptr;
+  
+  Node* node = head;
   Node* cloned = nullptr;
+  std::map<Node*, Node*> originToCloned;
   while (node != nullptr) {
     Node* p = new Node;
     p->value_ = node->value_;

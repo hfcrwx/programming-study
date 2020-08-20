@@ -10,7 +10,6 @@
 #include <base/List.h>
 
 ListNode* reverseList_iteratively(ListNode* head) {
-//  assert(head != nullptr);
   ListNode* prev = nullptr;
   while (head != nullptr) {
     ListNode* next = head->next_;

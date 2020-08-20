@@ -39,22 +39,22 @@ ListNode* mergeTwoLists2(ListNode* head1, ListNode* head2) {
   ListNode* newHead = nullptr;
   ListNode* prev = nullptr;
   while (head1 != nullptr && head2 != nullptr) {
-    ListNode* node = nullptr;
+    ListNode* curr = nullptr;
     if (head1->value_ < head2->value_) {
-      node = head1;
+      curr = head1;
       head1 = head1->next_;
     } else {
-      node = head2;
+      curr = head2;
       head2 = head2->next_;
     }
 
     if (prev == nullptr) {
-      newHead = node;
+      newHead = curr;
     } else {
-      prev->next_ = node;
+      prev->next_ = curr;
     }
 
-    prev = node;
+    prev = curr;
   }
 
   if (head1 == nullptr) {

@@ -2,11 +2,10 @@
 // 题目：给定单向链表的头指针和一个结点指针，定义一个函数在O(1)时间内删除该结点。
 
 #include <base/List.h>
+#include <assert.h>
 
-void deleteNode(ListNode** head, ListNode* target) {
-  if (head == nullptr || *head == nullptr || target == nullptr) {
-    return;
-  }
+ListNode* deleteNode(ListNode* head, ListNode* target) {
+  assert(head != nullptr && target != nullptr);
 
   if (target->next_ != nullptr) {
     ListNode* next = target->next_;
@@ -15,12 +14,12 @@ void deleteNode(ListNode** head, ListNode* target) {
     delete next;
     next = nullptr;
   } else {
-    if (target == *head) {
-      *head = nullptr;
+    if (target == head) {
+      head = nullptr;
       delete target;
       target = nullptr;
     } else {
-      ListNode* prev = *head;
+      ListNode* prev = head;
       while (prev->next_ != target) {
         prev = prev->next_;
       }
@@ -29,6 +28,8 @@ void deleteNode(ListNode** head, ListNode* target) {
       target = nullptr;
     }
   }
+
+  return head;
 }
 
 //203
