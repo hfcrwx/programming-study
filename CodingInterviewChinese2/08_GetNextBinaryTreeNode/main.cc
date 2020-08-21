@@ -15,7 +15,7 @@ BinaryTreeNodeEx* getNext(BinaryTreeNodeEx* node) {
     return nullptr;
   }
 
-  BinaryTreeNodeEx* next = nullptr;
+  BinaryTreeNodeEx* next;
   if (node->right_ != nullptr) {
     BinaryTreeNodeEx* tmp = node->right_;
     while (tmp->left_ != nullptr) {
@@ -32,6 +32,8 @@ BinaryTreeNodeEx* getNext(BinaryTreeNodeEx* node) {
       }
       next = tmp->parent_;
     }
+  } else {
+    next = nullptr;
   }
 
   return next;

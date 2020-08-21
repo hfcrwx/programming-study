@@ -12,7 +12,7 @@ class Solution {
     int left = 1;
     int right = 2;
     while (left < right) {
-      int sum = (right - left + 1)*(right + left)/2;
+      int sum = (right - left + 1)*(left + right)/2;
       if (sum == target) {
         std::vector<int> v;
         for (int i = left; i <= right; ++i) {

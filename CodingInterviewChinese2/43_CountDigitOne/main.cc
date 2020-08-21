@@ -1,7 +1,7 @@
 class Solution {
  public:
   int countDigitOne(int n) {
-    int numOfOne = 0;
+    int result = 0;
 
     int left = n;
     int right = 0;
@@ -9,20 +9,21 @@ class Solution {
     int base = 1;
     while (left > 0) {
       currDigit = left%10;
-      left = left/10;
+      left /= 10;
 
       if (currDigit == 0) {
-        numOfOne += left*base;
+        result += left*base;
       } else if (currDigit == 1) {
-        numOfOne += left*base + right + 1;
+        result += left*base + right + 1;
       } else {
-        numOfOne += (left + 1)*base;
+        result += (left + 1)*base;
       }
 
-      right = right + currDigit*base;
+      right += currDigit*base;
       base *= 10;
     }
-    return numOfOne;
+
+    return result;
   }
 };
 

@@ -18,9 +18,6 @@ bool isSymmetric(const BinaryTreeNode* node1, const BinaryTreeNode* node2) {
 }
 
 bool isSymmetric(const BinaryTreeNode* root) {
-//  if (root == nullptr) {
-//    return true;
-//  }
   return isSymmetric(root, root);
 }
 

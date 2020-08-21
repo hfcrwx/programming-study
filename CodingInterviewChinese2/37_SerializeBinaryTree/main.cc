@@ -25,6 +25,7 @@ std::string serialize(const BinaryTreeNode* root) {
 BinaryTreeNode* deserialize(std::istringstream& is) {
   std::string val;
   is >> val;
+
   if (val == "#"/* || val.empty()*/) {
     return nullptr;
   }

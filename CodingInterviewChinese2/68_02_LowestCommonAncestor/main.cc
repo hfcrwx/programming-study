@@ -8,10 +8,10 @@ BinaryTreeNode* lowestCommonAncestor(BinaryTreeNode* root,
                                      BinaryTreeNode* p,
                                      BinaryTreeNode* q) {
   assert(p != nullptr && q != nullptr);
-  
+
   if (root == nullptr)
     return nullptr;
-  if (p == root || q == root)
+  if (root == p || root == q)
     return root; // 同时查找两个结点
 
   BinaryTreeNode* left = lowestCommonAncestor(root->left_, p, q);

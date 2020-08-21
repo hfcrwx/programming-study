@@ -74,13 +74,10 @@ bool exist(char* board,
   if (0 <= i && i < rows && 0 <= j && j < cols
       && board[i*cols + j] == word[idx]) {
     board[i*cols + j] = '\0';
-
-    bool has = exist(board, rows, cols, word, i, j - 1, idx + 1)
+    if (exist(board, rows, cols, word, i, j - 1, idx + 1)
         || exist(board, rows, cols, word, i, j + 1, idx + 1)
         || exist(board, rows, cols, word, i - 1, j, idx + 1)
-        || exist(board, rows, cols, word, i + 1, j, idx + 1);
-
-    if (has) {
+        || exist(board, rows, cols, word, i + 1, j, idx + 1)) {
       return true;
     } else {
       board[i*cols + j] = word[idx];

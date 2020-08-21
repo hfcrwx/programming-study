@@ -4,25 +4,25 @@
 #include <base/BinaryTree.h>
 #include <stack>
 
-void mirrorBinaryTree(BinaryTreeNode* root) {
-  if (root == nullptr) {
-    return;
-  }
-  if (root->left_ == nullptr && root->right_ == nullptr) {
-    return;
-  }
-
-  BinaryTreeNode* tmp = root->left_;
-  root->left_ = root->right_;
-  root->right_ = tmp;
-
-  if (root->left_ != nullptr) {
-    mirrorBinaryTree(root->left_);
-  }
-  if (root->right_ != nullptr) {
-    mirrorBinaryTree(root->right_);
-  }
-}
+//void mirrorBinaryTree(BinaryTreeNode* root) {
+//  if (root == nullptr) {
+//    return;
+//  }
+//  if (root->left_ == nullptr && root->right_ == nullptr) {
+//    return;
+//  }
+//
+//  BinaryTreeNode* tmp = root->left_;
+//  root->left_ = root->right_;
+//  root->right_ = tmp;
+//
+//  if (root->left_ != nullptr) {
+//    mirrorBinaryTree(root->left_);
+//  }
+//  if (root->right_ != nullptr) {
+//    mirrorBinaryTree(root->right_);
+//  }
+//}
 
 BinaryTreeNode* invertTree_recursive(BinaryTreeNode* root) {
   if (root == nullptr) {

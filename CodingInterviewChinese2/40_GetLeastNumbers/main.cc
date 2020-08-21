@@ -69,7 +69,7 @@ class Solution {
   }
 
   std::vector<int> getLeastNumbers_qsort(std::vector<int>& nums, int k) {
-    assert(k >=0 && k <= nums.size());
+    assert(k >0 && k <= nums.size());
 
     int left = 0, right = nums.size() - 1;
     while (true) {

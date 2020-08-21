@@ -80,7 +80,7 @@ Node* reconnectNodes(Node* head) {
 
 Node* copyRandomList2(Node* head) {
   Node* clonedHead = nullptr;
-  
+
   Node* node = head;
   Node* cloned = nullptr;
   std::map<Node*, Node*> originToCloned;

@@ -11,14 +11,14 @@
 
 #include <base/BinaryTree.h>
 
-bool doesTree1HasTree2(BinaryTreeNode* root1, BinaryTreeNode* root2);
+bool isSubstructureWithSameRoot(BinaryTreeNode* root1, BinaryTreeNode* root2);
 
 // find root2
 bool isSubstructure(BinaryTreeNode* root1, BinaryTreeNode* root2) {
   bool result = false;
   if (root1 != nullptr && root2 != nullptr) {
     if (root1->value_ == root2->value_) {
-      result = doesTree1HasTree2(root1, root2);
+      result = isSubstructureWithSameRoot(root1, root2);
     }
     if (!result) {
       result = isSubstructure(root1->left_, root2);
@@ -32,7 +32,7 @@ bool isSubstructure(BinaryTreeNode* root1, BinaryTreeNode* root2) {
 }
 
 // same root
-bool doesTree1HasTree2(BinaryTreeNode* root1, BinaryTreeNode* root2) {
+bool isSubstructureWithSameRoot(BinaryTreeNode* root1, BinaryTreeNode* root2) {
   if (root2 == nullptr) {
     return true;
   }
@@ -41,8 +41,8 @@ bool doesTree1HasTree2(BinaryTreeNode* root1, BinaryTreeNode* root2) {
   }
 
   return root1->value_ == root2->value_
-      && doesTree1HasTree2(root1->left_, root2->left_)
-      && doesTree1HasTree2(root1->right_, root2->right_);
+      && isSubstructureWithSameRoot(root1->left_, root2->left_)
+      && isSubstructureWithSameRoot(root1->right_, root2->right_);
 }
 
 int main() {

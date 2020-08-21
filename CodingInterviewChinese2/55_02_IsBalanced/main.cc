@@ -27,9 +27,6 @@ bool isBalanced(const BinaryTreeNode* root, int* depth) {
 }
 
 bool isBalanced(const BinaryTreeNode* root) {
-  if (root == nullptr) {
-    return true;
-  }
   int depth = 0;
   return isBalanced(root, &depth);
 }

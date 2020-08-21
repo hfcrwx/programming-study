@@ -15,7 +15,7 @@ class Solution {
       if (sum == target) {
         result.push_back(nums[left]);
         result.push_back(nums[right]);
-        break;
+        return result;
       } else if (sum < target) {
         ++left;
       } else {

@@ -11,6 +11,7 @@ class Solution {
     return n == 1 ? 1 : sumNums(n - 1) + n;
   }
 
+  //s0 = 0, s1 = 1
   int sumNums2(int n) {
     assert(n >= 0);
     n && (n += sumNums(n - 1));
