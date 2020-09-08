@@ -14,7 +14,7 @@ https://www.nowcoder.com/ta/coding-interviews
 
 1.在O(1)时间内删除链表结点 //无，只删除指定的一个
 
-2.删除链表中重复的结点 //无
+> 2.删除链表中重复的结点 //无
 
 **剑指 Offer 22. 链表中倒数第k个结点** // 简单，双指针
 
@@ -98,13 +98,13 @@ https://www.nowcoder.com/ta/coding-interviews
 
 **剑指 Offer 13. 机器人的运动范围**
 
+**剑指 Offer 38. 字符串的排列**
+
 ## 递归 ##
 
 **剑指 Offer 10- I. 斐波那契数列** //509
 
 **剑指 Offer 10- II. 青蛙跳台阶问题** //70
-
-**剑指 Offer 62. 圆圈中最后剩下的数字**
 
 ## 查找 ##
 
@@ -112,7 +112,7 @@ https://www.nowcoder.com/ta/coding-interviews
 
 1.找出数组中重复的数字
 
-2.不修改数组找出重复的数字 //无，二分查找
+> 2.不修改数组找出重复的数字 //无，二分查找
 
 **剑指 Offer 04. 二维数组中的查找** //240
 
@@ -132,10 +132,6 @@ https://www.nowcoder.com/ta/coding-interviews
 
 **剑指 Offer 57 - II. 和为s的连续正数序列** //双指针
 
-## 全排列 ##
-
-**剑指 Offer 38. 字符串的排列** //回溯
-
 ## 动态规划与贪婪算法 ##
 
 **剑指 Offer 42. 连续子数组的最大和** //53，分治算法，动态规划
@@ -151,6 +147,8 @@ https://www.nowcoder.com/ta/coding-interviews
 **剑指 Offer 47. 礼物的最大价值** //动态规划
 
 **剑指 Offer 60. n个骰子的点数** //动态规划
+
+**剑指 Offer 62. 圆圈中最后剩下的数字**
 
 ## 排序 ##
 
