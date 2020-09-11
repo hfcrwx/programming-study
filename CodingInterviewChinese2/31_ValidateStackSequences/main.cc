@@ -21,7 +21,7 @@ bool validateStackSequences(const int* pushed,
   const int* pop = popped;
   while (pop < popped + poppedSize) {
     while ((stack.empty() || stack.top() != *pop)
-        && push < pushed + poppedSize) {
+        && push < pushed + pushedSize) {
       stack.push(*push);
       ++push;
     }

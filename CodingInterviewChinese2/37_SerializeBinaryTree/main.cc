@@ -30,12 +30,12 @@ BinaryTreeNode* deserialize(std::istringstream& is) {
     return nullptr;
   }
 
-  BinaryTreeNode* node = new BinaryTreeNode;
-  node->value_ = stoi(val);
-  node->left_ = deserialize(is);
-  node->right_ = deserialize(is);
+  BinaryTreeNode* root = new BinaryTreeNode;
+  root->value_ = stoi(val);
+  root->left_ = deserialize(is);
+  root->right_ = deserialize(is);
 
-  return node;
+  return root;
 }
 
 BinaryTreeNode* deserialize(const std::string& data) {

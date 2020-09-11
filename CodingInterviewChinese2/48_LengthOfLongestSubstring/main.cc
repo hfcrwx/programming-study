@@ -14,9 +14,9 @@ int lengthOfLongestSubstring(const char* str) {
       ++curLen;
     } else {
       int d = i - positions[str[i] - 'a'];
-      if (d <= curLen) {
+      if (d < curLen) {
         curLen = d;
-      } else {
+      } else if (d > curLen) {
         ++curLen;
       }
     }

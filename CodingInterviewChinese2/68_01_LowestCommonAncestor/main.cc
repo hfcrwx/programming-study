@@ -32,13 +32,11 @@ class Solution {
     while (root != nullptr) {
       if (root->value_ < p->value_ && root->value_ < q->value_) {
         root = root->right_;
-        continue;
-      }
-      if (root->value_ > p->value_ && root->value_ > q->value_) {
+      } else if (root->value_ > p->value_ && root->value_ > q->value_) {
         root = root->left_;
-        continue;
+      } else {
+        return root;
       }
-      return root;
     }
 
     return nullptr;

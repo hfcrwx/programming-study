@@ -9,8 +9,8 @@ class Queue {
  public:
   Queue();
   ~Queue();
-  void appendTail(const T&);
-  T deleteHead();
+  void appendTail(const T&); //push
+  T deleteHead(); //pop, front
 
  private:
   std::stack<T> stack1_;

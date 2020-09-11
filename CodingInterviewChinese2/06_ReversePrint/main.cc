@@ -1,9 +1,9 @@
+// 面试题6：从尾到头打印链表
+// 题目：输入一个链表的头结点，从尾到头反过来打印出每个结点的值。
+
 #include <base/List.h>
 #include <stack>
 #include <stdio.h>
-
-// 面试题6：从尾到头打印链表
-// 题目：输入一个链表的头结点，从尾到头反过来打印出每个结点的值。
 
 void reversePrint_iteratively(const ListNode* head) {
   std::stack<const ListNode*> nodes;
@@ -34,6 +34,12 @@ void reversePrint_recursively2(const ListNode* head) {
     reversePrint_recursively2(head->next_);
   }
   printf("%d ", head->value_);
+}
+
+void reversePrint_recursively1(const ListNode* head) {
+    if (head != nullptr) {
+        reversePrint_recursively1(head);
+    }
 }
 
 int main() {

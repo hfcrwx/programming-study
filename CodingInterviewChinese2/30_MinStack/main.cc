@@ -47,7 +47,7 @@ void MinStack<T>::pop() {
 //template<typename T>
 //void MinStack<T>::pop() {
 //  assert(!data_.empty() && !min_.empty());
-//  if (data.top() == min.top()) {
+//  if (data_.top() == min_.top()) {
 //    min_.pop();
 //  }
 //  data_.pop();
