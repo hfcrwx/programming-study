@@ -192,7 +192,7 @@ https://www.nowcoder.com/ta/coding-interviews
 
 ## 其他 ##
 
-**剑指 Offer 64. 求1+2+…+n**
+**剑指 Offer 64. 求1+2+…+n** //逻辑运算符 短路
 
 >**剑指 Offer 46. 把数字翻译成字符串**
 
@@ -205,3 +205,55 @@ https://www.nowcoder.com/ta/coding-interviews
 **剑指 Offer 44. 数字序列中某一位的数字** //400
 
 **剑指 Offer 49. 丑数** //264
+
+
+----------
+
+    int binarySearch(const int* nums, int low, int high, int target) {
+      while (low <= high) {
+        int mid = low + (high - low)/2;
+        if (nums[mid] < target) {
+          low = mid + 1;
+        } else if (nums[mid] > target) {
+          high = mid - 1;
+        } else {
+          return mid;
+        }
+      }
+    
+      return -1;
+    }
+
+
+----------
+
+    //qsort partition
+    int partition(std::vector<int>& nums, int left, int right) {
+      int pivot = nums[left];
+      int l = left + 1, r = right;
+      while (l <= r) {
+        if (nums[l] > pivot && nums[r] < pivot) {
+          std::swap(nums[l++], nums[r--]);
+        }
+        if (nums[l] <= pivot) {
+          l++;
+        }
+        if (nums[r] >= pivot) {
+          r--;
+        }
+      }
+      std::swap(nums[left], nums[r]);
+      return r;
+    }
+  
+    void quickSort(std::vector<int>& nums, int left, int right) {
+      if (left >= right) {
+        return;
+      }
+      int pos = partition(nums, left, right);
+      quickSort(nums, left, pos - 1);
+      quickSort(nums, pos + 1, right);
+    }
+
+----------
+
