@@ -5,9 +5,12 @@
 #include <algorithm>
 #include <vector>
 
+#include <assert.h>
+
 class Solution {
  public:
   bool isStraight(std::vector<int>& nums) {
+    assert(nums.size() == 5);
     std::sort(nums.begin(), nums.end());
     int numZero = 0;
     for (int i = 0; i < 5; ++i) {

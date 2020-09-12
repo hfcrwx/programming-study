@@ -13,7 +13,7 @@ class Solution {
   vector<double> twoSum(int n) {
     int** dp = new int* [n + 1];
     for (int i = 0; i < n + 1; ++i) {
-      dp[i] = new int[6*n + 1];
+      dp[i] = new int[6*i + 1];
     }
 
     for (int s = 1; s <= 6; ++s) {

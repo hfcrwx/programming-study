@@ -13,7 +13,7 @@ std::string minNumber(const int* nums, size_t size) {
 
   std::vector<std::string> strs;
   for (size_t i = 0; i < size; ++i) {
-    strs.push_back(std::to_string(nums[i]));
+    strs.emplace_back(std::to_string(nums[i]));
   }
   std::sort(strs.begin(),
             strs.end(),
