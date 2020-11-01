@@ -43,7 +43,7 @@ T Queue<T>::deleteHead() {
   }
 
   if (!stack2_.empty()) {
-    T v=  stack2_.top();
+    T v = stack2_.top();
     stack2_.pop();
     return v;
   } else {

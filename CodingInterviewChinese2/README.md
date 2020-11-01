@@ -34,7 +34,7 @@ https://www.nowcoder.com/ta/coding-interviews
 
 **剑指 Offer 08. 二叉树的下一个结点**(JZ57 二叉树的下一个结点) //无
 
-**剑指 Offer 26. 数的子结构** //中等，递归
+**剑指 Offer 26. 树的子结构** //中等，递归
 
 **剑指 Offer 27. 二叉树的镜像** //226，简单，递归
 
@@ -98,7 +98,7 @@ https://www.nowcoder.com/ta/coding-interviews
 
 **剑指 Offer 13. 机器人的运动范围**
 
-**剑指 Offer 38. 字符串的排列**
+**剑指 Offer 38. 字符串的排列** //46
 
 ## 递归 ##
 

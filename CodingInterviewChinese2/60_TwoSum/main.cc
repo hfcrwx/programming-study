@@ -22,7 +22,7 @@ class Solution {
 
     for (int i = 2; i <= n; ++i) {
       for (int s = i; s <= 6*i; ++s) {
-        for (int t = 1; t < s && t <= 6; t++) {
+        for (int t = 1; t < s && t <= 6; ++t) {
           dp[i][s] += dp[i - 1][s - t];
         }
       }

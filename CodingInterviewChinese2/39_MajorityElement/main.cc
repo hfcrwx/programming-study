@@ -27,5 +27,7 @@ int majorityElement(const int* nums, size_t len) {
 }
 
 int main() {
+  int nums[] = {1, 1, 2, 2, 3, 1, 1};
+  int x = majorityElement(nums, 7);
   return 0;
 }

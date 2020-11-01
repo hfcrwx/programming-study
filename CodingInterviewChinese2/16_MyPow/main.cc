@@ -21,13 +21,6 @@ double myPow(double x, int n) {
   return sign ? 1/result : result;
 }
 
-uint32_t errcode = 0;
-
-bool equal(double v1, double v2) {
-  return v1 - v2 < std::numeric_limits<double>::epsilon()
-      || v1 - v2 > -std::numeric_limits<double>::epsilon();
-}
-
 double powerWithUnsignedExp(double base, uint32_t exp) {
   double res = 1;
   for (uint32_t i = 0; i < exp; ++i) {
@@ -51,13 +44,17 @@ double powerWithUnsignedExp_Recusive(double base, uint32_t exp) {
   }
 }
 
-double power(double base, int32_t exp) {
-  if (equal(base, 0) && exp < 0) {
-    errcode = 1;
-    return 0;
-  }
-  return exp >= 0 ? powerWithUnsignedExp(base, exp) : 1
-      /powerWithUnsignedExp(base, -exp);
+#include <assert.h>
+
+bool equal(double v1, double v2) {
+  return v1 - v2 < std::numeric_limits<double>::epsilon()
+      || v1 - v2 > -std::numeric_limits<double>::epsilon();
+}
+
+double power(double x, int32_t n) {
+  assert (!(equal(x, 0) && n < 0));
+  return n >= 0 ? powerWithUnsignedExp(x, n) : 1
+      /powerWithUnsignedExp(x, -n);
 }
 
 #include <math.h>

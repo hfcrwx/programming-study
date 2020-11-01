@@ -91,7 +91,7 @@ class Solution {
         prev->next_ = curr->next_;
         delete curr;
       } else {
-        prev = prev->next_;
+        prev = curr;
       }
     }
 

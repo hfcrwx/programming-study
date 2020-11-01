@@ -10,25 +10,55 @@ class Solution {
 
     int left = n;
     int right = 0;
-    int currDigit = 0;
+    int digit = 0;
     int base = 1;
     while (left > 0) {
-      currDigit = left%10;
+      digit = left%10;
       left /= 10;
 
-      if (currDigit == 0) {
+      if (digit == 0) {
         result += left*base;
-      } else if (currDigit == 1) {
+      } else if (digit == 1) {
         result += left*base + right + 1;
       } else {
         result += (left + 1)*base;
       }
 
-      right += currDigit*base;
+      right += digit*base;
       base *= 10;
     }
 
     return result;
+  }
+};
+
+class Solution1 {
+ public:
+  int countDigitOne(int n) {
+    int result = 0;
+
+    int digit = n % 10;
+    int left = n / 10;
+    int right = 0;
+    int base = 1;
+    while (left >= 0) {
+      if (digit == 0) {
+        result += left * base;
+      } else if (digit == 1) {
+        result += left * base + right + 1;
+      } else {
+        result += (left + 1) * base;
+      }
+
+      if (left == 0) {
+        return result;
+      }
+
+      digit = left % 10;
+      left /= 10;
+      right += digit * base;
+      base *= 10;
+    }
   }
 };
 

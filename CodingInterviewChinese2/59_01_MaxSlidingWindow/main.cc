@@ -33,6 +33,59 @@ class Solution {
   }
 };
 
+#include <deque>
+#include <queue>
+
+class MaxQueue {
+ public:
+  MaxQueue () {
+  }
+
+  int max_value() {
+    return d.front();
+  }
+
+  void push_back(int value) {
+    q.push(value);
+
+    while (!d.empty() && d.back() < value) {
+      d.pop_back();
+    }
+    d.push_back(value);
+  }
+
+  int pop_front() {
+    int res = q.front();
+    q.pop();
+
+    if (res == d.front()) {
+      d.pop_front();
+    }
+
+    return res;
+  }
+
+ private:
+  std::queue<int> q;
+  std::deque<int> d;
+};
+
+std::vector<int> maxSlidingWindow(const std::vector<int>& nums, int k) {
+  assert(k > 0 && k <= nums.size());
+  std::vector<int> result;
+
+  MaxQueue q;
+  for (std::vector<int>::size_type i = 0; i < nums.size(); ++i) {
+    q.push_back(nums[i]);
+    if (i >= k-1) {
+      result.push_back(q.max_value());
+      q.pop_front();
+    }
+  }
+
+  return result;
+}
+
 int main() {
   return 0;
 }

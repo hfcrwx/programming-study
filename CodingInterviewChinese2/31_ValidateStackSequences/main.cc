@@ -20,8 +20,8 @@ bool validateStackSequences(const int* pushed,
   const int* push = pushed;
   const int* pop = popped;
   while (pop < popped + poppedSize) {
-    while ((stack.empty() || stack.top() != *pop)
-        && push < pushed + pushedSize) {
+    while (push < pushed + pushedSize
+        && (stack.empty() || stack.top() != *pop)) {
       stack.push(*push);
       ++push;
     }
